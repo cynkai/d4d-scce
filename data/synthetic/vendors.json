@@ -1,0 +1,122 @@
+[
+  {
+    "vendor_id": "V001",
+    "name": "한빛정밀항공",
+    "tier": 1,
+    "domains": [
+      "hanbit-aero.co.kr"
+    ],
+    "criticality": "항공전자(FCS)",
+    "employees": 820
+  },
+  {
+    "vendor_id": "V002",
+    "name": "대양유도시스템",
+    "tier": 1,
+    "domains": [
+      "daeyang-guidance.com"
+    ],
+    "criticality": "유도무기 시커",
+    "employees": 610
+  },
+  {
+    "vendor_id": "V003",
+    "name": "세종전술통신",
+    "tier": 1,
+    "domains": [
+      "sejong-tactcom.co.kr"
+    ],
+    "criticality": "전술데이터링크",
+    "employees": 540
+  },
+  {
+    "vendor_id": "V004",
+    "name": "누리항공기계",
+    "tier": 1,
+    "domains": [
+      "nuri-aeromech.com"
+    ],
+    "criticality": "기체 구조물",
+    "employees": 970
+  },
+  {
+    "vendor_id": "V005",
+    "name": "삼익정밀가공",
+    "tier": 2,
+    "domains": [
+      "samik-precision.co.kr"
+    ],
+    "criticality": "구동장치 부품",
+    "employees": 140
+  },
+  {
+    "vendor_id": "V006",
+    "name": "동방센서텍",
+    "tier": 2,
+    "domains": [
+      "dongbang-sensor.com"
+    ],
+    "criticality": "EO/IR 센서 모듈",
+    "employees": 95
+  },
+  {
+    "vendor_id": "V007",
+    "name": "태성회로",
+    "tier": 2,
+    "domains": [
+      "taesung-pcb.co.kr"
+    ],
+    "criticality": "군용 PCB",
+    "employees": 60
+  },
+  {
+    "vendor_id": "V008",
+    "name": "우진열처리",
+    "tier": 2,
+    "domains": [
+      "woojin-heat.com"
+    ],
+    "criticality": "특수 열처리",
+    "employees": 42
+  },
+  {
+    "vendor_id": "V009",
+    "name": "명성정밀",
+    "tier": 2,
+    "domains": [
+      "myungsung-fine.co.kr"
+    ],
+    "criticality": "커넥터/하네스",
+    "employees": 78
+  },
+  {
+    "vendor_id": "V010",
+    "name": "가온소재",
+    "tier": 2,
+    "domains": [
+      "gaon-materials.com"
+    ],
+    "criticality": "복합소재",
+    "employees": 120
+  },
+  {
+    "vendor_id": "V011",
+    "name": "청우기전",
+    "tier": 2,
+    "domains": [
+      "chungwoo-elec.co.kr"
+    ],
+    "criticality": "전원공급장치",
+    "employees": 55
+  },
+  {
+    "vendor_id": "V012",
+    "name": "한결시스템",
+    "tier": 2,
+    "domains": [
+      "hangyul-sys.com"
+    ],
+    "criticality": "임베디드 SW",
+    "employees": 33
+  }
+]
