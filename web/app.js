@@ -119,15 +119,20 @@
     if (status.startsWith("CRITICAL")) return "crit";
     if (status === "HIGH") return "high";
     if (status === "MEDIUM") return "med";
+    if (status.startsWith("NO SIGNAL")) return "nosignal";
     return "";
   }
-  function statusKey(s) { return s.startsWith("CRITICAL") ? "CRITICAL" : s; }
+  function statusKey(s) {
+    if (s.startsWith("CRITICAL")) return "CRITICAL";
+    if (s.startsWith("NO SIGNAL")) return "NOSIGNAL";
+    return s;
+  }
 
   const rankState = { status: "ALL", q: "", sort: "score_desc" };
 
   function initRankToolbar() {
-    const statuses = ["ALL", "CRITICAL", "HIGH", "MEDIUM", "LOW"];
-    const STATUS_KO = { ALL: "전체", CRITICAL: "CRITICAL", HIGH: "HIGH", MEDIUM: "MEDIUM", LOW: "LOW" };
+    const statuses = ["ALL", "CRITICAL", "HIGH", "MEDIUM", "LOW", "NOSIGNAL"];
+    const STATUS_KO = { ALL: "전체", CRITICAL: "CRITICAL", HIGH: "HIGH", MEDIUM: "MEDIUM", LOW: "LOW", NOSIGNAL: "NO SIGNAL" };
     const box = $("#rank-status-filters");
     box.innerHTML = statuses.map(s =>
       `<span class="sfilter${s === "ALL" ? " on" : ""}" data-status="${s}">${STATUS_KO[s]}</span>`).join("");
@@ -182,7 +187,7 @@
           <div class="meter ${meterClass(v.status)}"><i style="width:${pct}%"></i></div>
           <div class="risknum">${v.risk_score.toFixed(1)}</div>
         </div>
-        <div class="badge ${statusKey(v.status)}">${esc(v.status.replace(" — 즉시 조치", ""))}</div>`;
+        <div class="badge ${statusKey(v.status)}">${esc(v.status.replace(" — 즉시 조치", "").replace(" — 관측 공백", ""))}</div>`;
       row.addEventListener("click", () => selectVendor(v.vendor_id));
       body.appendChild(row);
     });
@@ -753,7 +758,7 @@
       { type: "화면", label: "보고서·탐지룰", sub: "브리프 · IOC · Sigma · STIX", go: () => showView("brief") },
     ];
     (R.ranked_vendors || []).forEach(v => items.push({
-      type: "협력사", label: v.name, sub: `${v.status.replace(" — 즉시 조치", "")} · risk ${v.risk_score.toFixed(1)}`,
+      type: "협력사", label: v.name, sub: `${v.status.replace(" — 즉시 조치", "").replace(" — 관측 공백", "")} · risk ${v.risk_score.toFixed(1)}`,
       go: () => { showView("overview"); selectVendor(v.vendor_id);
         document.querySelector(`.vrow[data-vid="${v.vendor_id}"]`)?.scrollIntoView({ block: "center" }); },
     }));
@@ -1459,7 +1464,10 @@ ${fams.map(f => "  - attack.stealer." + f.toLowerCase()).join("\n")}`;
     }
     $("#foot").innerHTML =
       `SCCE · ${esc(R.meta.problem)} · 합성/공개 데이터 기반 · 회사명·도메인·행위자·C2 전부 가공(fictional) · ` +
-      `기준일 ${esc(R.meta.generated_today)}`;
+      `기준일 ${esc(R.meta.generated_today)}<br>` +
+      `<span style="color:var(--ink-faint)">⚠ 관측범위 고지 — SCCE는 다크웹·인포스틸러 채널에 노출된 신호만 봅니다. ` +
+      `"NO SIGNAL"은 안전 확인이 아니라 관측된 증거가 없다는 뜻이며, 회사가 공개했는지 여부와 무관하게 ` +
+      `공격자 쪽 유통망에 흔적이 나타나지 않은 침해는 탐지되지 않을 수 있습니다.</span>`;
 
     // 데모: 첫 CRITICAL(=히어로) 자동 선택
     const hero = R.ranked_vendors.find(v => v.status.startsWith("CRITICAL")) || R.ranked_vendors[0];

@@ -42,10 +42,16 @@ def _primary_campaign(stealers, vendors):
 
 def build_replay(vendors, leaks, stealers, days=32):
     vname = {v["vendor_id"]: v["name"] for v in vendors}
+    vid_of = {v["name"]: v["vendor_id"] for v in vendors}
+    cj_id = vid_of.get(CROWN_JEWEL)
     primary = _primary_campaign(stealers, vendors)
     prim_logs = [l for l in stealers
                  if primary and (l.get("stealer_family"), l.get("c2_host")) == primary
                  and l.get("vendor_id")]
+    # crown-jewel 정점일은 반드시 '주 캠페인'에 속한 로그 기준으로만 판정한다.
+    # (다른 무관한 배경 스틸러 로그가 우연히 crown-jewel 도메인·HIGH 카테고리에
+    #  맞아 떨어지는 경우까지 "정점 침해"로 오인하지 않도록 근원을 한정한다.)
+    cj_prim_dates = sorted(_d(l["infection_date"]) for l in prim_logs if l.get("vendor_id") == cj_id)
 
     start = TODAY - timedelta(days=days)
     snaps, ew_day, hero_peak = [], None, None
@@ -55,7 +61,7 @@ def build_replay(vendors, leaks, stealers, days=32):
         L = [x for x in leaks if _d(x["first_seen"]) <= d]
         S = [x for x in stealers if _d(x["infection_date"]) <= d]
 
-        # as-of 활성 침해(전체)
+        # as-of 활성 침해(전체) — 화면 통계·상태 표시용(배경 신호 포함, 정상)
         active = []
         for log in S:
             if not log.get("vendor_id"):
@@ -72,8 +78,8 @@ def build_replay(vendors, leaks, stealers, days=32):
         if campaign_detected and ew_day is None:
             ew_day = d.isoformat()
 
-        # crown-jewel 정점(활성 침해 처음 걸린 날)
-        if hero_peak is None and any(vname.get(l.get("vendor_id")) == CROWN_JEWEL for l in active):
+        # crown-jewel 정점 — 주 캠페인 로그 기준으로만 판정(배경 노이즈 제외)
+        if hero_peak is None and cj_prim_dates and cj_prim_dates[0] <= d:
             hero_peak = d.isoformat()
 
         # 위험 지수(리플레이 시각화용): 활성 + 주캠페인 확산이 주도, 배경은 소량

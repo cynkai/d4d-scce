@@ -224,6 +224,7 @@ body {
 .meter.crit > i { background: linear-gradient(90deg, var(--critical), #ff8a84); }
 .meter.high > i { background: linear-gradient(90deg, var(--amber), #f4c579); }
 .meter.med  > i { background: linear-gradient(90deg, var(--medium), #8fd4e2); }
+.meter.nosignal > i { background: repeating-linear-gradient(135deg, var(--ink-faint) 0 6px, transparent 6px 12px); opacity: .55; }
 .risknum { font-family: var(--font-mono); font-size: 11px; color: var(--ink-dim); margin-top: 4px; text-align: right; }
 
 .badge {
@@ -235,6 +236,7 @@ body {
 .badge.HIGH { color: var(--amber); background: var(--high-soft); border-color: rgba(232,162,61,.3); }
 .badge.MEDIUM { color: var(--medium); background: rgba(110,147,184,.1); border-color: rgba(110,147,184,.25); }
 .badge.LOW { color: var(--low); background: rgba(91,116,136,.1); border-color: rgba(91,116,136,.25); }
+.badge.NOSIGNAL { color: var(--ink-faint); background: transparent; border: 1px dashed var(--line); }
 
 /* detail panel */
 .detail .body { padding: 16px; }

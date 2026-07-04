@@ -16,18 +16,18 @@
     "decision_rule": "최근 30일 스틸러 감염 + HIGH 크리덴셜(VPN/SSO/Admin/Cloud/Repo) + 다중 협력사 동일 C2/스틸러 상관"
   },
   "kpis": {
-    "vendor_count": 12,
+    "vendor_count": 13,
     "critical_count": 4,
     "active_compromises": 4,
-    "exposed_credentials": 189,
-    "matched_exposed_credentials": 189,
-    "total_observed_credentials": 265,
+    "exposed_credentials": 171,
+    "matched_exposed_credentials": 171,
+    "total_observed_credentials": 248,
     "campaigns_detected": 2,
-    "top_risk_score": 125.9,
+    "top_risk_score": 127.1,
     "early_warning_lead_days": 8,
     "campaign_recall_pct": 100,
     "active_precision_pct": 100,
-    "top_residual_risk": 53.9
+    "top_residual_risk": 55.1
   },
   "ranked_vendors": [
     {
@@ -35,11 +35,11 @@
       "name": "태성회로",
       "tier": 2,
       "criticality": "군용 PCB",
-      "risk_score": 125.9,
+      "risk_score": 127.1,
       "breakdown": {
         "active_compromise": 88.6,
-        "leaked_credentials": 8.4,
-        "stealer_infections": 7.9,
+        "leaked_credentials": 7.3,
+        "stealer_infections": 10.0,
         "mission_multiplier": 1.2,
         "reach_score": 30.0
       },
@@ -61,8 +61,8 @@
         "vpn": 17.7
       },
       "counts": {
-        "leaked_records": 20,
-        "infected_machines": 3,
+        "leaked_records": 17,
+        "infected_machines": 4,
         "active_incidents": 1
       },
       "active_incidents": [
@@ -160,12 +160,14 @@
         ],
         "stealer_families": [
           "Lumma",
+          "Raccoon",
           "RedLine"
         ],
         "machines": [
           "WIN-CAD-07",
           "WIN-6943949",
-          "WIN-4705235"
+          "WIN-4705235",
+          "WIN-DECOY-STALE58"
         ]
       },
       "confidence": {
@@ -180,7 +182,7 @@
         {
           "source": "telegram_channel:leakbase-kr",
           "type": "leaked_credential",
-          "count": 8
+          "count": 6
         },
         {
           "source": "combolist:cloud-2025-mix",
@@ -188,12 +190,12 @@
           "count": 4
         },
         {
-          "source": "breach:vendorportal-2024",
+          "source": "combolist:antipublic-2026",
           "type": "leaked_credential",
-          "count": 4
+          "count": 3
         },
         {
-          "source": "combolist:antipublic-2026",
+          "source": "breach:vendorportal-2024",
           "type": "leaked_credential",
           "count": 3
         },
@@ -211,6 +213,11 @@
           "source": "stealer:RedLine",
           "type": "stealer_log",
           "count": 1
+        },
+        {
+          "source": "stealer:Raccoon",
+          "type": "stealer_log",
+          "count": 1
         }
       ],
       "timeline": [
@@ -221,19 +228,19 @@
           "detail": "유출 유형: admin_panel, cloud_console, code_repo, sso, vpn, webmail"
         },
         {
-          "date": "2026-06-30",
-          "kind": "leak",
-          "label": "자격증명 유출 (taesung-pcb.co.kr)",
-          "detail": "출처: telegram_channel:leakbase-kr"
-        },
-        {
           "date": "2026-06-19",
           "kind": "leak",
           "label": "자격증명 유출 (taesung-pcb.co.kr)",
           "detail": "출처: telegram_channel:leakbase-kr"
         },
         {
-          "date": "2026-06-18",
+          "date": "2026-06-16",
+          "kind": "leak",
+          "label": "자격증명 유출 (taesung-pcb.co.kr)",
+          "detail": "출처: telegram_channel:leakbase-kr"
+        },
+        {
+          "date": "2026-06-14",
           "kind": "leak",
           "label": "자격증명 유출 (taesung-pcb.co.kr)",
           "detail": "출처: telegram_channel:leakbase-kr"
@@ -245,10 +252,10 @@
           "detail": "출처: breach:vendorportal-2024"
         },
         {
-          "date": "2026-03-15",
-          "kind": "leak",
-          "label": "자격증명 유출 (taesung-pcb.co.kr)",
-          "detail": "출처: breach:vendorportal-2024"
+          "date": "2026-05-07",
+          "kind": "stealer",
+          "label": "Raccoon 감염 (WIN-DECOY-STALE58)",
+          "detail": "유출 유형: sso, vpn"
         },
         {
           "date": "2025-12-27",
@@ -303,22 +310,22 @@
         {
           "kind": "stealer_telemetry",
           "title": "감염 단말 관측",
-          "score_effect": "+7.9",
-          "why": "협력사 도메인에 귀속된 감염기기 3대 관측",
+          "score_effect": "+10.0",
+          "why": "협력사 도메인에 귀속된 감염기기 4대 관측",
           "evidence": [
-            "infected_machines=3"
+            "infected_machines=4"
           ],
           "confidence": "medium"
         },
         {
           "kind": "credential_leak",
           "title": "기존 유출 자격증명 누적",
-          "score_effect": "+8.4",
-          "why": "협력사 도메인 계정 20건이 다중 출처에서 관측",
+          "score_effect": "+7.3",
+          "why": "협력사 도메인 계정 17건이 다중 출처에서 관측",
           "evidence": [
             "telegram_channel:leakbase-kr",
             "combolist:cloud-2025-mix",
-            "breach:vendorportal-2024"
+            "combolist:antipublic-2026"
           ],
           "confidence": "medium"
         },
@@ -372,8 +379,8 @@
         }
       ],
       "response_impact": {
-        "pre_risk": 125.9,
-        "residual_risk": 53.9,
+        "pre_risk": 127.1,
+        "residual_risk": 55.1,
         "risk_reduction": 72.0,
         "risk_reduction_pct": 57,
         "actions": [
@@ -439,10 +446,10 @@
       },
       "rank_analytics": {
         "rank": 1,
-        "of": 12,
+        "of": 13,
         "percentile": 100,
-        "portfolio_share_pct": 36.8,
-        "vs_median": 116.0,
+        "portfolio_share_pct": 37.8,
+        "vs_median": 124.5,
         "trajectory": {
           "state": "accelerating",
           "label": "가속 (7일내 활성 침해)"
@@ -454,11 +461,11 @@
       "name": "세종전술통신",
       "tier": 1,
       "criticality": "전술데이터링크",
-      "risk_score": 68.0,
+      "risk_score": 84.3,
       "breakdown": {
         "active_compromise": 48.6,
-        "leaked_credentials": 1.1,
-        "stealer_infections": 9.4,
+        "leaked_credentials": 1.0,
+        "stealer_infections": 23.7,
         "mission_multiplier": 1.15,
         "reach_score": 12.0
       },
@@ -476,7 +483,7 @@
         "vpn": 24.3
       },
       "counts": {
-        "leaked_records": 17,
+        "leaked_records": 12,
         "infected_machines": 6,
         "active_incidents": 1
       },
@@ -538,23 +545,24 @@
       ],
       "iocs": {
         "c2_hosts": [
-          "185.220.101.44",
           "193.42.33.8",
           "45.147.230.11",
           "cdn-update-sync.net"
         ],
         "stealer_families": [
+          "Lumma",
           "Raccoon",
           "RedLine",
-          "StealC"
+          "StealC",
+          "Vidar"
         ],
         "machines": [
           "WIN-ENG-22",
-          "WIN-9825812",
-          "WIN-3057514",
-          "WIN-7189302",
           "WIN-6161977",
-          "WIN-9480665"
+          "WIN-9480665",
+          "WIN-DECOY-STALE41",
+          "WIN-DECOY-LOW3",
+          "WIN-DECOY-LOW8"
         ]
       },
       "confidence": {
@@ -567,16 +575,6 @@
       },
       "provenance": [
         {
-          "source": "telegram_channel:leakbase-kr",
-          "type": "leaked_credential",
-          "count": 6
-        },
-        {
-          "source": "breach:vendorportal-2024",
-          "type": "leaked_credential",
-          "count": 3
-        },
-        {
           "source": "darkweb_forum:breachforums-repost",
           "type": "leaked_credential",
           "count": 3
@@ -587,12 +585,12 @@
           "count": 3
         },
         {
-          "source": "stealer:StealC",
-          "type": "stealer_log",
+          "source": "telegram_channel:leakbase-kr",
+          "type": "leaked_credential",
           "count": 3
         },
         {
-          "source": "combolist:cloud-2025-mix",
+          "source": "breach:vendorportal-2024",
           "type": "leaked_credential",
           "count": 2
         },
@@ -602,12 +600,44 @@
           "count": 2
         },
         {
+          "source": "combolist:cloud-2025-mix",
+          "type": "leaked_credential",
+          "count": 1
+        },
+        {
           "source": "stealer:RedLine",
+          "type": "stealer_log",
+          "count": 1
+        },
+        {
+          "source": "stealer:StealC",
+          "type": "stealer_log",
+          "count": 1
+        },
+        {
+          "source": "stealer:Vidar",
+          "type": "stealer_log",
+          "count": 1
+        },
+        {
+          "source": "stealer:Lumma",
           "type": "stealer_log",
           "count": 1
         }
       ],
       "timeline": [
+        {
+          "date": "2026-07-01",
+          "kind": "stealer",
+          "label": "Vidar 감염 (WIN-DECOY-LOW3)",
+          "detail": "유출 유형: generic, webmail"
+        },
+        {
+          "date": "2026-06-26",
+          "kind": "stealer",
+          "label": "Lumma 감염 (WIN-DECOY-LOW8)",
+          "detail": "유출 유형: generic, webmail"
+        },
         {
           "date": "2026-06-25",
           "kind": "stealer",
@@ -615,10 +645,10 @@
           "detail": "유출 유형: sso, vpn, webmail"
         },
         {
-          "date": "2026-05-20",
+          "date": "2026-05-24",
           "kind": "stealer",
-          "label": "StealC 감염 (WIN-7189302)",
-          "detail": "유출 유형: webmail"
+          "label": "Raccoon 감염 (WIN-DECOY-STALE41)",
+          "detail": "유출 유형: sso, vpn"
         },
         {
           "date": "2026-05-07",
@@ -639,24 +669,6 @@
           "detail": "출처: combolist:antipublic-2026"
         },
         {
-          "date": "2026-02-04",
-          "kind": "leak",
-          "label": "자격증명 유출 (sejong-tactcom.co.kr)",
-          "detail": "출처: combolist:cloud-2025-mix"
-        },
-        {
-          "date": "2026-01-11",
-          "kind": "leak",
-          "label": "자격증명 유출 (sejong-tactcom.co.kr)",
-          "detail": "출처: telegram_channel:leakbase-kr"
-        },
-        {
-          "date": "2025-12-26",
-          "kind": "stealer",
-          "label": "StealC 감염 (WIN-3057514)",
-          "detail": "유출 유형: generic, webmail"
-        },
-        {
           "date": "2025-10-13",
           "kind": "stealer",
           "label": "Raccoon 감염 (WIN-6161977)",
@@ -675,10 +687,16 @@
           "detail": "출처: telegram_channel:leakbase-kr"
         },
         {
-          "date": "2025-06-26",
+          "date": "2025-06-16",
           "kind": "stealer",
-          "label": "Raccoon 감염 (WIN-9825812)",
-          "detail": "유출 유형: webmail"
+          "label": "StealC 감염 (WIN-9480665)",
+          "detail": "유출 유형: generic, webmail"
+        },
+        {
+          "date": "2025-01-07",
+          "kind": "leak",
+          "label": "자격증명 유출 (sejong-tactcom.co.kr)",
+          "detail": "출처: darkweb_forum:breachforums-repost"
         }
       ],
       "evidence_ledger": [
@@ -697,7 +715,7 @@
         {
           "kind": "stealer_telemetry",
           "title": "감염 단말 관측",
-          "score_effect": "+9.4",
+          "score_effect": "+23.7",
           "why": "협력사 도메인에 귀속된 감염기기 6대 관측",
           "evidence": [
             "infected_machines=6"
@@ -707,12 +725,12 @@
         {
           "kind": "credential_leak",
           "title": "기존 유출 자격증명 누적",
-          "score_effect": "+1.1",
-          "why": "협력사 도메인 계정 17건이 다중 출처에서 관측",
+          "score_effect": "+1.0",
+          "why": "협력사 도메인 계정 12건이 다중 출처에서 관측",
           "evidence": [
-            "telegram_channel:leakbase-kr",
-            "breach:vendorportal-2024",
-            "darkweb_forum:breachforums-repost"
+            "darkweb_forum:breachforums-repost",
+            "combolist:antipublic-2026",
+            "telegram_channel:leakbase-kr"
           ],
           "confidence": "medium"
         },
@@ -751,10 +769,10 @@
         }
       ],
       "response_impact": {
-        "pre_risk": 68.0,
-        "residual_risk": 12,
+        "pre_risk": 84.3,
+        "residual_risk": 28.3,
         "risk_reduction": 56.0,
-        "risk_reduction_pct": 82,
+        "risk_reduction_pct": 66,
         "actions": [
           {
             "action": "감염 단말 격리 및 포렌식 확보",
@@ -776,9 +794,9 @@
             "action": "C2 차단 및 프록시/EDR 헌팅",
             "risk_reduction": 10,
             "blocks": [
-              "185.220.101.44",
               "193.42.33.8",
-              "45.147.230.11"
+              "45.147.230.11",
+              "cdn-update-sync.net"
             ]
           },
           {
@@ -798,11 +816,11 @@
           }
         ],
         "blocked_paths": [
-          "185.220.101.44",
           "193.42.33.8",
           "45.147.230.11",
           "SSO 통합인증",
           "VPN 원격접속",
+          "cdn-update-sync.net",
           "credential reuse",
           "local credential replay",
           "partner spread"
@@ -815,10 +833,10 @@
       },
       "rank_analytics": {
         "rank": 2,
-        "of": 12,
+        "of": 13,
         "percentile": 92,
-        "portfolio_share_pct": 19.9,
-        "vs_median": 58.1,
+        "portfolio_share_pct": 25.1,
+        "vs_median": 81.7,
         "trajectory": {
           "state": "active",
           "label": "활성 (30일내 침해)"
@@ -830,11 +848,11 @@
       "name": "동방센서텍",
       "tier": 2,
       "criticality": "EO/IR 센서 모듈",
-      "risk_score": 60.3,
+      "risk_score": 59.3,
       "breakdown": {
         "active_compromise": 36.3,
-        "leaked_credentials": 2.6,
-        "stealer_infections": 11.4,
+        "leaked_credentials": 1.3,
+        "stealer_infections": 11.9,
         "mission_multiplier": 1.2,
         "reach_score": 6.0
       },
@@ -851,7 +869,7 @@
       },
       "counts": {
         "leaked_records": 14,
-        "infected_machines": 6,
+        "infected_machines": 5,
         "active_incidents": 1
       },
       "active_incidents": [
@@ -910,7 +928,7 @@
           "cdn-update-sync.net"
         ],
         "stealer_families": [
-          "Lumma",
+          "Raccoon",
           "RedLine",
           "Vidar"
         ],
@@ -919,8 +937,7 @@
           "WIN-6429135",
           "WIN-5122665",
           "WIN-5080351",
-          "WIN-DECOY-STALE41",
-          "WIN-DECOY-STALE58"
+          "WIN-DECOY-LOW15"
         ]
       },
       "confidence": {
@@ -928,24 +945,14 @@
         "factors": [
           "활성 침해 직접 증거(스틸러 HIGH 크리덴셜)",
           "유출·스틸러 교차확증",
-          "출처 4종 교차"
+          "출처 5종 교차"
         ]
       },
       "provenance": [
         {
-          "source": "breach:vendorportal-2024",
-          "type": "leaked_credential",
-          "count": 4
-        },
-        {
           "source": "combolist:antipublic-2026",
           "type": "leaked_credential",
-          "count": 4
-        },
-        {
-          "source": "telegram_channel:leakbase-kr",
-          "type": "leaked_credential",
-          "count": 3
+          "count": 5
         },
         {
           "source": "darkweb_forum:breachforums-repost",
@@ -953,9 +960,24 @@
           "count": 3
         },
         {
+          "source": "telegram_channel:leakbase-kr",
+          "type": "leaked_credential",
+          "count": 2
+        },
+        {
+          "source": "combolist:cloud-2025-mix",
+          "type": "leaked_credential",
+          "count": 2
+        },
+        {
+          "source": "breach:vendorportal-2024",
+          "type": "leaked_credential",
+          "count": 2
+        },
+        {
           "source": "stealer:RedLine",
           "type": "stealer_log",
-          "count": 3
+          "count": 2
         },
         {
           "source": "stealer:Vidar",
@@ -963,18 +985,12 @@
           "count": 2
         },
         {
-          "source": "stealer:Lumma",
+          "source": "stealer:Raccoon",
           "type": "stealer_log",
           "count": 1
         }
       ],
       "timeline": [
-        {
-          "date": "2026-06-29",
-          "kind": "leak",
-          "label": "자격증명 유출 (dongbang-sensor.com)",
-          "detail": "출처: telegram_channel:leakbase-kr"
-        },
         {
           "date": "2026-06-22",
           "kind": "stealer",
@@ -982,22 +998,22 @@
           "detail": "유출 유형: generic, sso, webmail"
         },
         {
-          "date": "2026-05-24",
+          "date": "2026-06-19",
           "kind": "stealer",
-          "label": "Lumma 감염 (WIN-DECOY-STALE41)",
-          "detail": "유출 유형: sso, vpn"
-        },
-        {
-          "date": "2026-05-07",
-          "kind": "stealer",
-          "label": "RedLine 감염 (WIN-DECOY-STALE58)",
-          "detail": "유출 유형: sso, vpn"
+          "label": "Raccoon 감염 (WIN-DECOY-LOW15)",
+          "detail": "유출 유형: generic, webmail"
         },
         {
           "date": "2026-04-23",
           "kind": "leak",
           "label": "자격증명 유출 (dongbang-sensor.com)",
           "detail": "출처: breach:vendorportal-2024"
+        },
+        {
+          "date": "2026-04-10",
+          "kind": "leak",
+          "label": "자격증명 유출 (dongbang-sensor.com)",
+          "detail": "출처: telegram_channel:leakbase-kr"
         },
         {
           "date": "2026-03-13",
@@ -1010,6 +1026,12 @@
           "kind": "leak",
           "label": "자격증명 유출 (dongbang-sensor.com)",
           "detail": "출처: darkweb_forum:breachforums-repost"
+        },
+        {
+          "date": "2026-01-21",
+          "kind": "leak",
+          "label": "자격증명 유출 (dongbang-sensor.com)",
+          "detail": "출처: combolist:cloud-2025-mix"
         },
         {
           "date": "2025-12-21",
@@ -1058,21 +1080,21 @@
         {
           "kind": "stealer_telemetry",
           "title": "감염 단말 관측",
-          "score_effect": "+11.4",
-          "why": "협력사 도메인에 귀속된 감염기기 6대 관측",
+          "score_effect": "+11.9",
+          "why": "협력사 도메인에 귀속된 감염기기 5대 관측",
           "evidence": [
-            "infected_machines=6"
+            "infected_machines=5"
           ],
           "confidence": "medium"
         },
         {
           "kind": "credential_leak",
           "title": "기존 유출 자격증명 누적",
-          "score_effect": "+2.6",
+          "score_effect": "+1.3",
           "why": "협력사 도메인 계정 14건이 다중 출처에서 관측",
           "evidence": [
-            "breach:vendorportal-2024",
             "combolist:antipublic-2026",
+            "darkweb_forum:breachforums-repost",
             "telegram_channel:leakbase-kr"
           ],
           "confidence": "medium"
@@ -1107,9 +1129,9 @@
         }
       ],
       "response_impact": {
-        "pre_risk": 60.3,
+        "pre_risk": 59.3,
         "residual_risk": 12,
-        "risk_reduction": 48.3,
+        "risk_reduction": 47.3,
         "risk_reduction_pct": 80,
         "actions": [
           {
@@ -1170,10 +1192,10 @@
       },
       "rank_analytics": {
         "rank": 3,
-        "of": 12,
-        "percentile": 83,
-        "portfolio_share_pct": 17.6,
-        "vs_median": 50.4,
+        "of": 13,
+        "percentile": 85,
+        "portfolio_share_pct": 17.7,
+        "vs_median": 56.7,
         "trajectory": {
           "state": "active",
           "label": "활성 (30일내 침해)"
@@ -1185,11 +1207,11 @@
       "name": "대양유도시스템",
       "tier": 1,
       "criticality": "유도무기 시커",
-      "risk_score": 44.9,
+      "risk_score": 43.9,
       "breakdown": {
         "active_compromise": 30.1,
-        "leaked_credentials": 2.5,
-        "stealer_infections": 6.5,
+        "leaked_credentials": 1.2,
+        "stealer_infections": 6.9,
         "mission_multiplier": 1.15,
         "reach_score": 6.0
       },
@@ -1205,13 +1227,13 @@
         "admin_panel": 30.1
       },
       "counts": {
-        "leaked_records": 17,
+        "leaked_records": 14,
         "infected_machines": 4,
         "active_incidents": 1
       },
       "active_incidents": [
         {
-          "log_id": "S00036",
+          "log_id": "S00037",
           "stealer_family": "Raccoon",
           "infection_date": "2026-06-12",
           "machine_id": "WIN-3419132",
@@ -1269,7 +1291,7 @@
           "Vidar"
         ],
         "machines": [
-          "WIN-1962308",
+          "WIN-3679315",
           "WIN-6587495",
           "WIN-3419132",
           "WIN-5137094"
@@ -1290,19 +1312,14 @@
           "count": 5
         },
         {
-          "source": "telegram_channel:leakbase-kr",
-          "type": "leaked_credential",
-          "count": 5
-        },
-        {
           "source": "darkweb_forum:breachforums-repost",
           "type": "leaked_credential",
           "count": 3
         },
         {
-          "source": "combolist:antipublic-2026",
+          "source": "telegram_channel:leakbase-kr",
           "type": "leaked_credential",
-          "count": 2
+          "count": 3
         },
         {
           "source": "combolist:cloud-2025-mix",
@@ -1313,6 +1330,11 @@
           "source": "stealer:Raccoon",
           "type": "stealer_log",
           "count": 2
+        },
+        {
+          "source": "combolist:antipublic-2026",
+          "type": "leaked_credential",
+          "count": 1
         },
         {
           "source": "stealer:Vidar",
@@ -1333,12 +1355,6 @@
           "detail": "유출 유형: admin_panel"
         },
         {
-          "date": "2026-05-22",
-          "kind": "leak",
-          "label": "자격증명 유출 (daeyang-guidance.com)",
-          "detail": "출처: telegram_channel:leakbase-kr"
-        },
-        {
           "date": "2026-05-13",
           "kind": "leak",
           "label": "자격증명 유출 (daeyang-guidance.com)",
@@ -1357,10 +1373,10 @@
           "detail": "출처: telegram_channel:leakbase-kr"
         },
         {
-          "date": "2026-03-19",
-          "kind": "leak",
-          "label": "자격증명 유출 (daeyang-guidance.com)",
-          "detail": "출처: telegram_channel:leakbase-kr"
+          "date": "2026-03-02",
+          "kind": "stealer",
+          "label": "Vidar 감염 (WIN-3679315)",
+          "detail": "유출 유형: webmail"
         },
         {
           "date": "2026-01-30",
@@ -1381,12 +1397,6 @@
           "detail": "출처: darkweb_forum:breachforums-repost"
         },
         {
-          "date": "2025-11-22",
-          "kind": "stealer",
-          "label": "Vidar 감염 (WIN-1962308)",
-          "detail": "유출 유형: generic, webmail"
-        },
-        {
           "date": "2025-08-31",
           "kind": "stealer",
           "label": "Raccoon 감염 (WIN-5137094)",
@@ -1397,6 +1407,18 @@
           "kind": "leak",
           "label": "자격증명 유출 (daeyang-guidance.com)",
           "detail": "출처: breach:vendorportal-2024"
+        },
+        {
+          "date": "2025-07-05",
+          "kind": "leak",
+          "label": "자격증명 유출 (daeyang-guidance.com)",
+          "detail": "출처: breach:vendorportal-2024"
+        },
+        {
+          "date": "2025-02-04",
+          "kind": "leak",
+          "label": "자격증명 유출 (daeyang-guidance.com)",
+          "detail": "출처: combolist:antipublic-2026"
         }
       ],
       "evidence_ledger": [
@@ -1406,7 +1428,7 @@
           "score_effect": "+30.1",
           "why": "2026-06-12 WIN-3419132에서 Raccoon 감염 및 ERP/관리자 콘솔 노출",
           "evidence": [
-            "S00036",
+            "S00037",
             "WIN-3419132",
             "Raccoon"
           ],
@@ -1415,7 +1437,7 @@
         {
           "kind": "stealer_telemetry",
           "title": "감염 단말 관측",
-          "score_effect": "+6.5",
+          "score_effect": "+6.9",
           "why": "협력사 도메인에 귀속된 감염기기 4대 관측",
           "evidence": [
             "infected_machines=4"
@@ -1425,12 +1447,12 @@
         {
           "kind": "credential_leak",
           "title": "기존 유출 자격증명 누적",
-          "score_effect": "+2.5",
-          "why": "협력사 도메인 계정 17건이 다중 출처에서 관측",
+          "score_effect": "+1.2",
+          "why": "협력사 도메인 계정 14건이 다중 출처에서 관측",
           "evidence": [
             "breach:vendorportal-2024",
-            "telegram_channel:leakbase-kr",
-            "darkweb_forum:breachforums-repost"
+            "darkweb_forum:breachforums-repost",
+            "telegram_channel:leakbase-kr"
           ],
           "confidence": "medium"
         },
@@ -1464,9 +1486,9 @@
         }
       ],
       "response_impact": {
-        "pre_risk": 44.9,
+        "pre_risk": 43.9,
         "residual_risk": 12,
-        "risk_reduction": 32.9,
+        "risk_reduction": 31.9,
         "risk_reduction_pct": 73,
         "actions": [
           {
@@ -1526,10 +1548,10 @@
       },
       "rank_analytics": {
         "rank": 4,
-        "of": 12,
-        "percentile": 75,
+        "of": 13,
+        "percentile": 77,
         "portfolio_share_pct": 13.1,
-        "vs_median": 35.0,
+        "vs_median": 41.3,
         "trajectory": {
           "state": "active",
           "label": "활성 (30일내 침해)"
@@ -1537,253 +1559,15 @@
       }
     },
     {
-      "vendor_id": "V012",
-      "name": "한결시스템",
+      "vendor_id": "V008",
+      "name": "우진열처리",
       "tier": 2,
-      "criticality": "임베디드 SW",
-      "risk_score": 14.0,
+      "criticality": "특수 열처리",
+      "risk_score": 6.5,
       "breakdown": {
         "active_compromise": 0.0,
-        "leaked_credentials": 1.4,
-        "stealer_infections": 10.3,
-        "mission_multiplier": 1.2,
-        "reach_score": 0.0
-      },
-      "reach": {
-        "layers": [],
-        "full_chain": false,
-        "score": 0.0,
-        "label": "도달 계층 없음"
-      },
-      "category_breakdown": {},
-      "counts": {
-        "leaked_records": 10,
-        "infected_machines": 2,
-        "active_incidents": 0
-      },
-      "active_incidents": [],
-      "status": "MEDIUM",
-      "mitre": [],
-      "iocs": {
-        "c2_hosts": [],
-        "stealer_families": [
-          "StealC"
-        ],
-        "machines": [
-          "WIN-DECOY-STALE34",
-          "WIN-DECOY-LOW8"
-        ]
-      },
-      "confidence": {
-        "score": 0.5,
-        "factors": [
-          "유출·스틸러 교차확증",
-          "출처 4종 교차"
-        ]
-      },
-      "provenance": [
-        {
-          "source": "breach:vendorportal-2024",
-          "type": "leaked_credential",
-          "count": 4
-        },
-        {
-          "source": "combolist:cloud-2025-mix",
-          "type": "leaked_credential",
-          "count": 3
-        },
-        {
-          "source": "darkweb_forum:breachforums-repost",
-          "type": "leaked_credential",
-          "count": 2
-        },
-        {
-          "source": "stealer:StealC",
-          "type": "stealer_log",
-          "count": 2
-        },
-        {
-          "source": "telegram_channel:leakbase-kr",
-          "type": "leaked_credential",
-          "count": 1
-        }
-      ],
-      "timeline": [
-        {
-          "date": "2026-06-26",
-          "kind": "stealer",
-          "label": "StealC 감염 (WIN-DECOY-LOW8)",
-          "detail": "유출 유형: generic, webmail"
-        },
-        {
-          "date": "2026-05-31",
-          "kind": "stealer",
-          "label": "StealC 감염 (WIN-DECOY-STALE34)",
-          "detail": "유출 유형: sso, vpn"
-        },
-        {
-          "date": "2026-05-16",
-          "kind": "leak",
-          "label": "자격증명 유출 (hangyul-sys.com)",
-          "detail": "출처: darkweb_forum:breachforums-repost"
-        },
-        {
-          "date": "2026-04-28",
-          "kind": "leak",
-          "label": "자격증명 유출 (hangyul-sys.com)",
-          "detail": "출처: combolist:cloud-2025-mix"
-        },
-        {
-          "date": "2025-11-14",
-          "kind": "leak",
-          "label": "자격증명 유출 (hangyul-sys.com)",
-          "detail": "출처: darkweb_forum:breachforums-repost"
-        },
-        {
-          "date": "2025-03-02",
-          "kind": "leak",
-          "label": "자격증명 유출 (hangyul-sys.com)",
-          "detail": "출처: breach:vendorportal-2024"
-        },
-        {
-          "date": "2025-02-02",
-          "kind": "leak",
-          "label": "자격증명 유출 (hangyul-sys.com)",
-          "detail": "출처: breach:vendorportal-2024"
-        },
-        {
-          "date": "2024-11-10",
-          "kind": "leak",
-          "label": "자격증명 유출 (hangyul-sys.com)",
-          "detail": "출처: breach:vendorportal-2024"
-        },
-        {
-          "date": "2024-11-06",
-          "kind": "leak",
-          "label": "자격증명 유출 (hangyul-sys.com)",
-          "detail": "출처: combolist:cloud-2025-mix"
-        },
-        {
-          "date": "2024-10-15",
-          "kind": "leak",
-          "label": "자격증명 유출 (hangyul-sys.com)",
-          "detail": "출처: breach:vendorportal-2024"
-        },
-        {
-          "date": "2024-07-26",
-          "kind": "leak",
-          "label": "자격증명 유출 (hangyul-sys.com)",
-          "detail": "출처: combolist:cloud-2025-mix"
-        },
-        {
-          "date": "2024-06-21",
-          "kind": "leak",
-          "label": "자격증명 유출 (hangyul-sys.com)",
-          "detail": "출처: telegram_channel:leakbase-kr"
-        }
-      ],
-      "evidence_ledger": [
-        {
-          "kind": "stealer_telemetry",
-          "title": "감염 단말 관측",
-          "score_effect": "+10.3",
-          "why": "협력사 도메인에 귀속된 감염기기 2대 관측",
-          "evidence": [
-            "infected_machines=2"
-          ],
-          "confidence": "medium"
-        },
-        {
-          "kind": "credential_leak",
-          "title": "기존 유출 자격증명 누적",
-          "score_effect": "+1.4",
-          "why": "협력사 도메인 계정 10건이 다중 출처에서 관측",
-          "evidence": [
-            "breach:vendorportal-2024",
-            "combolist:cloud-2025-mix",
-            "darkweb_forum:breachforums-repost"
-          ],
-          "confidence": "medium"
-        },
-        {
-          "kind": "mission_impact",
-          "title": "임무 영향 승수",
-          "score_effect": "×1.2",
-          "why": "2차 협력사 · 공급품목: 임베디드 SW",
-          "evidence": [
-            "tier",
-            "criticality"
-          ],
-          "confidence": "policy"
-        }
-      ],
-      "attack_path": [
-        {
-          "stage": "Infostealer infection",
-          "label": "스틸러 감염",
-          "status": "observed"
-        },
-        {
-          "stage": "Supply-chain risk",
-          "label": "공급망 2차 침투",
-          "status": "risk"
-        }
-      ],
-      "response_impact": {
-        "pre_risk": 14.0,
-        "residual_risk": 12,
-        "risk_reduction": 2.0,
-        "risk_reduction_pct": 14,
-        "actions": [
-          {
-            "action": "협력사/원청 동시 통보 및 전수 모니터링",
-            "risk_reduction": 8,
-            "blocks": [
-              "credential reuse",
-              "partner spread"
-            ]
-          },
-          {
-            "action": "MFA 강제 적용 및 30일 소급 로그인 감사",
-            "risk_reduction": 6,
-            "blocks": [
-              "valid-account abuse"
-            ]
-          }
-        ],
-        "blocked_paths": [
-          "credential reuse",
-          "partner spread",
-          "valid-account abuse"
-        ],
-        "remaining_risk": [
-          "이미 사용된 세션/토큰의 소급 조사 필요",
-          "협력사 외부 SaaS 계정 재사용 가능성",
-          "동일 캠페인의 미관측 협력사 확산 가능성"
-        ]
-      },
-      "rank_analytics": {
-        "rank": 5,
-        "of": 12,
-        "percentile": 67,
-        "portfolio_share_pct": 4.1,
-        "vs_median": 4.1,
-        "trajectory": {
-          "state": "smoldering",
-          "label": "잠복 (정적 노출 누적)"
-        }
-      }
-    },
-    {
-      "vendor_id": "V010",
-      "name": "가온소재",
-      "tier": 2,
-      "criticality": "복합소재",
-      "risk_score": 9.9,
-      "breakdown": {
-        "active_compromise": 0.0,
-        "leaked_credentials": 0.7,
-        "stealer_infections": 7.5,
+        "leaked_credentials": 1.3,
+        "stealer_infections": 4.2,
         "mission_multiplier": 1.2,
         "reach_score": 0.0
       },
@@ -1804,25 +1588,30 @@
       "mitre": [],
       "iocs": {
         "c2_hosts": [
-          "45.147.230.11"
+          "185.220.101.44"
         ],
         "stealer_families": [
-          "Lumma",
+          "RedLine",
           "StealC"
         ],
         "machines": [
-          "WIN-6379868",
-          "WIN-DECOY-LOW3"
+          "WIN-2732967",
+          "WIN-DECOY-STALE34"
         ]
       },
       "confidence": {
         "score": 0.5,
         "factors": [
           "유출·스틸러 교차확증",
-          "출처 5종 교차"
+          "출처 3종 교차"
         ]
       },
       "provenance": [
+        {
+          "source": "darkweb_forum:breachforums-repost",
+          "type": "leaked_credential",
+          "count": 6
+        },
         {
           "source": "breach:vendorportal-2024",
           "type": "leaked_credential",
@@ -1834,110 +1623,95 @@
           "count": 3
         },
         {
-          "source": "combolist:cloud-2025-mix",
-          "type": "leaked_credential",
-          "count": 2
-        },
-        {
-          "source": "darkweb_forum:breachforums-repost",
-          "type": "leaked_credential",
-          "count": 2
-        },
-        {
-          "source": "telegram_channel:leakbase-kr",
-          "type": "leaked_credential",
-          "count": 2
-        },
-        {
-          "source": "stealer:Lumma",
+          "source": "stealer:StealC",
           "type": "stealer_log",
           "count": 1
         },
         {
-          "source": "stealer:StealC",
+          "source": "stealer:RedLine",
           "type": "stealer_log",
           "count": 1
         }
       ],
       "timeline": [
         {
-          "date": "2026-07-01",
+          "date": "2026-05-31",
           "kind": "stealer",
-          "label": "StealC 감염 (WIN-DECOY-LOW3)",
-          "detail": "유출 유형: generic, webmail"
+          "label": "RedLine 감염 (WIN-DECOY-STALE34)",
+          "detail": "유출 유형: sso, vpn"
         },
         {
-          "date": "2026-04-20",
+          "date": "2026-05-27",
           "kind": "leak",
-          "label": "자격증명 유출 (gaon-materials.com)",
+          "label": "자격증명 유출 (woojin-heat.com)",
           "detail": "출처: breach:vendorportal-2024"
         },
         {
-          "date": "2026-02-27",
+          "date": "2026-04-10",
           "kind": "leak",
-          "label": "자격증명 유출 (gaon-materials.com)",
+          "label": "자격증명 유출 (woojin-heat.com)",
           "detail": "출처: darkweb_forum:breachforums-repost"
         },
         {
-          "date": "2026-01-26",
-          "kind": "leak",
-          "label": "자격증명 유출 (gaon-materials.com)",
-          "detail": "출처: breach:vendorportal-2024"
-        },
-        {
-          "date": "2025-12-26",
-          "kind": "leak",
-          "label": "자격증명 유출 (gaon-materials.com)",
-          "detail": "출처: combolist:antipublic-2026"
-        },
-        {
-          "date": "2025-12-02",
-          "kind": "leak",
-          "label": "자격증명 유출 (gaon-materials.com)",
-          "detail": "출처: breach:vendorportal-2024"
-        },
-        {
-          "date": "2025-11-11",
+          "date": "2026-03-09",
           "kind": "stealer",
-          "label": "Lumma 감염 (WIN-6379868)",
-          "detail": "유출 유형: generic"
+          "label": "StealC 감염 (WIN-2732967)",
+          "detail": "유출 유형: generic, webmail"
         },
         {
-          "date": "2025-08-28",
+          "date": "2026-02-18",
           "kind": "leak",
-          "label": "자격증명 유출 (gaon-materials.com)",
-          "detail": "출처: breach:vendorportal-2024"
-        },
-        {
-          "date": "2025-05-29",
-          "kind": "leak",
-          "label": "자격증명 유출 (gaon-materials.com)",
-          "detail": "출처: breach:vendorportal-2024"
-        },
-        {
-          "date": "2025-04-15",
-          "kind": "leak",
-          "label": "자격증명 유출 (gaon-materials.com)",
-          "detail": "출처: telegram_channel:leakbase-kr"
-        },
-        {
-          "date": "2024-12-05",
-          "kind": "leak",
-          "label": "자격증명 유출 (gaon-materials.com)",
-          "detail": "출처: combolist:cloud-2025-mix"
-        },
-        {
-          "date": "2024-07-15",
-          "kind": "leak",
-          "label": "자격증명 유출 (gaon-materials.com)",
+          "label": "자격증명 유출 (woojin-heat.com)",
           "detail": "출처: combolist:antipublic-2026"
+        },
+        {
+          "date": "2025-11-25",
+          "kind": "leak",
+          "label": "자격증명 유출 (woojin-heat.com)",
+          "detail": "출처: breach:vendorportal-2024"
+        },
+        {
+          "date": "2025-11-13",
+          "kind": "leak",
+          "label": "자격증명 유출 (woojin-heat.com)",
+          "detail": "출처: combolist:antipublic-2026"
+        },
+        {
+          "date": "2025-08-21",
+          "kind": "leak",
+          "label": "자격증명 유출 (woojin-heat.com)",
+          "detail": "출처: darkweb_forum:breachforums-repost"
+        },
+        {
+          "date": "2025-07-21",
+          "kind": "leak",
+          "label": "자격증명 유출 (woojin-heat.com)",
+          "detail": "출처: breach:vendorportal-2024"
+        },
+        {
+          "date": "2025-02-07",
+          "kind": "leak",
+          "label": "자격증명 유출 (woojin-heat.com)",
+          "detail": "출처: combolist:antipublic-2026"
+        },
+        {
+          "date": "2025-02-02",
+          "kind": "leak",
+          "label": "자격증명 유출 (woojin-heat.com)",
+          "detail": "출처: breach:vendorportal-2024"
+        },
+        {
+          "date": "2024-11-01",
+          "kind": "leak",
+          "label": "자격증명 유출 (woojin-heat.com)",
+          "detail": "출처: breach:vendorportal-2024"
         }
       ],
       "evidence_ledger": [
         {
           "kind": "stealer_telemetry",
           "title": "감염 단말 관측",
-          "score_effect": "+7.5",
+          "score_effect": "+4.2",
           "why": "협력사 도메인에 귀속된 감염기기 2대 관측",
           "evidence": [
             "infected_machines=2"
@@ -1947,12 +1721,12 @@
         {
           "kind": "credential_leak",
           "title": "기존 유출 자격증명 누적",
-          "score_effect": "+0.7",
+          "score_effect": "+1.3",
           "why": "협력사 도메인 계정 14건이 다중 출처에서 관측",
           "evidence": [
+            "darkweb_forum:breachforums-repost",
             "breach:vendorportal-2024",
-            "combolist:antipublic-2026",
-            "combolist:cloud-2025-mix"
+            "combolist:antipublic-2026"
           ],
           "confidence": "medium"
         },
@@ -1960,7 +1734,7 @@
           "kind": "mission_impact",
           "title": "임무 영향 승수",
           "score_effect": "×1.2",
-          "why": "2차 협력사 · 공급품목: 복합소재",
+          "why": "2차 협력사 · 공급품목: 특수 열처리",
           "evidence": [
             "tier",
             "criticality"
@@ -1981,16 +1755,16 @@
         }
       ],
       "response_impact": {
-        "pre_risk": 9.9,
+        "pre_risk": 6.5,
         "residual_risk": 12,
-        "risk_reduction": -2.1,
-        "risk_reduction_pct": -21,
+        "risk_reduction": -5.5,
+        "risk_reduction_pct": -85,
         "actions": [
           {
             "action": "C2 차단 및 프록시/EDR 헌팅",
             "risk_reduction": 10,
             "blocks": [
-              "45.147.230.11"
+              "185.220.101.44"
             ]
           },
           {
@@ -2010,7 +1784,229 @@
           }
         ],
         "blocked_paths": [
-          "45.147.230.11",
+          "185.220.101.44",
+          "credential reuse",
+          "partner spread",
+          "valid-account abuse"
+        ],
+        "remaining_risk": [
+          "이미 사용된 세션/토큰의 소급 조사 필요",
+          "협력사 외부 SaaS 계정 재사용 가능성",
+          "동일 캠페인의 미관측 협력사 확산 가능성"
+        ]
+      },
+      "rank_analytics": {
+        "rank": 5,
+        "of": 13,
+        "percentile": 69,
+        "portfolio_share_pct": 1.9,
+        "vs_median": 3.9,
+        "trajectory": {
+          "state": "smoldering",
+          "label": "잠복 (정적 노출 누적)"
+        }
+      }
+    },
+    {
+      "vendor_id": "V004",
+      "name": "누리항공기계",
+      "tier": 1,
+      "criticality": "기체 구조물",
+      "risk_score": 3.9,
+      "breakdown": {
+        "active_compromise": 0.0,
+        "leaked_credentials": 3.9,
+        "stealer_infections": 0.0,
+        "mission_multiplier": 1.0,
+        "reach_score": 0.0
+      },
+      "reach": {
+        "layers": [],
+        "full_chain": false,
+        "score": 0.0,
+        "label": "도달 계층 없음"
+      },
+      "category_breakdown": {},
+      "counts": {
+        "leaked_records": 18,
+        "infected_machines": 0,
+        "active_incidents": 0
+      },
+      "active_incidents": [],
+      "status": "LOW",
+      "mitre": [],
+      "iocs": {
+        "c2_hosts": [],
+        "stealer_families": [],
+        "machines": []
+      },
+      "confidence": {
+        "score": 0.35,
+        "factors": [
+          "출처 5종 교차"
+        ]
+      },
+      "provenance": [
+        {
+          "source": "combolist:cloud-2025-mix",
+          "type": "leaked_credential",
+          "count": 7
+        },
+        {
+          "source": "telegram_channel:leakbase-kr",
+          "type": "leaked_credential",
+          "count": 5
+        },
+        {
+          "source": "breach:vendorportal-2024",
+          "type": "leaked_credential",
+          "count": 3
+        },
+        {
+          "source": "darkweb_forum:breachforums-repost",
+          "type": "leaked_credential",
+          "count": 2
+        },
+        {
+          "source": "combolist:antipublic-2026",
+          "type": "leaked_credential",
+          "count": 1
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2026-06-27",
+          "kind": "leak",
+          "label": "자격증명 유출 (nuri-aeromech.com)",
+          "detail": "출처: telegram_channel:leakbase-kr"
+        },
+        {
+          "date": "2026-04-20",
+          "kind": "leak",
+          "label": "자격증명 유출 (nuri-aeromech.com)",
+          "detail": "출처: breach:vendorportal-2024"
+        },
+        {
+          "date": "2026-04-17",
+          "kind": "leak",
+          "label": "자격증명 유출 (nuri-aeromech.com)",
+          "detail": "출처: combolist:antipublic-2026"
+        },
+        {
+          "date": "2026-03-20",
+          "kind": "leak",
+          "label": "자격증명 유출 (nuri-aeromech.com)",
+          "detail": "출처: breach:vendorportal-2024"
+        },
+        {
+          "date": "2026-02-27",
+          "kind": "leak",
+          "label": "자격증명 유출 (nuri-aeromech.com)",
+          "detail": "출처: breach:vendorportal-2024"
+        },
+        {
+          "date": "2025-11-07",
+          "kind": "leak",
+          "label": "자격증명 유출 (nuri-aeromech.com)",
+          "detail": "출처: combolist:cloud-2025-mix"
+        },
+        {
+          "date": "2025-11-07",
+          "kind": "leak",
+          "label": "자격증명 유출 (nuri-aeromech.com)",
+          "detail": "출처: combolist:cloud-2025-mix"
+        },
+        {
+          "date": "2025-04-17",
+          "kind": "leak",
+          "label": "자격증명 유출 (nuri-aeromech.com)",
+          "detail": "출처: telegram_channel:leakbase-kr"
+        },
+        {
+          "date": "2025-03-20",
+          "kind": "leak",
+          "label": "자격증명 유출 (nuri-aeromech.com)",
+          "detail": "출처: combolist:cloud-2025-mix"
+        },
+        {
+          "date": "2025-03-09",
+          "kind": "leak",
+          "label": "자격증명 유출 (nuri-aeromech.com)",
+          "detail": "출처: telegram_channel:leakbase-kr"
+        },
+        {
+          "date": "2024-10-14",
+          "kind": "leak",
+          "label": "자격증명 유출 (nuri-aeromech.com)",
+          "detail": "출처: combolist:cloud-2025-mix"
+        },
+        {
+          "date": "2024-10-09",
+          "kind": "leak",
+          "label": "자격증명 유출 (nuri-aeromech.com)",
+          "detail": "출처: telegram_channel:leakbase-kr"
+        }
+      ],
+      "evidence_ledger": [
+        {
+          "kind": "credential_leak",
+          "title": "기존 유출 자격증명 누적",
+          "score_effect": "+3.9",
+          "why": "협력사 도메인 계정 18건이 다중 출처에서 관측",
+          "evidence": [
+            "combolist:cloud-2025-mix",
+            "telegram_channel:leakbase-kr",
+            "breach:vendorportal-2024"
+          ],
+          "confidence": "medium"
+        },
+        {
+          "kind": "mission_impact",
+          "title": "임무 영향 승수",
+          "score_effect": "×1.0",
+          "why": "1차 협력사 · 공급품목: 기체 구조물",
+          "evidence": [
+            "tier",
+            "criticality"
+          ],
+          "confidence": "policy"
+        }
+      ],
+      "attack_path": [
+        {
+          "stage": "Infostealer infection",
+          "label": "스틸러 감염",
+          "status": "observed"
+        },
+        {
+          "stage": "Supply-chain risk",
+          "label": "공급망 2차 침투",
+          "status": "risk"
+        }
+      ],
+      "response_impact": {
+        "pre_risk": 3.9,
+        "residual_risk": 12,
+        "risk_reduction": -8.1,
+        "risk_reduction_pct": -208,
+        "actions": [
+          {
+            "action": "협력사/원청 동시 통보 및 전수 모니터링",
+            "risk_reduction": 8,
+            "blocks": [
+              "credential reuse",
+              "partner spread"
+            ]
+          },
+          {
+            "action": "MFA 강제 적용 및 30일 소급 로그인 감사",
+            "risk_reduction": 6,
+            "blocks": [
+              "valid-account abuse"
+            ]
+          }
+        ],
+        "blocked_paths": [
           "credential reuse",
           "partner spread",
           "valid-account abuse"
@@ -2023,10 +2019,10 @@
       },
       "rank_analytics": {
         "rank": 6,
-        "of": 12,
-        "percentile": 58,
-        "portfolio_share_pct": 2.9,
-        "vs_median": 0.0,
+        "of": 13,
+        "percentile": 62,
+        "portfolio_share_pct": 1.2,
+        "vs_median": 1.3,
         "trajectory": {
           "state": "smoldering",
           "label": "잠복 (정적 노출 누적)"
@@ -2038,11 +2034,11 @@
       "name": "청우기전",
       "tier": 2,
       "criticality": "전원공급장치",
-      "risk_score": 9.2,
+      "risk_score": 2.6,
       "breakdown": {
         "active_compromise": 0.0,
-        "leaked_credentials": 2.0,
-        "stealer_infections": 5.7,
+        "leaked_credentials": 1.9,
+        "stealer_infections": 0.3,
         "mission_multiplier": 1.2,
         "reach_score": 0.0
       },
@@ -2054,12 +2050,12 @@
       },
       "category_breakdown": {},
       "counts": {
-        "leaked_records": 20,
-        "infected_machines": 3,
+        "leaked_records": 19,
+        "infected_machines": 2,
         "active_incidents": 0
       },
       "active_incidents": [],
-      "status": "MEDIUM",
+      "status": "LOW",
       "mitre": [],
       "iocs": {
         "c2_hosts": [
@@ -2067,13 +2063,12 @@
           "193.42.33.8"
         ],
         "stealer_families": [
-          "Lumma",
+          "Raccoon",
           "StealC"
         ],
         "machines": [
-          "WIN-1802018",
-          "WIN-2221118",
-          "WIN-DECOY-LOW15"
+          "WIN-3193891",
+          "WIN-2221118"
         ]
       },
       "confidence": {
@@ -2100,19 +2095,19 @@
           "count": 3
         },
         {
-          "source": "combolist:cloud-2025-mix",
-          "type": "leaked_credential",
-          "count": 2
-        },
-        {
           "source": "breach:vendorportal-2024",
           "type": "leaked_credential",
           "count": 2
         },
         {
-          "source": "stealer:Lumma",
+          "source": "combolist:cloud-2025-mix",
+          "type": "leaked_credential",
+          "count": 1
+        },
+        {
+          "source": "stealer:Raccoon",
           "type": "stealer_log",
-          "count": 2
+          "count": 1
         },
         {
           "source": "stealer:StealC",
@@ -2121,12 +2116,6 @@
         }
       ],
       "timeline": [
-        {
-          "date": "2026-06-19",
-          "kind": "stealer",
-          "label": "Lumma 감염 (WIN-DECOY-LOW15)",
-          "detail": "유출 유형: generic, webmail"
-        },
         {
           "date": "2026-06-04",
           "kind": "leak",
@@ -2146,10 +2135,10 @@
           "detail": "출처: telegram_channel:leakbase-kr"
         },
         {
-          "date": "2026-02-26",
-          "kind": "leak",
-          "label": "자격증명 유출 (chungwoo-elec.co.kr)",
-          "detail": "출처: darkweb_forum:breachforums-repost"
+          "date": "2026-02-05",
+          "kind": "stealer",
+          "label": "Raccoon 감염 (WIN-3193891)",
+          "detail": "유출 유형: generic, webmail"
         },
         {
           "date": "2026-02-03",
@@ -2164,16 +2153,16 @@
           "detail": "출처: telegram_channel:leakbase-kr"
         },
         {
-          "date": "2025-12-07",
+          "date": "2025-11-04",
           "kind": "leak",
           "label": "자격증명 유출 (chungwoo-elec.co.kr)",
           "detail": "출처: combolist:antipublic-2026"
         },
         {
-          "date": "2025-11-04",
+          "date": "2025-11-02",
           "kind": "leak",
           "label": "자격증명 유출 (chungwoo-elec.co.kr)",
-          "detail": "출처: combolist:antipublic-2026"
+          "detail": "출처: darkweb_forum:breachforums-repost"
         },
         {
           "date": "2025-10-23",
@@ -2188,7 +2177,13 @@
           "detail": "유출 유형: cloud_console"
         },
         {
-          "date": "2025-08-27",
+          "date": "2025-07-25",
+          "kind": "leak",
+          "label": "자격증명 유출 (chungwoo-elec.co.kr)",
+          "detail": "출처: telegram_channel:leakbase-kr"
+        },
+        {
+          "date": "2025-07-12",
           "kind": "leak",
           "label": "자격증명 유출 (chungwoo-elec.co.kr)",
           "detail": "출처: telegram_channel:leakbase-kr"
@@ -2198,18 +2193,18 @@
         {
           "kind": "stealer_telemetry",
           "title": "감염 단말 관측",
-          "score_effect": "+5.7",
-          "why": "협력사 도메인에 귀속된 감염기기 3대 관측",
+          "score_effect": "+0.3",
+          "why": "협력사 도메인에 귀속된 감염기기 2대 관측",
           "evidence": [
-            "infected_machines=3"
+            "infected_machines=2"
           ],
           "confidence": "medium"
         },
         {
           "kind": "credential_leak",
           "title": "기존 유출 자격증명 누적",
-          "score_effect": "+2.0",
-          "why": "협력사 도메인 계정 20건이 다중 출처에서 관측",
+          "score_effect": "+1.9",
+          "why": "협력사 도메인 계정 19건이 다중 출처에서 관측",
           "evidence": [
             "telegram_channel:leakbase-kr",
             "darkweb_forum:breachforums-repost",
@@ -2242,10 +2237,10 @@
         }
       ],
       "response_impact": {
-        "pre_risk": 9.2,
+        "pre_risk": 2.6,
         "residual_risk": 12,
-        "risk_reduction": -2.8,
-        "risk_reduction_pct": -30,
+        "risk_reduction": -9.4,
+        "risk_reduction_pct": -362,
         "actions": [
           {
             "action": "C2 차단 및 프록시/EDR 헌팅",
@@ -2286,10 +2281,10 @@
       },
       "rank_analytics": {
         "rank": 7,
-        "of": 12,
-        "percentile": 50,
-        "portfolio_share_pct": 2.7,
-        "vs_median": -0.7,
+        "of": 13,
+        "percentile": 54,
+        "portfolio_share_pct": 0.8,
+        "vs_median": 0.0,
         "trajectory": {
           "state": "smoldering",
           "label": "잠복 (정적 노출 누적)"
@@ -2297,513 +2292,14 @@
       }
     },
     {
-      "vendor_id": "V004",
-      "name": "누리항공기계",
-      "tier": 1,
-      "criticality": "기체 구조물",
-      "risk_score": 5.0,
-      "breakdown": {
-        "active_compromise": 0.0,
-        "leaked_credentials": 4.8,
-        "stealer_infections": 0.2,
-        "mission_multiplier": 1.0,
-        "reach_score": 0.0
-      },
-      "reach": {
-        "layers": [],
-        "full_chain": false,
-        "score": 0.0,
-        "label": "도달 계층 없음"
-      },
-      "category_breakdown": {},
-      "counts": {
-        "leaked_records": 18,
-        "infected_machines": 1,
-        "active_incidents": 0
-      },
-      "active_incidents": [],
-      "status": "MEDIUM",
-      "mitre": [],
-      "iocs": {
-        "c2_hosts": [
-          "185.220.101.44"
-        ],
-        "stealer_families": [
-          "StealC"
-        ],
-        "machines": [
-          "WIN-6357240"
-        ]
-      },
-      "confidence": {
-        "score": 0.5,
-        "factors": [
-          "유출·스틸러 교차확증",
-          "출처 5종 교차"
-        ]
-      },
-      "provenance": [
-        {
-          "source": "combolist:cloud-2025-mix",
-          "type": "leaked_credential",
-          "count": 5
-        },
-        {
-          "source": "darkweb_forum:breachforums-repost",
-          "type": "leaked_credential",
-          "count": 5
-        },
-        {
-          "source": "telegram_channel:leakbase-kr",
-          "type": "leaked_credential",
-          "count": 4
-        },
-        {
-          "source": "breach:vendorportal-2024",
-          "type": "leaked_credential",
-          "count": 2
-        },
-        {
-          "source": "combolist:antipublic-2026",
-          "type": "leaked_credential",
-          "count": 2
-        },
-        {
-          "source": "stealer:StealC",
-          "type": "stealer_log",
-          "count": 1
-        }
-      ],
-      "timeline": [
-        {
-          "date": "2026-06-27",
-          "kind": "leak",
-          "label": "자격증명 유출 (nuri-aeromech.com)",
-          "detail": "출처: telegram_channel:leakbase-kr"
-        },
-        {
-          "date": "2026-06-04",
-          "kind": "leak",
-          "label": "자격증명 유출 (nuri-aeromech.com)",
-          "detail": "출처: combolist:antipublic-2026"
-        },
-        {
-          "date": "2026-04-20",
-          "kind": "leak",
-          "label": "자격증명 유출 (nuri-aeromech.com)",
-          "detail": "출처: breach:vendorportal-2024"
-        },
-        {
-          "date": "2026-04-17",
-          "kind": "leak",
-          "label": "자격증명 유출 (nuri-aeromech.com)",
-          "detail": "출처: combolist:antipublic-2026"
-        },
-        {
-          "date": "2026-03-20",
-          "kind": "leak",
-          "label": "자격증명 유출 (nuri-aeromech.com)",
-          "detail": "출처: breach:vendorportal-2024"
-        },
-        {
-          "date": "2026-02-01",
-          "kind": "stealer",
-          "label": "StealC 감염 (WIN-6357240)",
-          "detail": "유출 유형: webmail"
-        },
-        {
-          "date": "2025-11-07",
-          "kind": "leak",
-          "label": "자격증명 유출 (nuri-aeromech.com)",
-          "detail": "출처: combolist:cloud-2025-mix"
-        },
-        {
-          "date": "2025-11-02",
-          "kind": "leak",
-          "label": "자격증명 유출 (nuri-aeromech.com)",
-          "detail": "출처: darkweb_forum:breachforums-repost"
-        },
-        {
-          "date": "2025-07-06",
-          "kind": "leak",
-          "label": "자격증명 유출 (nuri-aeromech.com)",
-          "detail": "출처: combolist:cloud-2025-mix"
-        },
-        {
-          "date": "2025-04-17",
-          "kind": "leak",
-          "label": "자격증명 유출 (nuri-aeromech.com)",
-          "detail": "출처: telegram_channel:leakbase-kr"
-        },
-        {
-          "date": "2025-03-09",
-          "kind": "leak",
-          "label": "자격증명 유출 (nuri-aeromech.com)",
-          "detail": "출처: telegram_channel:leakbase-kr"
-        },
-        {
-          "date": "2024-12-08",
-          "kind": "leak",
-          "label": "자격증명 유출 (nuri-aeromech.com)",
-          "detail": "출처: darkweb_forum:breachforums-repost"
-        }
-      ],
-      "evidence_ledger": [
-        {
-          "kind": "stealer_telemetry",
-          "title": "감염 단말 관측",
-          "score_effect": "+0.2",
-          "why": "협력사 도메인에 귀속된 감염기기 1대 관측",
-          "evidence": [
-            "infected_machines=1"
-          ],
-          "confidence": "medium"
-        },
-        {
-          "kind": "credential_leak",
-          "title": "기존 유출 자격증명 누적",
-          "score_effect": "+4.8",
-          "why": "협력사 도메인 계정 18건이 다중 출처에서 관측",
-          "evidence": [
-            "combolist:cloud-2025-mix",
-            "darkweb_forum:breachforums-repost",
-            "telegram_channel:leakbase-kr"
-          ],
-          "confidence": "medium"
-        },
-        {
-          "kind": "mission_impact",
-          "title": "임무 영향 승수",
-          "score_effect": "×1.0",
-          "why": "1차 협력사 · 공급품목: 기체 구조물",
-          "evidence": [
-            "tier",
-            "criticality"
-          ],
-          "confidence": "policy"
-        }
-      ],
-      "attack_path": [
-        {
-          "stage": "Infostealer infection",
-          "label": "스틸러 감염",
-          "status": "observed"
-        },
-        {
-          "stage": "Supply-chain risk",
-          "label": "공급망 2차 침투",
-          "status": "risk"
-        }
-      ],
-      "response_impact": {
-        "pre_risk": 5.0,
-        "residual_risk": 12,
-        "risk_reduction": -7.0,
-        "risk_reduction_pct": -140,
-        "actions": [
-          {
-            "action": "C2 차단 및 프록시/EDR 헌팅",
-            "risk_reduction": 10,
-            "blocks": [
-              "185.220.101.44"
-            ]
-          },
-          {
-            "action": "협력사/원청 동시 통보 및 전수 모니터링",
-            "risk_reduction": 8,
-            "blocks": [
-              "credential reuse",
-              "partner spread"
-            ]
-          },
-          {
-            "action": "MFA 강제 적용 및 30일 소급 로그인 감사",
-            "risk_reduction": 6,
-            "blocks": [
-              "valid-account abuse"
-            ]
-          }
-        ],
-        "blocked_paths": [
-          "185.220.101.44",
-          "credential reuse",
-          "partner spread",
-          "valid-account abuse"
-        ],
-        "remaining_risk": [
-          "이미 사용된 세션/토큰의 소급 조사 필요",
-          "협력사 외부 SaaS 계정 재사용 가능성",
-          "동일 캠페인의 미관측 협력사 확산 가능성"
-        ]
-      },
-      "rank_analytics": {
-        "rank": 8,
-        "of": 12,
-        "percentile": 42,
-        "portfolio_share_pct": 1.5,
-        "vs_median": -4.9,
-        "trajectory": {
-          "state": "smoldering",
-          "label": "잠복 (정적 노출 누적)"
-        }
-      }
-    },
-    {
-      "vendor_id": "V008",
-      "name": "우진열처리",
+      "vendor_id": "V012",
+      "name": "한결시스템",
       "tier": 2,
-      "criticality": "특수 열처리",
-      "risk_score": 2.0,
+      "criticality": "임베디드 SW",
+      "risk_score": 2.2,
       "breakdown": {
         "active_compromise": 0.0,
-        "leaked_credentials": 1.2,
-        "stealer_infections": 0.5,
-        "mission_multiplier": 1.2,
-        "reach_score": 0.0
-      },
-      "reach": {
-        "layers": [],
-        "full_chain": false,
-        "score": 0.0,
-        "label": "도달 계층 없음"
-      },
-      "category_breakdown": {},
-      "counts": {
-        "leaked_records": 16,
-        "infected_machines": 1,
-        "active_incidents": 0
-      },
-      "active_incidents": [],
-      "status": "LOW",
-      "mitre": [],
-      "iocs": {
-        "c2_hosts": [
-          "185.220.101.44"
-        ],
-        "stealer_families": [
-          "StealC"
-        ],
-        "machines": [
-          "WIN-2732967"
-        ]
-      },
-      "confidence": {
-        "score": 0.5,
-        "factors": [
-          "유출·스틸러 교차확증",
-          "출처 4종 교차"
-        ]
-      },
-      "provenance": [
-        {
-          "source": "darkweb_forum:breachforums-repost",
-          "type": "leaked_credential",
-          "count": 7
-        },
-        {
-          "source": "breach:vendorportal-2024",
-          "type": "leaked_credential",
-          "count": 5
-        },
-        {
-          "source": "combolist:antipublic-2026",
-          "type": "leaked_credential",
-          "count": 3
-        },
-        {
-          "source": "telegram_channel:leakbase-kr",
-          "type": "leaked_credential",
-          "count": 1
-        },
-        {
-          "source": "stealer:StealC",
-          "type": "stealer_log",
-          "count": 1
-        }
-      ],
-      "timeline": [
-        {
-          "date": "2026-05-27",
-          "kind": "leak",
-          "label": "자격증명 유출 (woojin-heat.com)",
-          "detail": "출처: breach:vendorportal-2024"
-        },
-        {
-          "date": "2026-04-10",
-          "kind": "leak",
-          "label": "자격증명 유출 (woojin-heat.com)",
-          "detail": "출처: darkweb_forum:breachforums-repost"
-        },
-        {
-          "date": "2026-03-09",
-          "kind": "stealer",
-          "label": "StealC 감염 (WIN-2732967)",
-          "detail": "유출 유형: generic, webmail"
-        },
-        {
-          "date": "2025-11-25",
-          "kind": "leak",
-          "label": "자격증명 유출 (woojin-heat.com)",
-          "detail": "출처: breach:vendorportal-2024"
-        },
-        {
-          "date": "2025-11-13",
-          "kind": "leak",
-          "label": "자격증명 유출 (woojin-heat.com)",
-          "detail": "출처: combolist:antipublic-2026"
-        },
-        {
-          "date": "2025-10-27",
-          "kind": "leak",
-          "label": "자격증명 유출 (woojin-heat.com)",
-          "detail": "출처: breach:vendorportal-2024"
-        },
-        {
-          "date": "2025-09-23",
-          "kind": "leak",
-          "label": "자격증명 유출 (woojin-heat.com)",
-          "detail": "출처: darkweb_forum:breachforums-repost"
-        },
-        {
-          "date": "2025-08-21",
-          "kind": "leak",
-          "label": "자격증명 유출 (woojin-heat.com)",
-          "detail": "출처: darkweb_forum:breachforums-repost"
-        },
-        {
-          "date": "2025-07-21",
-          "kind": "leak",
-          "label": "자격증명 유출 (woojin-heat.com)",
-          "detail": "출처: breach:vendorportal-2024"
-        },
-        {
-          "date": "2025-05-21",
-          "kind": "leak",
-          "label": "자격증명 유출 (woojin-heat.com)",
-          "detail": "출처: combolist:antipublic-2026"
-        },
-        {
-          "date": "2025-05-01",
-          "kind": "leak",
-          "label": "자격증명 유출 (woojin-heat.com)",
-          "detail": "출처: darkweb_forum:breachforums-repost"
-        },
-        {
-          "date": "2025-04-19",
-          "kind": "leak",
-          "label": "자격증명 유출 (woojin-heat.com)",
-          "detail": "출처: telegram_channel:leakbase-kr"
-        }
-      ],
-      "evidence_ledger": [
-        {
-          "kind": "stealer_telemetry",
-          "title": "감염 단말 관측",
-          "score_effect": "+0.5",
-          "why": "협력사 도메인에 귀속된 감염기기 1대 관측",
-          "evidence": [
-            "infected_machines=1"
-          ],
-          "confidence": "medium"
-        },
-        {
-          "kind": "credential_leak",
-          "title": "기존 유출 자격증명 누적",
-          "score_effect": "+1.2",
-          "why": "협력사 도메인 계정 16건이 다중 출처에서 관측",
-          "evidence": [
-            "darkweb_forum:breachforums-repost",
-            "breach:vendorportal-2024",
-            "combolist:antipublic-2026"
-          ],
-          "confidence": "medium"
-        },
-        {
-          "kind": "mission_impact",
-          "title": "임무 영향 승수",
-          "score_effect": "×1.2",
-          "why": "2차 협력사 · 공급품목: 특수 열처리",
-          "evidence": [
-            "tier",
-            "criticality"
-          ],
-          "confidence": "policy"
-        }
-      ],
-      "attack_path": [
-        {
-          "stage": "Infostealer infection",
-          "label": "스틸러 감염",
-          "status": "observed"
-        },
-        {
-          "stage": "Supply-chain risk",
-          "label": "공급망 2차 침투",
-          "status": "risk"
-        }
-      ],
-      "response_impact": {
-        "pre_risk": 2.0,
-        "residual_risk": 12,
-        "risk_reduction": -10.0,
-        "risk_reduction_pct": -500,
-        "actions": [
-          {
-            "action": "C2 차단 및 프록시/EDR 헌팅",
-            "risk_reduction": 10,
-            "blocks": [
-              "185.220.101.44"
-            ]
-          },
-          {
-            "action": "협력사/원청 동시 통보 및 전수 모니터링",
-            "risk_reduction": 8,
-            "blocks": [
-              "credential reuse",
-              "partner spread"
-            ]
-          },
-          {
-            "action": "MFA 강제 적용 및 30일 소급 로그인 감사",
-            "risk_reduction": 6,
-            "blocks": [
-              "valid-account abuse"
-            ]
-          }
-        ],
-        "blocked_paths": [
-          "185.220.101.44",
-          "credential reuse",
-          "partner spread",
-          "valid-account abuse"
-        ],
-        "remaining_risk": [
-          "이미 사용된 세션/토큰의 소급 조사 필요",
-          "협력사 외부 SaaS 계정 재사용 가능성",
-          "동일 캠페인의 미관측 협력사 확산 가능성"
-        ]
-      },
-      "rank_analytics": {
-        "rank": 9,
-        "of": 12,
-        "percentile": 33,
-        "portfolio_share_pct": 0.6,
-        "vs_median": -7.9,
-        "trajectory": {
-          "state": "smoldering",
-          "label": "잠복 (정적 노출 누적)"
-        }
-      }
-    },
-    {
-      "vendor_id": "V009",
-      "name": "명성정밀",
-      "tier": 2,
-      "criticality": "커넥터/하네스",
-      "risk_score": 2.0,
-      "breakdown": {
-        "active_compromise": 0.0,
-        "leaked_credentials": 1.7,
+        "leaked_credentials": 1.8,
         "stealer_infections": 0.0,
         "mission_multiplier": 1.2,
         "reach_score": 0.0
@@ -2831,14 +2327,238 @@
       "confidence": {
         "score": 0.35,
         "factors": [
-          "출처 5종 교차"
+          "출처 4종 교차"
         ]
       },
       "provenance": [
         {
           "source": "telegram_channel:leakbase-kr",
           "type": "leaked_credential",
-          "count": 5
+          "count": 4
+        },
+        {
+          "source": "darkweb_forum:breachforums-repost",
+          "type": "leaked_credential",
+          "count": 4
+        },
+        {
+          "source": "combolist:cloud-2025-mix",
+          "type": "leaked_credential",
+          "count": 3
+        },
+        {
+          "source": "breach:vendorportal-2024",
+          "type": "leaked_credential",
+          "count": 2
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2026-05-16",
+          "kind": "leak",
+          "label": "자격증명 유출 (hangyul-sys.com)",
+          "detail": "출처: darkweb_forum:breachforums-repost"
+        },
+        {
+          "date": "2026-05-16",
+          "kind": "leak",
+          "label": "자격증명 유출 (hangyul-sys.com)",
+          "detail": "출처: darkweb_forum:breachforums-repost"
+        },
+        {
+          "date": "2026-03-13",
+          "kind": "leak",
+          "label": "자격증명 유출 (hangyul-sys.com)",
+          "detail": "출처: telegram_channel:leakbase-kr"
+        },
+        {
+          "date": "2025-12-26",
+          "kind": "leak",
+          "label": "자격증명 유출 (hangyul-sys.com)",
+          "detail": "출처: combolist:cloud-2025-mix"
+        },
+        {
+          "date": "2025-11-14",
+          "kind": "leak",
+          "label": "자격증명 유출 (hangyul-sys.com)",
+          "detail": "출처: darkweb_forum:breachforums-repost"
+        },
+        {
+          "date": "2025-09-25",
+          "kind": "leak",
+          "label": "자격증명 유출 (hangyul-sys.com)",
+          "detail": "출처: darkweb_forum:breachforums-repost"
+        },
+        {
+          "date": "2024-11-10",
+          "kind": "leak",
+          "label": "자격증명 유출 (hangyul-sys.com)",
+          "detail": "출처: breach:vendorportal-2024"
+        },
+        {
+          "date": "2024-11-06",
+          "kind": "leak",
+          "label": "자격증명 유출 (hangyul-sys.com)",
+          "detail": "출처: combolist:cloud-2025-mix"
+        },
+        {
+          "date": "2024-10-15",
+          "kind": "leak",
+          "label": "자격증명 유출 (hangyul-sys.com)",
+          "detail": "출처: breach:vendorportal-2024"
+        },
+        {
+          "date": "2024-07-26",
+          "kind": "leak",
+          "label": "자격증명 유출 (hangyul-sys.com)",
+          "detail": "출처: combolist:cloud-2025-mix"
+        },
+        {
+          "date": "2024-07-09",
+          "kind": "leak",
+          "label": "자격증명 유출 (hangyul-sys.com)",
+          "detail": "출처: telegram_channel:leakbase-kr"
+        },
+        {
+          "date": "2024-06-21",
+          "kind": "leak",
+          "label": "자격증명 유출 (hangyul-sys.com)",
+          "detail": "출처: telegram_channel:leakbase-kr"
+        }
+      ],
+      "evidence_ledger": [
+        {
+          "kind": "credential_leak",
+          "title": "기존 유출 자격증명 누적",
+          "score_effect": "+1.8",
+          "why": "협력사 도메인 계정 13건이 다중 출처에서 관측",
+          "evidence": [
+            "telegram_channel:leakbase-kr",
+            "darkweb_forum:breachforums-repost",
+            "combolist:cloud-2025-mix"
+          ],
+          "confidence": "medium"
+        },
+        {
+          "kind": "mission_impact",
+          "title": "임무 영향 승수",
+          "score_effect": "×1.2",
+          "why": "2차 협력사 · 공급품목: 임베디드 SW",
+          "evidence": [
+            "tier",
+            "criticality"
+          ],
+          "confidence": "policy"
+        }
+      ],
+      "attack_path": [
+        {
+          "stage": "Infostealer infection",
+          "label": "스틸러 감염",
+          "status": "observed"
+        },
+        {
+          "stage": "Supply-chain risk",
+          "label": "공급망 2차 침투",
+          "status": "risk"
+        }
+      ],
+      "response_impact": {
+        "pre_risk": 2.2,
+        "residual_risk": 12,
+        "risk_reduction": -9.8,
+        "risk_reduction_pct": -445,
+        "actions": [
+          {
+            "action": "협력사/원청 동시 통보 및 전수 모니터링",
+            "risk_reduction": 8,
+            "blocks": [
+              "credential reuse",
+              "partner spread"
+            ]
+          },
+          {
+            "action": "MFA 강제 적용 및 30일 소급 로그인 감사",
+            "risk_reduction": 6,
+            "blocks": [
+              "valid-account abuse"
+            ]
+          }
+        ],
+        "blocked_paths": [
+          "credential reuse",
+          "partner spread",
+          "valid-account abuse"
+        ],
+        "remaining_risk": [
+          "이미 사용된 세션/토큰의 소급 조사 필요",
+          "협력사 외부 SaaS 계정 재사용 가능성",
+          "동일 캠페인의 미관측 협력사 확산 가능성"
+        ]
+      },
+      "rank_analytics": {
+        "rank": 8,
+        "of": 13,
+        "percentile": 46,
+        "portfolio_share_pct": 0.7,
+        "vs_median": -0.4,
+        "trajectory": {
+          "state": "smoldering",
+          "label": "잠복 (정적 노출 누적)"
+        }
+      }
+    },
+    {
+      "vendor_id": "V009",
+      "name": "명성정밀",
+      "tier": 2,
+      "criticality": "커넥터/하네스",
+      "risk_score": 1.9,
+      "breakdown": {
+        "active_compromise": 0.0,
+        "leaked_credentials": 1.6,
+        "stealer_infections": 0.0,
+        "mission_multiplier": 1.2,
+        "reach_score": 0.0
+      },
+      "reach": {
+        "layers": [],
+        "full_chain": false,
+        "score": 0.0,
+        "label": "도달 계층 없음"
+      },
+      "category_breakdown": {},
+      "counts": {
+        "leaked_records": 14,
+        "infected_machines": 1,
+        "active_incidents": 0
+      },
+      "active_incidents": [],
+      "status": "LOW",
+      "mitre": [],
+      "iocs": {
+        "c2_hosts": [
+          "193.42.33.8"
+        ],
+        "stealer_families": [
+          "RedLine"
+        ],
+        "machines": [
+          "WIN-2739191"
+        ]
+      },
+      "confidence": {
+        "score": 0.5,
+        "factors": [
+          "유출·스틸러 교차확증",
+          "출처 4종 교차"
+        ]
+      },
+      "provenance": [
+        {
+          "source": "telegram_channel:leakbase-kr",
+          "type": "leaked_credential",
+          "count": 7
         },
         {
           "source": "breach:vendorportal-2024",
@@ -2846,27 +2566,27 @@
           "count": 3
         },
         {
-          "source": "darkweb_forum:breachforums-repost",
-          "type": "leaked_credential",
-          "count": 2
-        },
-        {
           "source": "combolist:cloud-2025-mix",
           "type": "leaked_credential",
-          "count": 2
+          "count": 3
         },
         {
-          "source": "combolist:antipublic-2026",
+          "source": "darkweb_forum:breachforums-repost",
           "type": "leaked_credential",
+          "count": 1
+        },
+        {
+          "source": "stealer:RedLine",
+          "type": "stealer_log",
           "count": 1
         }
       ],
       "timeline": [
         {
-          "date": "2026-06-03",
+          "date": "2026-05-31",
           "kind": "leak",
           "label": "자격증명 유출 (myungsung-fine.co.kr)",
-          "detail": "출처: telegram_channel:leakbase-kr"
+          "detail": "출처: breach:vendorportal-2024"
         },
         {
           "date": "2026-05-02",
@@ -2875,16 +2595,16 @@
           "detail": "출처: combolist:cloud-2025-mix"
         },
         {
-          "date": "2025-09-19",
-          "kind": "leak",
-          "label": "자격증명 유출 (myungsung-fine.co.kr)",
-          "detail": "출처: darkweb_forum:breachforums-repost"
-        },
-        {
           "date": "2025-08-25",
           "kind": "leak",
           "label": "자격증명 유출 (myungsung-fine.co.kr)",
           "detail": "출처: telegram_channel:leakbase-kr"
+        },
+        {
+          "date": "2025-08-14",
+          "kind": "stealer",
+          "label": "RedLine 감염 (WIN-2739191)",
+          "detail": "유출 유형: cloud_console, vpn, webmail"
         },
         {
           "date": "2025-04-26",
@@ -2893,16 +2613,28 @@
           "detail": "출처: telegram_channel:leakbase-kr"
         },
         {
+          "date": "2025-04-22",
+          "kind": "leak",
+          "label": "자격증명 유출 (myungsung-fine.co.kr)",
+          "detail": "출처: telegram_channel:leakbase-kr"
+        },
+        {
+          "date": "2025-04-09",
+          "kind": "leak",
+          "label": "자격증명 유출 (myungsung-fine.co.kr)",
+          "detail": "출처: combolist:cloud-2025-mix"
+        },
+        {
           "date": "2025-01-25",
           "kind": "leak",
           "label": "자격증명 유출 (myungsung-fine.co.kr)",
           "detail": "출처: telegram_channel:leakbase-kr"
         },
         {
-          "date": "2024-12-24",
+          "date": "2024-11-16",
           "kind": "leak",
           "label": "자격증명 유출 (myungsung-fine.co.kr)",
-          "detail": "출처: combolist:antipublic-2026"
+          "detail": "출처: telegram_channel:leakbase-kr"
         },
         {
           "date": "2024-09-17",
@@ -2917,34 +2649,22 @@
           "detail": "출처: breach:vendorportal-2024"
         },
         {
-          "date": "2024-08-04",
-          "kind": "leak",
-          "label": "자격증명 유출 (myungsung-fine.co.kr)",
-          "detail": "출처: breach:vendorportal-2024"
-        },
-        {
           "date": "2024-07-19",
           "kind": "leak",
           "label": "자격증명 유출 (myungsung-fine.co.kr)",
           "detail": "출처: darkweb_forum:breachforums-repost"
-        },
-        {
-          "date": "2024-01-21",
-          "kind": "leak",
-          "label": "자격증명 유출 (myungsung-fine.co.kr)",
-          "detail": "출처: breach:vendorportal-2024"
         }
       ],
       "evidence_ledger": [
         {
           "kind": "credential_leak",
           "title": "기존 유출 자격증명 누적",
-          "score_effect": "+1.7",
-          "why": "협력사 도메인 계정 13건이 다중 출처에서 관측",
+          "score_effect": "+1.6",
+          "why": "협력사 도메인 계정 14건이 다중 출처에서 관측",
           "evidence": [
             "telegram_channel:leakbase-kr",
             "breach:vendorportal-2024",
-            "darkweb_forum:breachforums-repost"
+            "combolist:cloud-2025-mix"
           ],
           "confidence": "medium"
         },
@@ -2973,10 +2693,211 @@
         }
       ],
       "response_impact": {
-        "pre_risk": 2.0,
+        "pre_risk": 1.9,
         "residual_risk": 12,
-        "risk_reduction": -10.0,
-        "risk_reduction_pct": -500,
+        "risk_reduction": -10.1,
+        "risk_reduction_pct": -532,
+        "actions": [
+          {
+            "action": "C2 차단 및 프록시/EDR 헌팅",
+            "risk_reduction": 10,
+            "blocks": [
+              "193.42.33.8"
+            ]
+          },
+          {
+            "action": "협력사/원청 동시 통보 및 전수 모니터링",
+            "risk_reduction": 8,
+            "blocks": [
+              "credential reuse",
+              "partner spread"
+            ]
+          },
+          {
+            "action": "MFA 강제 적용 및 30일 소급 로그인 감사",
+            "risk_reduction": 6,
+            "blocks": [
+              "valid-account abuse"
+            ]
+          }
+        ],
+        "blocked_paths": [
+          "193.42.33.8",
+          "credential reuse",
+          "partner spread",
+          "valid-account abuse"
+        ],
+        "remaining_risk": [
+          "이미 사용된 세션/토큰의 소급 조사 필요",
+          "협력사 외부 SaaS 계정 재사용 가능성",
+          "동일 캠페인의 미관측 협력사 확산 가능성"
+        ]
+      },
+      "rank_analytics": {
+        "rank": 9,
+        "of": 13,
+        "percentile": 38,
+        "portfolio_share_pct": 0.6,
+        "vs_median": -0.7,
+        "trajectory": {
+          "state": "smoldering",
+          "label": "잠복 (정적 노출 누적)"
+        }
+      }
+    },
+    {
+      "vendor_id": "V001",
+      "name": "한빛정밀항공",
+      "tier": 1,
+      "criticality": "항공전자(FCS)",
+      "risk_score": 1.8,
+      "breakdown": {
+        "active_compromise": 0.0,
+        "leaked_credentials": 1.5,
+        "stealer_infections": 0.0,
+        "mission_multiplier": 1.15,
+        "reach_score": 0.0
+      },
+      "reach": {
+        "layers": [],
+        "full_chain": false,
+        "score": 0.0,
+        "label": "도달 계층 없음"
+      },
+      "category_breakdown": {},
+      "counts": {
+        "leaked_records": 8,
+        "infected_machines": 0,
+        "active_incidents": 0
+      },
+      "active_incidents": [],
+      "status": "LOW",
+      "mitre": [],
+      "iocs": {
+        "c2_hosts": [],
+        "stealer_families": [],
+        "machines": []
+      },
+      "confidence": {
+        "score": 0.35,
+        "factors": [
+          "출처 4종 교차"
+        ]
+      },
+      "provenance": [
+        {
+          "source": "combolist:antipublic-2026",
+          "type": "leaked_credential",
+          "count": 4
+        },
+        {
+          "source": "combolist:cloud-2025-mix",
+          "type": "leaked_credential",
+          "count": 2
+        },
+        {
+          "source": "breach:vendorportal-2024",
+          "type": "leaked_credential",
+          "count": 1
+        },
+        {
+          "source": "darkweb_forum:breachforums-repost",
+          "type": "leaked_credential",
+          "count": 1
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2026-06-22",
+          "kind": "leak",
+          "label": "자격증명 유출 (hanbit-aero.co.kr)",
+          "detail": "출처: combolist:cloud-2025-mix"
+        },
+        {
+          "date": "2025-10-22",
+          "kind": "leak",
+          "label": "자격증명 유출 (hanbit-aero.co.kr)",
+          "detail": "출처: combolist:antipublic-2026"
+        },
+        {
+          "date": "2024-11-04",
+          "kind": "leak",
+          "label": "자격증명 유출 (hanbit-aero.co.kr)",
+          "detail": "출처: combolist:antipublic-2026"
+        },
+        {
+          "date": "2024-09-27",
+          "kind": "leak",
+          "label": "자격증명 유출 (hanbit-aero.co.kr)",
+          "detail": "출처: combolist:antipublic-2026"
+        },
+        {
+          "date": "2024-09-14",
+          "kind": "leak",
+          "label": "자격증명 유출 (hanbit-aero.co.kr)",
+          "detail": "출처: combolist:antipublic-2026"
+        },
+        {
+          "date": "2024-08-13",
+          "kind": "leak",
+          "label": "자격증명 유출 (hanbit-aero.co.kr)",
+          "detail": "출처: breach:vendorportal-2024"
+        },
+        {
+          "date": "2024-08-06",
+          "kind": "leak",
+          "label": "자격증명 유출 (hanbit-aero.co.kr)",
+          "detail": "출처: combolist:cloud-2025-mix"
+        },
+        {
+          "date": "2024-07-27",
+          "kind": "leak",
+          "label": "자격증명 유출 (hanbit-aero.co.kr)",
+          "detail": "출처: darkweb_forum:breachforums-repost"
+        }
+      ],
+      "evidence_ledger": [
+        {
+          "kind": "credential_leak",
+          "title": "기존 유출 자격증명 누적",
+          "score_effect": "+1.5",
+          "why": "협력사 도메인 계정 8건이 다중 출처에서 관측",
+          "evidence": [
+            "combolist:antipublic-2026",
+            "combolist:cloud-2025-mix",
+            "breach:vendorportal-2024"
+          ],
+          "confidence": "medium"
+        },
+        {
+          "kind": "mission_impact",
+          "title": "임무 영향 승수",
+          "score_effect": "×1.15",
+          "why": "1차 협력사 · 공급품목: 항공전자(FCS)",
+          "evidence": [
+            "tier",
+            "criticality"
+          ],
+          "confidence": "policy"
+        }
+      ],
+      "attack_path": [
+        {
+          "stage": "Infostealer infection",
+          "label": "스틸러 감염",
+          "status": "observed"
+        },
+        {
+          "stage": "Supply-chain risk",
+          "label": "공급망 2차 침투",
+          "status": "risk"
+        }
+      ],
+      "response_impact": {
+        "pre_risk": 1.8,
+        "residual_risk": 12,
+        "risk_reduction": -10.2,
+        "risk_reduction_pct": -567,
         "actions": [
           {
             "action": "협력사/원청 동시 통보 및 전수 모니터링",
@@ -3007,10 +2928,10 @@
       },
       "rank_analytics": {
         "rank": 10,
-        "of": 12,
-        "percentile": 25,
-        "portfolio_share_pct": 0.6,
-        "vs_median": -7.9,
+        "of": 13,
+        "percentile": 31,
+        "portfolio_share_pct": 0.5,
+        "vs_median": -0.8,
         "trajectory": {
           "state": "smoldering",
           "label": "잠복 (정적 노출 누적)"
@@ -3038,7 +2959,7 @@
       },
       "category_breakdown": {},
       "counts": {
-        "leaked_records": 20,
+        "leaked_records": 16,
         "infected_machines": 0,
         "active_incidents": 0
       },
@@ -3060,7 +2981,7 @@
         {
           "source": "breach:vendorportal-2024",
           "type": "leaked_credential",
-          "count": 7
+          "count": 5
         },
         {
           "source": "combolist:cloud-2025-mix",
@@ -3070,15 +2991,15 @@
         {
           "source": "combolist:antipublic-2026",
           "type": "leaked_credential",
-          "count": 4
-        },
-        {
-          "source": "darkweb_forum:breachforums-repost",
-          "type": "leaked_credential",
           "count": 3
         },
         {
           "source": "telegram_channel:leakbase-kr",
+          "type": "leaked_credential",
+          "count": 2
+        },
+        {
+          "source": "darkweb_forum:breachforums-repost",
           "type": "leaked_credential",
           "count": 2
         }
@@ -3127,31 +3048,31 @@
           "detail": "출처: combolist:cloud-2025-mix"
         },
         {
-          "date": "2025-08-10",
-          "kind": "leak",
-          "label": "자격증명 유출 (samik-precision.co.kr)",
-          "detail": "출처: combolist:antipublic-2026"
-        },
-        {
           "date": "2025-04-20",
           "kind": "leak",
           "label": "자격증명 유출 (samik-precision.co.kr)",
           "detail": "출처: combolist:antipublic-2026"
         },
         {
-          "date": "2025-04-06",
-          "kind": "leak",
-          "label": "자격증명 유출 (samik-precision.co.kr)",
-          "detail": "출처: breach:vendorportal-2024"
-        },
-        {
-          "date": "2024-12-07",
-          "kind": "leak",
-          "label": "자격증명 유출 (samik-precision.co.kr)",
-          "detail": "출처: breach:vendorportal-2024"
-        },
-        {
           "date": "2024-11-05",
+          "kind": "leak",
+          "label": "자격증명 유출 (samik-precision.co.kr)",
+          "detail": "출처: telegram_channel:leakbase-kr"
+        },
+        {
+          "date": "2024-10-08",
+          "kind": "leak",
+          "label": "자격증명 유출 (samik-precision.co.kr)",
+          "detail": "출처: combolist:cloud-2025-mix"
+        },
+        {
+          "date": "2024-09-15",
+          "kind": "leak",
+          "label": "자격증명 유출 (samik-precision.co.kr)",
+          "detail": "출처: combolist:antipublic-2026"
+        },
+        {
+          "date": "2024-08-28",
           "kind": "leak",
           "label": "자격증명 유출 (samik-precision.co.kr)",
           "detail": "출처: telegram_channel:leakbase-kr"
@@ -3162,7 +3083,7 @@
           "kind": "credential_leak",
           "title": "기존 유출 자격증명 누적",
           "score_effect": "+1.0",
-          "why": "협력사 도메인 계정 20건이 다중 출처에서 관측",
+          "why": "협력사 도메인 계정 16건이 다중 출처에서 관측",
           "evidence": [
             "breach:vendorportal-2024",
             "combolist:cloud-2025-mix",
@@ -3229,10 +3150,10 @@
       },
       "rank_analytics": {
         "rank": 11,
-        "of": 12,
-        "percentile": 17,
+        "of": 13,
+        "percentile": 23,
         "portfolio_share_pct": 0.4,
-        "vs_median": -8.7,
+        "vs_median": -1.4,
         "trajectory": {
           "state": "smoldering",
           "label": "잠복 (정적 노출 누적)"
@@ -3240,16 +3161,16 @@
       }
     },
     {
-      "vendor_id": "V001",
-      "name": "한빛정밀항공",
-      "tier": 1,
-      "criticality": "항공전자(FCS)",
-      "risk_score": 0.0,
+      "vendor_id": "V010",
+      "name": "가온소재",
+      "tier": 2,
+      "criticality": "복합소재",
+      "risk_score": 1.1,
       "breakdown": {
         "active_compromise": 0.0,
-        "leaked_credentials": 0.0,
+        "leaked_credentials": 0.9,
         "stealer_infections": 0.0,
-        "mission_multiplier": 1.15,
+        "mission_multiplier": 1.2,
         "reach_score": 0.0
       },
       "reach": {
@@ -3260,7 +3181,7 @@
       },
       "category_breakdown": {},
       "counts": {
-        "leaked_records": 10,
+        "leaked_records": 12,
         "infected_machines": 0,
         "active_incidents": 0
       },
@@ -3275,99 +3196,128 @@
       "confidence": {
         "score": 0.35,
         "factors": [
-          "출처 4종 교차"
+          "출처 5종 교차"
         ]
       },
       "provenance": [
         {
-          "source": "combolist:antipublic-2026",
+          "source": "breach:vendorportal-2024",
           "type": "leaked_credential",
-          "count": 5
-        },
-        {
-          "source": "combolist:cloud-2025-mix",
-          "type": "leaked_credential",
-          "count": 2
+          "count": 4
         },
         {
           "source": "darkweb_forum:breachforums-repost",
           "type": "leaked_credential",
-          "count": 2
+          "count": 3
         },
         {
-          "source": "breach:vendorportal-2024",
+          "source": "telegram_channel:leakbase-kr",
+          "type": "leaked_credential",
+          "count": 3
+        },
+        {
+          "source": "combolist:antipublic-2026",
+          "type": "leaked_credential",
+          "count": 1
+        },
+        {
+          "source": "combolist:cloud-2025-mix",
           "type": "leaked_credential",
           "count": 1
         }
       ],
       "timeline": [
         {
-          "date": "2025-10-22",
+          "date": "2026-04-20",
           "kind": "leak",
-          "label": "자격증명 유출 (hanbit-aero.co.kr)",
-          "detail": "출처: combolist:antipublic-2026"
-        },
-        {
-          "date": "2025-04-07",
-          "kind": "leak",
-          "label": "자격증명 유출 (hanbit-aero.co.kr)",
+          "label": "자격증명 유출 (gaon-materials.com)",
           "detail": "출처: breach:vendorportal-2024"
         },
         {
-          "date": "2024-11-04",
+          "date": "2026-03-05",
           "kind": "leak",
-          "label": "자격증명 유출 (hanbit-aero.co.kr)",
-          "detail": "출처: combolist:antipublic-2026"
+          "label": "자격증명 유출 (gaon-materials.com)",
+          "detail": "출처: telegram_channel:leakbase-kr"
         },
         {
-          "date": "2024-10-27",
+          "date": "2026-02-27",
           "kind": "leak",
-          "label": "자격증명 유출 (hanbit-aero.co.kr)",
+          "label": "자격증명 유출 (gaon-materials.com)",
           "detail": "출처: darkweb_forum:breachforums-repost"
         },
         {
-          "date": "2024-09-27",
+          "date": "2026-01-26",
           "kind": "leak",
-          "label": "자격증명 유출 (hanbit-aero.co.kr)",
-          "detail": "출처: combolist:antipublic-2026"
+          "label": "자격증명 유출 (gaon-materials.com)",
+          "detail": "출처: breach:vendorportal-2024"
         },
         {
-          "date": "2024-09-14",
+          "date": "2025-12-02",
           "kind": "leak",
-          "label": "자격증명 유출 (hanbit-aero.co.kr)",
-          "detail": "출처: combolist:antipublic-2026"
+          "label": "자격증명 유출 (gaon-materials.com)",
+          "detail": "출처: breach:vendorportal-2024"
         },
         {
-          "date": "2024-08-08",
+          "date": "2025-05-29",
           "kind": "leak",
-          "label": "자격증명 유출 (hanbit-aero.co.kr)",
-          "detail": "출처: combolist:cloud-2025-mix"
+          "label": "자격증명 유출 (gaon-materials.com)",
+          "detail": "출처: breach:vendorportal-2024"
         },
         {
-          "date": "2024-08-06",
+          "date": "2025-04-15",
           "kind": "leak",
-          "label": "자격증명 유출 (hanbit-aero.co.kr)",
-          "detail": "출처: combolist:cloud-2025-mix"
+          "label": "자격증명 유출 (gaon-materials.com)",
+          "detail": "출처: telegram_channel:leakbase-kr"
         },
         {
-          "date": "2024-07-27",
+          "date": "2025-01-04",
           "kind": "leak",
-          "label": "자격증명 유출 (hanbit-aero.co.kr)",
+          "label": "자격증명 유출 (gaon-materials.com)",
           "detail": "출처: darkweb_forum:breachforums-repost"
         },
         {
-          "date": "2024-05-13",
+          "date": "2024-12-05",
           "kind": "leak",
-          "label": "자격증명 유출 (hanbit-aero.co.kr)",
+          "label": "자격증명 유출 (gaon-materials.com)",
+          "detail": "출처: combolist:cloud-2025-mix"
+        },
+        {
+          "date": "2024-08-21",
+          "kind": "leak",
+          "label": "자격증명 유출 (gaon-materials.com)",
+          "detail": "출처: darkweb_forum:breachforums-repost"
+        },
+        {
+          "date": "2024-07-15",
+          "kind": "leak",
+          "label": "자격증명 유출 (gaon-materials.com)",
           "detail": "출처: combolist:antipublic-2026"
+        },
+        {
+          "date": "2024-01-20",
+          "kind": "leak",
+          "label": "자격증명 유출 (gaon-materials.com)",
+          "detail": "출처: telegram_channel:leakbase-kr"
         }
       ],
       "evidence_ledger": [
         {
+          "kind": "credential_leak",
+          "title": "기존 유출 자격증명 누적",
+          "score_effect": "+0.9",
+          "why": "협력사 도메인 계정 12건이 다중 출처에서 관측",
+          "evidence": [
+            "breach:vendorportal-2024",
+            "darkweb_forum:breachforums-repost",
+            "telegram_channel:leakbase-kr"
+          ],
+          "confidence": "medium"
+        },
+        {
           "kind": "mission_impact",
           "title": "임무 영향 승수",
-          "score_effect": "×1.15",
-          "why": "1차 협력사 · 공급품목: 항공전자(FCS)",
+          "score_effect": "×1.2",
+          "why": "2차 협력사 · 공급품목: 복합소재",
           "evidence": [
             "tier",
             "criticality"
@@ -3388,10 +3338,10 @@
         }
       ],
       "response_impact": {
-        "pre_risk": 0.0,
+        "pre_risk": 1.1,
         "residual_risk": 12,
-        "risk_reduction": -12.0,
-        "risk_reduction_pct": 0,
+        "risk_reduction": -10.9,
+        "risk_reduction_pct": -991,
         "actions": [
           {
             "action": "협력사/원청 동시 통보 및 전수 모니터링",
@@ -3422,20 +3372,119 @@
       },
       "rank_analytics": {
         "rank": 12,
-        "of": 12,
-        "percentile": 8,
-        "portfolio_share_pct": 0.0,
-        "vs_median": -9.9,
+        "of": 13,
+        "percentile": 15,
+        "portfolio_share_pct": 0.3,
+        "vs_median": -1.5,
         "trajectory": {
           "state": "smoldering",
           "label": "잠복 (정적 노출 누적)"
         }
       }
+    },
+    {
+      "vendor_id": "V013",
+      "name": "성일방산소재",
+      "tier": 2,
+      "criticality": "특수합금 원소재",
+      "risk_score": 0.0,
+      "breakdown": {
+        "active_compromise": 0.0,
+        "leaked_credentials": 0.0,
+        "stealer_infections": 0.0,
+        "mission_multiplier": 1.2,
+        "reach_score": 0.0
+      },
+      "reach": {
+        "layers": [],
+        "full_chain": false,
+        "score": 0.0,
+        "label": "도달 계층 없음"
+      },
+      "category_breakdown": {},
+      "counts": {
+        "leaked_records": 0,
+        "infected_machines": 0,
+        "active_incidents": 0
+      },
+      "active_incidents": [],
+      "status": "NO SIGNAL — 관측 공백",
+      "mitre": [],
+      "iocs": {
+        "c2_hosts": [],
+        "stealer_families": [],
+        "machines": []
+      },
+      "confidence": {
+        "score": 0.25,
+        "factors": []
+      },
+      "provenance": [],
+      "timeline": [],
+      "evidence_ledger": [
+        {
+          "kind": "mission_impact",
+          "title": "임무 영향 승수",
+          "score_effect": "×1.2",
+          "why": "2차 협력사 · 공급품목: 특수합금 원소재",
+          "evidence": [
+            "tier",
+            "criticality"
+          ],
+          "confidence": "policy"
+        }
+      ],
+      "attack_path": [
+        {
+          "stage": "Infostealer infection",
+          "label": "스틸러 감염",
+          "status": "observed"
+        },
+        {
+          "stage": "Supply-chain risk",
+          "label": "공급망 2차 침투",
+          "status": "risk"
+        }
+      ],
+      "response_impact": {
+        "pre_risk": 0.0,
+        "residual_risk": 12,
+        "risk_reduction": -12.0,
+        "risk_reduction_pct": 0,
+        "actions": [
+          {
+            "action": "MFA 강제 적용 및 30일 소급 로그인 감사",
+            "risk_reduction": 6,
+            "blocks": [
+              "valid-account abuse"
+            ]
+          }
+        ],
+        "blocked_paths": [
+          "valid-account abuse"
+        ],
+        "remaining_risk": [
+          "이미 사용된 세션/토큰의 소급 조사 필요",
+          "협력사 외부 SaaS 계정 재사용 가능성",
+          "동일 캠페인의 미관측 협력사 확산 가능성"
+        ]
+      },
+      "rank_analytics": {
+        "rank": 13,
+        "of": 13,
+        "percentile": 8,
+        "portfolio_share_pct": 0.0,
+        "vs_median": -2.6,
+        "trajectory": {
+          "state": "quiet",
+          "label": "관측중"
+        }
+      }
     }
   ],
   "portfolio": {
-    "median_score": 9.9,
-    "total_portfolio_risk": 342.4
+    "median_score": 2.6,
+    "total_portfolio_risk": 335.8
   },
   "advisories": [
     {
@@ -3717,20 +3766,25 @@
           "name": "동방센서텍"
         },
         {
+          "vendor_id": "V009",
+          "name": "명성정밀"
+        },
+        {
           "vendor_id": "V011",
           "name": "청우기전"
         }
       ],
-      "affected_count": 2,
+      "affected_count": 3,
       "machines": [
+        "WIN-2739191",
         "WIN-5080351",
         "WIN-8279795"
       ],
       "first_seen": "2025-08-03",
       "last_seen": "2025-08-21",
       "span_days": 18,
-      "confidence": 0.74,
-      "note": "2개 협력사가 동일 C2(193.42.33.8)·동일 스틸러(RedLine)로 18일 내 동시 감염 — 조율된 공급망 표적 정황."
+      "confidence": 0.86,
+      "note": "3개 협력사가 동일 C2(193.42.33.8)·동일 스틸러(RedLine)로 18일 내 동시 감염 — 조율된 공급망 표적 정황."
     }
   ],
   "forecast": {
@@ -3752,7 +3806,23 @@
         "escalation_risk": 70,
         "band": "HIGH",
         "reasons": [
-          "캠페인 피해사와 자격증명/단말 공유 3건 — 횡적 이동 경로 존재",
+          "캠페인 피해사와 자격증명/단말 공유 5건 — 횡적 이동 경로 존재",
+          "2차 말단 협력사 — 공급망 진입점 선호 표적",
+          "캠페인 주(主) 표적 계층(2차)과 동일",
+          "최근 60일 내 유출 자격증명 관측 — 사전 정찰 정황",
+          "비활성 스틸러 감염 발판 존재"
+        ],
+        "projected_window": "2026-07-09"
+      },
+      {
+        "vendor_id": "V009",
+        "name": "명성정밀",
+        "tier": 2,
+        "criticality": "커넥터/하네스",
+        "escalation_risk": 70,
+        "band": "HIGH",
+        "reasons": [
+          "캠페인 피해사와 자격증명/단말 공유 4건 — 횡적 이동 경로 존재",
           "2차 말단 협력사 — 공급망 진입점 선호 표적",
           "캠페인 주(主) 표적 계층(2차)과 동일",
           "최근 60일 내 유출 자격증명 관측 — 사전 정찰 정황",
@@ -3768,7 +3838,7 @@
         "escalation_risk": 70,
         "band": "HIGH",
         "reasons": [
-          "캠페인 피해사와 자격증명/단말 공유 8건 — 횡적 이동 경로 존재",
+          "캠페인 피해사와 자격증명/단말 공유 3건 — 횡적 이동 경로 존재",
           "2차 말단 협력사 — 공급망 진입점 선호 표적",
           "캠페인 주(主) 표적 계층(2차)과 동일",
           "최근 60일 내 유출 자격증명 관측 — 사전 정찰 정황",
@@ -3781,45 +3851,28 @@
         "name": "한결시스템",
         "tier": 2,
         "criticality": "임베디드 SW",
-        "escalation_risk": 70,
-        "band": "HIGH",
-        "reasons": [
-          "캠페인 피해사와 자격증명/단말 공유 6건 — 횡적 이동 경로 존재",
-          "2차 말단 협력사 — 공급망 진입점 선호 표적",
-          "캠페인 주(主) 표적 계층(2차)과 동일",
-          "최근 60일 내 유출 자격증명 관측 — 사전 정찰 정황",
-          "비활성 스틸러 감염 발판 존재"
-        ],
-        "projected_window": "2026-07-09"
-      },
-      {
-        "vendor_id": "V010",
-        "name": "가온소재",
-        "tier": 2,
-        "criticality": "복합소재",
-        "escalation_risk": 64,
+        "escalation_risk": 62,
         "band": "HIGH",
         "reasons": [
           "캠페인 피해사와 자격증명/단말 공유 3건 — 횡적 이동 경로 존재",
           "2차 말단 협력사 — 공급망 진입점 선호 표적",
           "캠페인 주(主) 표적 계층(2차)과 동일",
-          "과거 유출 자격증명 누적",
-          "비활성 스틸러 감염 발판 존재"
+          "최근 60일 내 유출 자격증명 관측 — 사전 정찰 정황"
         ],
         "projected_window": "2026-07-09"
       },
       {
-        "vendor_id": "V009",
-        "name": "명성정밀",
+        "vendor_id": "V005",
+        "name": "삼익정밀가공",
         "tier": 2,
-        "criticality": "커넥터/하네스",
-        "escalation_risk": 62,
+        "criticality": "구동장치 부품",
+        "escalation_risk": 56,
         "band": "HIGH",
         "reasons": [
-          "캠페인 피해사와 자격증명/단말 공유 5건 — 횡적 이동 경로 존재",
+          "캠페인 피해사와 자격증명/단말 공유 4건 — 횡적 이동 경로 존재",
           "2차 말단 협력사 — 공급망 진입점 선호 표적",
           "캠페인 주(主) 표적 계층(2차)과 동일",
-          "최근 60일 내 유출 자격증명 관측 — 사전 정찰 정황"
+          "과거 유출 자격증명 누적"
         ],
         "projected_window": "2026-07-09"
       }
@@ -3848,48 +3901,20 @@
   "cross_vendor_links": [
     {
       "type": "credential_reuse",
-      "key": "bora.han",
+      "key": "jae.oh",
       "vendors": [
         "대양유도시스템",
-        "삼익정밀가공",
-        "태성회로"
+        "동방센서텍",
+        "명성정밀",
+        "우진열처리"
       ],
       "vendor_ids": [
         "V002",
-        "V005",
-        "V007"
-      ],
-      "detail": "동일 계정 식별자 'bora.han'가 3개 협력사에서 관측 — 재사용/횡적 이동 가능성"
-    },
-    {
-      "type": "credential_reuse",
-      "key": "hyun.kang",
-      "vendors": [
-        "누리항공기계",
-        "명성정밀",
-        "태성회로"
-      ],
-      "vendor_ids": [
-        "V004",
-        "V007",
+        "V006",
+        "V008",
         "V009"
       ],
-      "detail": "동일 계정 식별자 'hyun.kang'가 3개 협력사에서 관측 — 재사용/횡적 이동 가능성"
-    },
-    {
-      "type": "credential_reuse",
-      "key": "junho.lim",
-      "vendors": [
-        "누리항공기계",
-        "동방센서텍",
-        "태성회로"
-      ],
-      "vendor_ids": [
-        "V004",
-        "V006",
-        "V007"
-      ],
-      "detail": "동일 계정 식별자 'junho.lim'가 3개 협력사에서 관측 — 재사용/횡적 이동 가능성"
+      "detail": "동일 계정 식별자 'jae.oh'가 4개 협력사에서 관측 — 재사용/횡적 이동 가능성"
     },
     {
       "type": "credential_reuse",
@@ -3908,18 +3933,18 @@
     },
     {
       "type": "credential_reuse",
-      "key": "sujin.jung",
+      "key": "eunji.jung",
       "vendors": [
-        "동방센서텍",
+        "대양유도시스템",
         "명성정밀",
-        "한결시스템"
+        "삼익정밀가공"
       ],
       "vendor_ids": [
-        "V006",
-        "V009",
-        "V012"
+        "V002",
+        "V005",
+        "V009"
       ],
-      "detail": "동일 계정 식별자 'sujin.jung'가 3개 협력사에서 관측 — 재사용/횡적 이동 가능성"
+      "detail": "동일 계정 식별자 'eunji.jung'가 3개 협력사에서 관측 — 재사용/횡적 이동 가능성"
     },
     {
       "type": "credential_reuse",
@@ -3938,21 +3963,6 @@
     },
     {
       "type": "credential_reuse",
-      "key": "kanghee.seo",
-      "vendors": [
-        "가온소재",
-        "누리항공기계",
-        "대양유도시스템"
-      ],
-      "vendor_ids": [
-        "V002",
-        "V004",
-        "V010"
-      ],
-      "detail": "동일 계정 식별자 'kanghee.seo'가 3개 협력사에서 관측 — 재사용/횡적 이동 가능성"
-    },
-    {
-      "type": "credential_reuse",
       "key": "taeho.shin",
       "vendors": [
         "가온소재",
@@ -3968,21 +3978,6 @@
     },
     {
       "type": "credential_reuse",
-      "key": "jae.han",
-      "vendors": [
-        "누리항공기계",
-        "삼익정밀가공",
-        "세종전술통신"
-      ],
-      "vendor_ids": [
-        "V003",
-        "V004",
-        "V005"
-      ],
-      "detail": "동일 계정 식별자 'jae.han'가 3개 협력사에서 관측 — 재사용/횡적 이동 가능성"
-    },
-    {
-      "type": "credential_reuse",
       "key": "hyun.cho",
       "vendors": [
         "삼익정밀가공",
@@ -3995,21 +3990,6 @@
         "V012"
       ],
       "detail": "동일 계정 식별자 'hyun.cho'가 3개 협력사에서 관측 — 재사용/횡적 이동 가능성"
-    },
-    {
-      "type": "credential_reuse",
-      "key": "nari.jung",
-      "vendors": [
-        "대양유도시스템",
-        "세종전술통신",
-        "우진열처리"
-      ],
-      "vendor_ids": [
-        "V002",
-        "V003",
-        "V008"
-      ],
-      "detail": "동일 계정 식별자 'nari.jung'가 3개 협력사에서 관측 — 재사용/횡적 이동 가능성"
     },
     {
       "type": "credential_reuse",
@@ -4043,31 +4023,59 @@
     },
     {
       "type": "credential_reuse",
-      "key": "hyun.shin",
+      "key": "sangwoo.kang",
       "vendors": [
         "누리항공기계",
-        "동방센서텍",
-        "한결시스템"
+        "명성정밀",
+        "세종전술통신"
       ],
       "vendor_ids": [
+        "V003",
         "V004",
-        "V006",
-        "V012"
+        "V009"
       ],
-      "detail": "동일 계정 식별자 'hyun.shin'가 3개 협력사에서 관측 — 재사용/횡적 이동 가능성"
+      "detail": "동일 계정 식별자 'sangwoo.kang'가 3개 협력사에서 관측 — 재사용/횡적 이동 가능성"
     },
     {
       "type": "credential_reuse",
-      "key": "taeho.seo",
+      "key": "doyoon.yoon",
       "vendors": [
-        "누리항공기계",
+        "세종전술통신",
+        "우진열처리",
         "태성회로"
       ],
       "vendor_ids": [
-        "V004",
+        "V003",
+        "V007",
+        "V008"
+      ],
+      "detail": "동일 계정 식별자 'doyoon.yoon'가 3개 협력사에서 관측 — 재사용/횡적 이동 가능성"
+    },
+    {
+      "type": "credential_reuse",
+      "key": "seoyeon.yoon",
+      "vendors": [
+        "세종전술통신",
+        "태성회로"
+      ],
+      "vendor_ids": [
+        "V003",
         "V007"
       ],
-      "detail": "동일 계정 식별자 'taeho.seo'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
+      "detail": "동일 계정 식별자 'seoyeon.yoon'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
+    },
+    {
+      "type": "credential_reuse",
+      "key": "hana.seo",
+      "vendors": [
+        "동방센서텍",
+        "태성회로"
+      ],
+      "vendor_ids": [
+        "V006",
+        "V007"
+      ],
+      "detail": "동일 계정 식별자 'hana.seo'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
     },
     {
       "type": "credential_reuse",
@@ -4084,16 +4092,16 @@
     },
     {
       "type": "credential_reuse",
-      "key": "nari.oh",
+      "key": "bora.lim",
       "vendors": [
-        "세종전술통신",
+        "동방센서텍",
         "태성회로"
       ],
       "vendor_ids": [
-        "V003",
+        "V006",
         "V007"
       ],
-      "detail": "동일 계정 식별자 'nari.oh'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
+      "detail": "동일 계정 식별자 'bora.lim'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
     },
     {
       "type": "credential_reuse",
@@ -4112,19 +4120,6 @@
       "type": "credential_reuse",
       "key": "seoyeon.shin",
       "vendors": [
-        "태성회로",
-        "한결시스템"
-      ],
-      "vendor_ids": [
-        "V007",
-        "V012"
-      ],
-      "detail": "동일 계정 식별자 'seoyeon.shin'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
-    },
-    {
-      "type": "credential_reuse",
-      "key": "kanghee.yoon",
-      "vendors": [
         "세종전술통신",
         "태성회로"
       ],
@@ -4132,37 +4127,11 @@
         "V003",
         "V007"
       ],
-      "detail": "동일 계정 식별자 'kanghee.yoon'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
+      "detail": "동일 계정 식별자 'seoyeon.shin'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
     },
     {
       "type": "credential_reuse",
-      "key": "eunji.choi",
-      "vendors": [
-        "명성정밀",
-        "태성회로"
-      ],
-      "vendor_ids": [
-        "V007",
-        "V009"
-      ],
-      "detail": "동일 계정 식별자 'eunji.choi'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
-    },
-    {
-      "type": "credential_reuse",
-      "key": "jiwoo.jung",
-      "vendors": [
-        "청우기전",
-        "태성회로"
-      ],
-      "vendor_ids": [
-        "V007",
-        "V011"
-      ],
-      "detail": "동일 계정 식별자 'jiwoo.jung'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
-    },
-    {
-      "type": "credential_reuse",
-      "key": "wonjin.kang",
+      "key": "hyun.kang",
       "vendors": [
         "누리항공기계",
         "태성회로"
@@ -4171,46 +4140,59 @@
         "V004",
         "V007"
       ],
-      "detail": "동일 계정 식별자 'wonjin.kang'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
+      "detail": "동일 계정 식별자 'hyun.kang'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
     },
     {
       "type": "credential_reuse",
-      "key": "kanghee.choi",
+      "key": "junho.lim",
       "vendors": [
-        "삼익정밀가공",
+        "동방센서텍",
+        "태성회로"
+      ],
+      "vendor_ids": [
+        "V006",
+        "V007"
+      ],
+      "detail": "동일 계정 식별자 'junho.lim'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
+    },
+    {
+      "type": "credential_reuse",
+      "key": "taeho.lee",
+      "vendors": [
+        "청우기전",
         "한빛정밀항공"
       ],
       "vendor_ids": [
         "V001",
-        "V005"
+        "V011"
       ],
-      "detail": "동일 계정 식별자 'kanghee.choi'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
-    },
-    {
-      "type": "credential_reuse",
-      "key": "gitae.oh",
-      "vendors": [
-        "삼익정밀가공",
-        "한빛정밀항공"
-      ],
-      "vendor_ids": [
-        "V001",
-        "V005"
-      ],
-      "detail": "동일 계정 식별자 'gitae.oh'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
+      "detail": "동일 계정 식별자 'taeho.lee'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
     },
     {
       "type": "credential_reuse",
       "key": "yerin.kang",
       "vendors": [
-        "삼익정밀가공",
+        "세종전술통신",
         "한빛정밀항공"
       ],
       "vendor_ids": [
         "V001",
-        "V005"
+        "V003"
       ],
       "detail": "동일 계정 식별자 'yerin.kang'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
+    },
+    {
+      "type": "credential_reuse",
+      "key": "sujin.cho",
+      "vendors": [
+        "대양유도시스템",
+        "한빛정밀항공"
+      ],
+      "vendor_ids": [
+        "V001",
+        "V002"
+      ],
+      "detail": "동일 계정 식별자 'sujin.cho'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
     },
     {
       "type": "credential_reuse",
@@ -4253,19 +4235,6 @@
     },
     {
       "type": "credential_reuse",
-      "key": "taeho.kwon",
-      "vendors": [
-        "명성정밀",
-        "청우기전"
-      ],
-      "vendor_ids": [
-        "V009",
-        "V011"
-      ],
-      "detail": "동일 계정 식별자 'taeho.kwon'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
-    },
-    {
-      "type": "credential_reuse",
       "key": "sujin.lim",
       "vendors": [
         "명성정밀",
@@ -4279,16 +4248,42 @@
     },
     {
       "type": "credential_reuse",
-      "key": "seoyeon.lee",
+      "key": "nari.lee",
       "vendors": [
-        "가온소재",
-        "동방센서텍"
+        "명성정밀",
+        "청우기전"
       ],
       "vendor_ids": [
-        "V006",
+        "V009",
+        "V011"
+      ],
+      "detail": "동일 계정 식별자 'nari.lee'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
+    },
+    {
+      "type": "credential_reuse",
+      "key": "kanghee.seo",
+      "vendors": [
+        "가온소재",
+        "누리항공기계"
+      ],
+      "vendor_ids": [
+        "V004",
         "V010"
       ],
-      "detail": "동일 계정 식별자 'seoyeon.lee'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
+      "detail": "동일 계정 식별자 'kanghee.seo'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
+    },
+    {
+      "type": "credential_reuse",
+      "key": "seoyeon.cho",
+      "vendors": [
+        "가온소재",
+        "누리항공기계"
+      ],
+      "vendor_ids": [
+        "V004",
+        "V010"
+      ],
+      "detail": "동일 계정 식별자 'seoyeon.cho'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
     },
     {
       "type": "credential_reuse",
@@ -4305,19 +4300,6 @@
     },
     {
       "type": "credential_reuse",
-      "key": "yerin.lee",
-      "vendors": [
-        "가온소재",
-        "세종전술통신"
-      ],
-      "vendor_ids": [
-        "V003",
-        "V010"
-      ],
-      "detail": "동일 계정 식별자 'yerin.lee'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
-    },
-    {
-      "type": "credential_reuse",
       "key": "wonjin.jung",
       "vendors": [
         "가온소재",
@@ -4331,29 +4313,16 @@
     },
     {
       "type": "credential_reuse",
-      "key": "jae.lim",
+      "key": "junho.cho",
       "vendors": [
         "가온소재",
-        "세종전술통신"
+        "청우기전"
       ],
       "vendor_ids": [
-        "V003",
-        "V010"
+        "V010",
+        "V011"
       ],
-      "detail": "동일 계정 식별자 'jae.lim'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
-    },
-    {
-      "type": "credential_reuse",
-      "key": "jae.choi",
-      "vendors": [
-        "삼익정밀가공",
-        "세종전술통신"
-      ],
-      "vendor_ids": [
-        "V003",
-        "V005"
-      ],
-      "detail": "동일 계정 식별자 'jae.choi'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
+      "detail": "동일 계정 식별자 'junho.cho'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
     },
     {
       "type": "credential_reuse",
@@ -4383,29 +4352,16 @@
     },
     {
       "type": "credential_reuse",
-      "key": "hana.yoon",
+      "key": "bora.han",
       "vendors": [
-        "삼익정밀가공",
-        "우진열처리"
+        "대양유도시스템",
+        "삼익정밀가공"
       ],
       "vendor_ids": [
-        "V005",
-        "V008"
+        "V002",
+        "V005"
       ],
-      "detail": "동일 계정 식별자 'hana.yoon'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
-    },
-    {
-      "type": "credential_reuse",
-      "key": "minjun.lee",
-      "vendors": [
-        "삼익정밀가공",
-        "우진열처리"
-      ],
-      "vendor_ids": [
-        "V005",
-        "V008"
-      ],
-      "detail": "동일 계정 식별자 'minjun.lee'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
+      "detail": "동일 계정 식별자 'bora.han'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
     },
     {
       "type": "credential_reuse",
@@ -4435,45 +4391,6 @@
     },
     {
       "type": "credential_reuse",
-      "key": "eunji.jung",
-      "vendors": [
-        "대양유도시스템",
-        "삼익정밀가공"
-      ],
-      "vendor_ids": [
-        "V002",
-        "V005"
-      ],
-      "detail": "동일 계정 식별자 'eunji.jung'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
-    },
-    {
-      "type": "credential_reuse",
-      "key": "nari.shin",
-      "vendors": [
-        "대양유도시스템",
-        "청우기전"
-      ],
-      "vendor_ids": [
-        "V002",
-        "V011"
-      ],
-      "detail": "동일 계정 식별자 'nari.shin'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
-    },
-    {
-      "type": "credential_reuse",
-      "key": "minjun.yoon",
-      "vendors": [
-        "대양유도시스템",
-        "동방센서텍"
-      ],
-      "vendor_ids": [
-        "V002",
-        "V006"
-      ],
-      "detail": "동일 계정 식별자 'minjun.yoon'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
-    },
-    {
-      "type": "credential_reuse",
       "key": "junho.lee",
       "vendors": [
         "대양유도시스템",
@@ -4500,7 +4417,7 @@
     },
     {
       "type": "credential_reuse",
-      "key": "gitae.shin",
+      "key": "nari.jung",
       "vendors": [
         "대양유도시스템",
         "우진열처리"
@@ -4509,33 +4426,46 @@
         "V002",
         "V008"
       ],
-      "detail": "동일 계정 식별자 'gitae.shin'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
+      "detail": "동일 계정 식별자 'nari.jung'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
     },
     {
       "type": "credential_reuse",
-      "key": "gitae.cho",
+      "key": "yerin.shin",
       "vendors": [
-        "가온소재",
-        "우진열처리"
+        "우진열처리",
+        "태성회로"
+      ],
+      "vendor_ids": [
+        "V007",
+        "V008"
+      ],
+      "detail": "동일 계정 식별자 'yerin.shin'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
+    },
+    {
+      "type": "credential_reuse",
+      "key": "yerin.oh",
+      "vendors": [
+        "우진열처리",
+        "한결시스템"
       ],
       "vendor_ids": [
         "V008",
-        "V010"
+        "V012"
       ],
-      "detail": "동일 계정 식별자 'gitae.cho'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
+      "detail": "동일 계정 식별자 'yerin.oh'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
     },
     {
       "type": "credential_reuse",
-      "key": "jiwoo.seo",
+      "key": "bora.choi",
       "vendors": [
-        "세종전술통신",
+        "누리항공기계",
         "청우기전"
       ],
       "vendor_ids": [
-        "V003",
+        "V004",
         "V011"
       ],
-      "detail": "동일 계정 식별자 'jiwoo.seo'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
+      "detail": "동일 계정 식별자 'bora.choi'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
     },
     {
       "type": "credential_reuse",
@@ -4552,20 +4482,33 @@
     },
     {
       "type": "credential_reuse",
-      "key": "kanghee.kim",
+      "key": "seunghyun.jang",
       "vendors": [
-        "세종전술통신",
-        "청우기전"
+        "누리항공기계",
+        "명성정밀"
       ],
       "vendor_ids": [
-        "V003",
-        "V011"
+        "V004",
+        "V009"
       ],
-      "detail": "동일 계정 식별자 'kanghee.kim'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
+      "detail": "동일 계정 식별자 'seunghyun.jang'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
     },
     {
       "type": "credential_reuse",
-      "key": "sangwoo.kang",
+      "key": "mira.lim",
+      "vendors": [
+        "누리항공기계",
+        "세종전술통신"
+      ],
+      "vendor_ids": [
+        "V003",
+        "V004"
+      ],
+      "detail": "동일 계정 식별자 'mira.lim'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
+    },
+    {
+      "type": "credential_reuse",
+      "key": "hana.cho",
       "vendors": [
         "누리항공기계",
         "동방센서텍"
@@ -4574,20 +4517,20 @@
         "V004",
         "V006"
       ],
-      "detail": "동일 계정 식별자 'sangwoo.kang'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
+      "detail": "동일 계정 식별자 'hana.cho'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
     },
     {
       "type": "credential_reuse",
-      "key": "junho.kim",
+      "key": "hyun.shin",
       "vendors": [
-        "대양유도시스템",
-        "세종전술통신"
+        "누리항공기계",
+        "한결시스템"
       ],
       "vendor_ids": [
-        "V002",
-        "V003"
+        "V004",
+        "V012"
       ],
-      "detail": "동일 계정 식별자 'junho.kim'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
+      "detail": "동일 계정 식별자 'hyun.shin'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
     },
     {
       "type": "credential_reuse",
@@ -4604,29 +4547,16 @@
     },
     {
       "type": "credential_reuse",
-      "key": "sangwoo.jang",
+      "key": "seunghyun.kang",
       "vendors": [
-        "세종전술통신",
-        "태성회로"
+        "태성회로",
+        "한결시스템"
       ],
       "vendor_ids": [
-        "V003",
-        "V007"
+        "V007",
+        "V012"
       ],
-      "detail": "동일 계정 식별자 'sangwoo.jang'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
-    },
-    {
-      "type": "credential_reuse",
-      "key": "hana.seo",
-      "vendors": [
-        "동방센서텍",
-        "태성회로"
-      ],
-      "vendor_ids": [
-        "V006",
-        "V007"
-      ],
-      "detail": "동일 계정 식별자 'hana.seo'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
+      "detail": "동일 계정 식별자 'seunghyun.kang'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
     },
     {
       "type": "credential_reuse",
@@ -4643,33 +4573,20 @@
     },
     {
       "type": "credential_reuse",
-      "key": "yerin.oh",
+      "key": "taeho.cho",
       "vendors": [
-        "동방센서텍",
-        "한결시스템"
+        "세종전술통신",
+        "태성회로"
       ],
       "vendor_ids": [
-        "V006",
-        "V012"
+        "V003",
+        "V007"
       ],
-      "detail": "동일 계정 식별자 'yerin.oh'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
+      "detail": "동일 계정 식별자 'taeho.cho'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
     },
     {
       "type": "credential_reuse",
-      "key": "seunghyun.lim",
-      "vendors": [
-        "대양유도시스템",
-        "동방센서텍"
-      ],
-      "vendor_ids": [
-        "V002",
-        "V006"
-      ],
-      "detail": "동일 계정 식별자 'seunghyun.lim'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
-    },
-    {
-      "type": "credential_reuse",
-      "key": "mira.lim",
+      "key": "kanghee.han",
       "vendors": [
         "동방센서텍",
         "태성회로"
@@ -4678,46 +4595,7 @@
         "V006",
         "V007"
       ],
-      "detail": "동일 계정 식별자 'mira.lim'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
-    },
-    {
-      "type": "credential_reuse",
-      "key": "eunji.seo",
-      "vendors": [
-        "세종전술통신",
-        "청우기전"
-      ],
-      "vendor_ids": [
-        "V003",
-        "V011"
-      ],
-      "detail": "동일 계정 식별자 'eunji.seo'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
-    },
-    {
-      "type": "credential_reuse",
-      "key": "kanghee.han",
-      "vendors": [
-        "청우기전",
-        "태성회로"
-      ],
-      "vendor_ids": [
-        "V007",
-        "V011"
-      ],
       "detail": "동일 계정 식별자 'kanghee.han'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
-    },
-    {
-      "type": "credential_reuse",
-      "key": "jae.oh",
-      "vendors": [
-        "대양유도시스템",
-        "우진열처리"
-      ],
-      "vendor_ids": [
-        "V002",
-        "V008"
-      ],
-      "detail": "동일 계정 식별자 'jae.oh'가 2개 협력사에서 관측 — 재사용/횡적 이동 가능성"
     }
   ],
   "graph": {
@@ -4742,28 +4620,28 @@
         "id": "V003",
         "type": "vendor",
         "label": "세종전술통신",
-        "risk": 68.0,
+        "risk": 84.3,
         "status": "CRITICAL — 즉시 조치"
       },
       {
         "id": "V006",
         "type": "vendor",
         "label": "동방센서텍",
-        "risk": 60.3,
+        "risk": 59.3,
         "status": "CRITICAL — 즉시 조치"
       },
       {
         "id": "V007",
         "type": "vendor",
         "label": "태성회로",
-        "risk": 125.9,
+        "risk": 127.1,
         "status": "CRITICAL — 즉시 조치"
       },
       {
         "id": "CAMP-RedLine-193.42",
         "type": "campaign",
         "label": "CAMP-RedLine-193.42",
-        "confidence": 0.74
+        "confidence": 0.86
       },
       {
         "id": "c2:193.42.33.8",
@@ -4771,11 +4649,18 @@
         "label": "193.42.33.8"
       },
       {
+        "id": "V009",
+        "type": "vendor",
+        "label": "명성정밀",
+        "risk": 1.9,
+        "status": "LOW"
+      },
+      {
         "id": "V011",
         "type": "vendor",
         "label": "청우기전",
-        "risk": 9.2,
-        "status": "MEDIUM"
+        "risk": 2.6,
+        "status": "LOW"
       }
     ],
     "edges": [
@@ -4816,6 +4701,11 @@
       },
       {
         "source": "CAMP-RedLine-193.42",
+        "target": "V009",
+        "rel": "hits"
+      },
+      {
+        "source": "CAMP-RedLine-193.42",
         "target": "V011",
         "rel": "hits"
       }
@@ -4827,56 +4717,56 @@
       "value": "185.220.101.44",
       "context": "stealer C2/exfil",
       "count": 18,
-      "first_seen": "2025-06-09"
+      "first_seen": "2025-07-24"
     },
     {
       "type": "malware_family",
-      "value": "StealC",
+      "value": "RedLine",
       "context": "infostealer",
-      "count": 12,
-      "first_seen": "2025-06-16"
+      "count": 13,
+      "first_seen": "2025-07-30"
     },
     {
       "type": "ipv4",
       "value": "193.42.33.8",
       "context": "stealer C2/exfil",
       "count": 11,
-      "first_seen": "2025-05-31"
+      "first_seen": "2025-06-16"
     },
     {
       "type": "ipv4",
       "value": "45.147.230.11",
       "context": "stealer C2/exfil",
       "count": 11,
-      "first_seen": "2025-08-09"
-    },
-    {
-      "type": "malware_family",
-      "value": "Raccoon",
-      "context": "infostealer",
-      "count": 11,
-      "first_seen": "2025-06-15"
-    },
-    {
-      "type": "malware_family",
-      "value": "RedLine",
-      "context": "infostealer",
-      "count": 9,
-      "first_seen": "2025-07-30"
-    },
-    {
-      "type": "malware_family",
-      "value": "Lumma",
-      "context": "infostealer",
-      "count": 9,
-      "first_seen": "2025-05-31"
+      "first_seen": "2025-09-24"
     },
     {
       "type": "malware_family",
       "value": "Vidar",
       "context": "infostealer",
-      "count": 8,
+      "count": 11,
       "first_seen": "2025-08-25"
+    },
+    {
+      "type": "malware_family",
+      "value": "Raccoon",
+      "context": "infostealer",
+      "count": 10,
+      "first_seen": "2025-08-31"
+    },
+    {
+      "type": "malware_family",
+      "value": "StealC",
+      "context": "infostealer",
+      "count": 8,
+      "first_seen": "2025-06-16"
+    },
+    {
+      "type": "malware_family",
+      "value": "Lumma",
+      "context": "infostealer",
+      "count": 7,
+      "first_seen": "2025-09-03"
     },
     {
       "type": "domain",
@@ -4959,7 +4849,7 @@
     "snapshots": [
       {
         "date": "2026-06-02",
-        "exposed_credentials": 251,
+        "exposed_credentials": 235,
         "infected_machines": 41,
         "active_compromises": 3,
         "campaign_spread": 0,
@@ -4970,7 +4860,18 @@
       },
       {
         "date": "2026-06-03",
-        "exposed_credentials": 252,
+        "exposed_credentials": 235,
+        "infected_machines": 41,
+        "active_compromises": 3,
+        "campaign_spread": 0,
+        "campaign_detected": false,
+        "risk_index": 167.8,
+        "status": "warning",
+        "events": []
+      },
+      {
+        "date": "2026-06-04",
+        "exposed_credentials": 237,
         "infected_machines": 41,
         "active_compromises": 3,
         "campaign_spread": 0,
@@ -4986,25 +4887,8 @@
         ]
       },
       {
-        "date": "2026-06-04",
-        "exposed_credentials": 255,
-        "infected_machines": 41,
-        "active_compromises": 3,
-        "campaign_spread": 0,
-        "campaign_detected": false,
-        "risk_index": 167.8,
-        "status": "warning",
-        "events": [
-          {
-            "kind": "leak",
-            "label": "협력사 자격증명 유출 2건",
-            "campaign": false
-          }
-        ]
-      },
-      {
         "date": "2026-06-05",
-        "exposed_credentials": 255,
+        "exposed_credentials": 237,
         "infected_machines": 41,
         "active_compromises": 3,
         "campaign_spread": 0,
@@ -5015,7 +4899,7 @@
       },
       {
         "date": "2026-06-06",
-        "exposed_credentials": 255,
+        "exposed_credentials": 237,
         "infected_machines": 41,
         "active_compromises": 3,
         "campaign_spread": 0,
@@ -5026,7 +4910,7 @@
       },
       {
         "date": "2026-06-07",
-        "exposed_credentials": 255,
+        "exposed_credentials": 237,
         "infected_machines": 41,
         "active_compromises": 2,
         "campaign_spread": 0,
@@ -5037,7 +4921,7 @@
       },
       {
         "date": "2026-06-08",
-        "exposed_credentials": 255,
+        "exposed_credentials": 238,
         "infected_machines": 41,
         "active_compromises": 2,
         "campaign_spread": 0,
@@ -5048,7 +4932,7 @@
       },
       {
         "date": "2026-06-09",
-        "exposed_credentials": 255,
+        "exposed_credentials": 238,
         "infected_machines": 41,
         "active_compromises": 2,
         "campaign_spread": 0,
@@ -5059,7 +4943,7 @@
       },
       {
         "date": "2026-06-10",
-        "exposed_credentials": 255,
+        "exposed_credentials": 239,
         "infected_machines": 41,
         "active_compromises": 2,
         "campaign_spread": 0,
@@ -5070,23 +4954,23 @@
       },
       {
         "date": "2026-06-11",
-        "exposed_credentials": 255,
-        "infected_machines": 41,
+        "exposed_credentials": 240,
+        "infected_machines": 42,
         "active_compromises": 2,
         "campaign_spread": 0,
         "campaign_detected": false,
-        "risk_index": 122.8,
+        "risk_index": 123.6,
         "status": "warning",
         "events": []
       },
       {
         "date": "2026-06-12",
-        "exposed_credentials": 255,
-        "infected_machines": 42,
+        "exposed_credentials": 240,
+        "infected_machines": 43,
         "active_compromises": 3,
         "campaign_spread": 0,
         "campaign_detected": false,
-        "risk_index": 168.6,
+        "risk_index": 169.4,
         "status": "warning",
         "events": [
           {
@@ -5098,67 +4982,23 @@
       },
       {
         "date": "2026-06-13",
-        "exposed_credentials": 255,
-        "infected_machines": 42,
+        "exposed_credentials": 240,
+        "infected_machines": 43,
         "active_compromises": 3,
         "campaign_spread": 0,
         "campaign_detected": false,
-        "risk_index": 168.6,
+        "risk_index": 169.4,
         "status": "warning",
         "events": []
       },
       {
         "date": "2026-06-14",
-        "exposed_credentials": 255,
-        "infected_machines": 42,
+        "exposed_credentials": 241,
+        "infected_machines": 43,
         "active_compromises": 3,
         "campaign_spread": 0,
         "campaign_detected": false,
-        "risk_index": 168.6,
-        "status": "warning",
-        "events": []
-      },
-      {
-        "date": "2026-06-15",
-        "exposed_credentials": 257,
-        "infected_machines": 42,
-        "active_compromises": 3,
-        "campaign_spread": 0,
-        "campaign_detected": false,
-        "risk_index": 168.6,
-        "status": "warning",
-        "events": []
-      },
-      {
-        "date": "2026-06-16",
-        "exposed_credentials": 257,
-        "infected_machines": 42,
-        "active_compromises": 3,
-        "campaign_spread": 0,
-        "campaign_detected": false,
-        "risk_index": 168.6,
-        "status": "warning",
-        "events": []
-      },
-      {
-        "date": "2026-06-17",
-        "exposed_credentials": 257,
-        "infected_machines": 42,
-        "active_compromises": 3,
-        "campaign_spread": 0,
-        "campaign_detected": false,
-        "risk_index": 168.6,
-        "status": "warning",
-        "events": []
-      },
-      {
-        "date": "2026-06-18",
-        "exposed_credentials": 258,
-        "infected_machines": 42,
-        "active_compromises": 3,
-        "campaign_spread": 0,
-        "campaign_detected": false,
-        "risk_index": 168.6,
+        "risk_index": 169.4,
         "status": "warning",
         "events": [
           {
@@ -5169,8 +5009,19 @@
         ]
       },
       {
-        "date": "2026-06-19",
-        "exposed_credentials": 259,
+        "date": "2026-06-15",
+        "exposed_credentials": 242,
+        "infected_machines": 43,
+        "active_compromises": 3,
+        "campaign_spread": 0,
+        "campaign_detected": false,
+        "risk_index": 169.4,
+        "status": "warning",
+        "events": []
+      },
+      {
+        "date": "2026-06-16",
+        "exposed_credentials": 243,
         "infected_machines": 43,
         "active_compromises": 3,
         "campaign_spread": 0,
@@ -5179,8 +5030,47 @@
         "status": "warning",
         "events": [
           {
+            "kind": "leak",
+            "label": "협력사 자격증명 유출 1건",
+            "campaign": false
+          }
+        ]
+      },
+      {
+        "date": "2026-06-17",
+        "exposed_credentials": 243,
+        "infected_machines": 43,
+        "active_compromises": 3,
+        "campaign_spread": 0,
+        "campaign_detected": false,
+        "risk_index": 169.4,
+        "status": "warning",
+        "events": []
+      },
+      {
+        "date": "2026-06-18",
+        "exposed_credentials": 243,
+        "infected_machines": 43,
+        "active_compromises": 3,
+        "campaign_spread": 0,
+        "campaign_detected": false,
+        "risk_index": 169.4,
+        "status": "warning",
+        "events": []
+      },
+      {
+        "date": "2026-06-19",
+        "exposed_credentials": 244,
+        "infected_machines": 44,
+        "active_compromises": 3,
+        "campaign_spread": 0,
+        "campaign_detected": false,
+        "risk_index": 170.2,
+        "status": "warning",
+        "events": [
+          {
             "kind": "stealer",
-            "label": "청우기전 · Lumma 감염",
+            "label": "동방센서텍 · Raccoon 감염",
             "campaign": false
           },
           {
@@ -5192,46 +5082,51 @@
       },
       {
         "date": "2026-06-20",
-        "exposed_credentials": 260,
-        "infected_machines": 43,
+        "exposed_credentials": 245,
+        "infected_machines": 44,
         "active_compromises": 3,
         "campaign_spread": 0,
         "campaign_detected": false,
-        "risk_index": 169.4,
+        "risk_index": 170.2,
         "status": "warning",
         "events": []
       },
       {
         "date": "2026-06-21",
-        "exposed_credentials": 261,
-        "infected_machines": 43,
+        "exposed_credentials": 246,
+        "infected_machines": 44,
         "active_compromises": 3,
         "campaign_spread": 0,
         "campaign_detected": false,
-        "risk_index": 169.4,
+        "risk_index": 170.2,
         "status": "warning",
         "events": []
       },
       {
         "date": "2026-06-22",
-        "exposed_credentials": 261,
-        "infected_machines": 44,
+        "exposed_credentials": 247,
+        "infected_machines": 45,
         "active_compromises": 4,
         "campaign_spread": 1,
         "campaign_detected": false,
-        "risk_index": 233.2,
+        "risk_index": 234.0,
         "status": "warning",
         "events": [
           {
             "kind": "stealer",
             "label": "동방센서텍 · RedLine 감염 (HIGH: sso)",
             "campaign": true
+          },
+          {
+            "kind": "leak",
+            "label": "협력사 자격증명 유출 1건",
+            "campaign": false
           }
         ]
       },
       {
         "date": "2026-06-23",
-        "exposed_credentials": 261,
+        "exposed_credentials": 247,
         "infected_machines": 45,
         "active_compromises": 4,
         "campaign_spread": 1,
@@ -5242,7 +5137,7 @@
       },
       {
         "date": "2026-06-24",
-        "exposed_credentials": 261,
+        "exposed_credentials": 247,
         "infected_machines": 45,
         "active_compromises": 3,
         "campaign_spread": 1,
@@ -5253,7 +5148,7 @@
       },
       {
         "date": "2026-06-25",
-        "exposed_credentials": 261,
+        "exposed_credentials": 247,
         "infected_machines": 46,
         "active_compromises": 4,
         "campaign_spread": 2,
@@ -5270,7 +5165,7 @@
       },
       {
         "date": "2026-06-26",
-        "exposed_credentials": 261,
+        "exposed_credentials": 247,
         "infected_machines": 47,
         "active_compromises": 4,
         "campaign_spread": 2,
@@ -5280,14 +5175,14 @@
         "events": [
           {
             "kind": "stealer",
-            "label": "한결시스템 · StealC 감염",
+            "label": "세종전술통신 · Lumma 감염",
             "campaign": false
           }
         ]
       },
       {
         "date": "2026-06-27",
-        "exposed_credentials": 262,
+        "exposed_credentials": 248,
         "infected_machines": 47,
         "active_compromises": 4,
         "campaign_spread": 2,
@@ -5304,7 +5199,7 @@
       },
       {
         "date": "2026-06-28",
-        "exposed_credentials": 262,
+        "exposed_credentials": 248,
         "infected_machines": 47,
         "active_compromises": 4,
         "campaign_spread": 2,
@@ -5315,41 +5210,29 @@
       },
       {
         "date": "2026-06-29",
-        "exposed_credentials": 263,
+        "exposed_credentials": 248,
         "infected_machines": 47,
         "active_compromises": 4,
         "campaign_spread": 2,
         "campaign_detected": true,
         "risk_index": 253.6,
         "status": "critical",
-        "events": [
-          {
-            "kind": "leak",
-            "label": "협력사 자격증명 유출 1건",
-            "campaign": false
-          }
-        ]
+        "events": []
       },
       {
         "date": "2026-06-30",
-        "exposed_credentials": 264,
+        "exposed_credentials": 248,
         "infected_machines": 47,
         "active_compromises": 4,
         "campaign_spread": 2,
         "campaign_detected": true,
         "risk_index": 253.6,
         "status": "critical",
-        "events": [
-          {
-            "kind": "leak",
-            "label": "협력사 자격증명 유출 1건",
-            "campaign": false
-          }
-        ]
+        "events": []
       },
       {
         "date": "2026-07-01",
-        "exposed_credentials": 265,
+        "exposed_credentials": 248,
         "infected_machines": 48,
         "active_compromises": 3,
         "campaign_spread": 2,
@@ -5359,14 +5242,14 @@
         "events": [
           {
             "kind": "stealer",
-            "label": "가온소재 · StealC 감염",
+            "label": "세종전술통신 · Vidar 감염",
             "campaign": false
           }
         ]
       },
       {
         "date": "2026-07-02",
-        "exposed_credentials": 265,
+        "exposed_credentials": 248,
         "infected_machines": 48,
         "active_compromises": 3,
         "campaign_spread": 2,
@@ -5377,7 +5260,7 @@
       },
       {
         "date": "2026-07-03",
-        "exposed_credentials": 265,
+        "exposed_credentials": 248,
         "infected_machines": 49,
         "active_compromises": 4,
         "campaign_spread": 3,
@@ -5394,7 +5277,7 @@
       },
       {
         "date": "2026-07-04",
-        "exposed_credentials": 265,
+        "exposed_credentials": 248,
         "infected_machines": 49,
         "active_compromises": 4,
         "campaign_spread": 3,
@@ -5417,18 +5300,29 @@
   "siem": {
     "events": [
       {
-        "ts": "2024-01-30 14:18:27",
+        "ts": "2024-01-17 02:34:13",
         "severity": "high",
         "source": "cred_leak",
-        "vendor": "태성회로",
-        "vendor_id": "V007",
+        "vendor": "명성정밀",
+        "vendor_id": "V009",
         "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · taesung-pcb.co.kr · 출처 telegram_channel:leakbase-kr",
+        "message": "유출 자격증명 관측 · myungsung-fine.co.kr · 출처 telegram_channel:leakbase-kr",
         "mitre": [],
         "id": "E00001"
       },
       {
-        "ts": "2024-02-09 12:16:59",
+        "ts": "2024-01-20 16:16:08",
+        "severity": "high",
+        "source": "cred_leak",
+        "vendor": "가온소재",
+        "vendor_id": "V010",
+        "rule": "CRED-LEAK",
+        "message": "유출 자격증명 관측 · gaon-materials.com · 출처 telegram_channel:leakbase-kr",
+        "mitre": [],
+        "id": "E00002"
+      },
+      {
+        "ts": "2024-02-09 20:34:53",
         "severity": "high",
         "source": "cred_leak",
         "vendor": "동방센서텍",
@@ -5436,43 +5330,54 @@
         "rule": "CRED-LEAK",
         "message": "유출 자격증명 관측 · dongbang-sensor.com · 출처 telegram_channel:leakbase-kr",
         "mitre": [],
-        "id": "E00002"
+        "id": "E00003"
       },
       {
-        "ts": "2024-04-23 17:06:03",
+        "ts": "2024-02-28 12:08:42",
         "severity": "medium",
         "source": "cred_leak",
         "vendor": "청우기전",
         "vendor_id": "V011",
         "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · chungwoo-elec.co.kr · 출처 combolist:cloud-2025-mix",
-        "mitre": [],
-        "id": "E00003"
-      },
-      {
-        "ts": "2024-04-29 19:51:41",
-        "severity": "high",
-        "source": "cred_leak",
-        "vendor": "누리항공기계",
-        "vendor_id": "V004",
-        "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · nuri-aeromech.com · 출처 combolist:cloud-2025-mix",
+        "message": "유출 자격증명 관측 · chungwoo-elec.co.kr · 출처 darkweb_forum:breachforums-repost",
         "mitre": [],
         "id": "E00004"
       },
       {
-        "ts": "2024-05-13 07:23:18",
-        "severity": "medium",
+        "ts": "2024-04-01 07:23:18",
+        "severity": "high",
         "source": "cred_leak",
-        "vendor": "한빛정밀항공",
-        "vendor_id": "V001",
+        "vendor": "청우기전",
+        "vendor_id": "V011",
         "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · hanbit-aero.co.kr · 출처 combolist:antipublic-2026",
+        "message": "유출 자격증명 관측 · chungwoo-elec.co.kr · 출처 breach:vendorportal-2024",
         "mitre": [],
         "id": "E00005"
       },
       {
-        "ts": "2024-06-21 05:04:38",
+        "ts": "2024-04-08 17:45:19",
+        "severity": "high",
+        "source": "cred_leak",
+        "vendor": "우진열처리",
+        "vendor_id": "V008",
+        "rule": "CRED-LEAK",
+        "message": "유출 자격증명 관측 · woojin-heat.com · 출처 darkweb_forum:breachforums-repost",
+        "mitre": [],
+        "id": "E00006"
+      },
+      {
+        "ts": "2024-05-22 14:18:27",
+        "severity": "medium",
+        "source": "cred_leak",
+        "vendor": "명성정밀",
+        "vendor_id": "V009",
+        "rule": "CRED-LEAK",
+        "message": "유출 자격증명 관측 · myungsung-fine.co.kr · 출처 telegram_channel:leakbase-kr",
+        "mitre": [],
+        "id": "E00007"
+      },
+      {
+        "ts": "2024-06-21 09:13:03",
         "severity": "medium",
         "source": "cred_leak",
         "vendor": "한결시스템",
@@ -5480,10 +5385,10 @@
         "rule": "CRED-LEAK",
         "message": "유출 자격증명 관측 · hangyul-sys.com · 출처 telegram_channel:leakbase-kr",
         "mitre": [],
-        "id": "E00006"
+        "id": "E00008"
       },
       {
-        "ts": "2024-07-03 12:57:03",
+        "ts": "2024-07-03 18:15:37",
         "severity": "high",
         "source": "cred_leak",
         "vendor": "대양유도시스템",
@@ -5491,21 +5396,10 @@
         "rule": "CRED-LEAK",
         "message": "유출 자격증명 관측 · daeyang-guidance.com · 출처 darkweb_forum:breachforums-repost",
         "mitre": [],
-        "id": "E00007"
+        "id": "E00009"
       },
       {
-        "ts": "2024-07-10 17:42:45",
-        "severity": "high",
-        "source": "cred_leak",
-        "vendor": "동방센서텍",
-        "vendor_id": "V006",
-        "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · dongbang-sensor.com · 출처 breach:vendorportal-2024",
-        "mitre": [],
-        "id": "E00008"
-      },
-      {
-        "ts": "2024-07-15 04:27:11",
+        "ts": "2024-07-15 13:11:17",
         "severity": "medium",
         "source": "cred_leak",
         "vendor": "가온소재",
@@ -5513,10 +5407,43 @@
         "rule": "CRED-LEAK",
         "message": "유출 자격증명 관측 · gaon-materials.com · 출처 combolist:antipublic-2026",
         "mitre": [],
-        "id": "E00009"
+        "id": "E00010"
       },
       {
-        "ts": "2024-08-20 11:56:04",
+        "ts": "2024-08-04 12:16:59",
+        "severity": "medium",
+        "source": "cred_leak",
+        "vendor": "삼익정밀가공",
+        "vendor_id": "V005",
+        "rule": "CRED-LEAK",
+        "message": "유출 자격증명 관측 · samik-precision.co.kr · 출처 breach:vendorportal-2024",
+        "mitre": [],
+        "id": "E00011"
+      },
+      {
+        "ts": "2024-08-13 18:36:33",
+        "severity": "high",
+        "source": "cred_leak",
+        "vendor": "한빛정밀항공",
+        "vendor_id": "V001",
+        "rule": "CRED-LEAK",
+        "message": "유출 자격증명 관측 · hanbit-aero.co.kr · 출처 breach:vendorportal-2024",
+        "mitre": [],
+        "id": "E00012"
+      },
+      {
+        "ts": "2024-08-14 18:47:34",
+        "severity": "high",
+        "source": "cred_leak",
+        "vendor": "삼익정밀가공",
+        "vendor_id": "V005",
+        "rule": "CRED-LEAK",
+        "message": "유출 자격증명 관측 · samik-precision.co.kr · 출처 breach:vendorportal-2024",
+        "mitre": [],
+        "id": "E00013"
+      },
+      {
+        "ts": "2024-08-20 10:15:16",
         "severity": "medium",
         "source": "cred_leak",
         "vendor": "세종전술통신",
@@ -5524,10 +5451,32 @@
         "rule": "CRED-LEAK",
         "message": "유출 자격증명 관측 · sejong-tactcom.co.kr · 출처 breach:vendorportal-2024",
         "mitre": [],
-        "id": "E00010"
+        "id": "E00014"
       },
       {
-        "ts": "2024-08-28 15:32:58",
+        "ts": "2024-08-20 10:59:48",
+        "severity": "medium",
+        "source": "cred_leak",
+        "vendor": "누리항공기계",
+        "vendor_id": "V004",
+        "rule": "CRED-LEAK",
+        "message": "유출 자격증명 관측 · nuri-aeromech.com · 출처 combolist:cloud-2025-mix",
+        "mitre": [],
+        "id": "E00015"
+      },
+      {
+        "ts": "2024-08-21 19:51:41",
+        "severity": "high",
+        "source": "cred_leak",
+        "vendor": "가온소재",
+        "vendor_id": "V010",
+        "rule": "CRED-LEAK",
+        "message": "유출 자격증명 관측 · gaon-materials.com · 출처 darkweb_forum:breachforums-repost",
+        "mitre": [],
+        "id": "E00016"
+      },
+      {
+        "ts": "2024-08-28 02:26:42",
         "severity": "medium",
         "source": "cred_leak",
         "vendor": "삼익정밀가공",
@@ -5535,32 +5484,21 @@
         "rule": "CRED-LEAK",
         "message": "유출 자격증명 관측 · samik-precision.co.kr · 출처 telegram_channel:leakbase-kr",
         "mitre": [],
-        "id": "E00011"
+        "id": "E00017"
       },
       {
-        "ts": "2024-09-26 18:15:37",
+        "ts": "2024-09-09 07:25:07",
         "severity": "medium",
         "source": "cred_leak",
-        "vendor": "누리항공기계",
-        "vendor_id": "V004",
+        "vendor": "태성회로",
+        "vendor_id": "V007",
         "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · nuri-aeromech.com · 출처 darkweb_forum:breachforums-repost",
+        "message": "유출 자격증명 관측 · taesung-pcb.co.kr · 출처 combolist:cloud-2025-mix",
         "mitre": [],
-        "id": "E00012"
+        "id": "E00018"
       },
       {
-        "ts": "2024-09-27 10:59:48",
-        "severity": "medium",
-        "source": "cred_leak",
-        "vendor": "누리항공기계",
-        "vendor_id": "V004",
-        "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · nuri-aeromech.com · 출처 darkweb_forum:breachforums-repost",
-        "mitre": [],
-        "id": "E00013"
-      },
-      {
-        "ts": "2024-10-28 18:47:34",
+        "ts": "2024-10-28 15:32:58",
         "severity": "high",
         "source": "cred_leak",
         "vendor": "세종전술통신",
@@ -5568,95 +5506,84 @@
         "rule": "CRED-LEAK",
         "message": "유출 자격증명 관측 · sejong-tactcom.co.kr · 출처 telegram_channel:leakbase-kr",
         "mitre": [],
-        "id": "E00014"
+        "id": "E00019"
       },
       {
-        "ts": "2024-11-04 02:34:13",
-        "severity": "high",
-        "source": "cred_leak",
-        "vendor": "대양유도시스템",
-        "vendor_id": "V002",
-        "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · daeyang-guidance.com · 출처 combolist:antipublic-2026",
-        "mitre": [],
-        "id": "E00015"
-      },
-      {
-        "ts": "2024-11-04 16:10:03",
-        "severity": "high",
-        "source": "cred_leak",
-        "vendor": "한빛정밀항공",
-        "vendor_id": "V001",
-        "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · hanbit-aero.co.kr · 출처 combolist:antipublic-2026",
-        "mitre": [],
-        "id": "E00016"
-      },
-      {
-        "ts": "2024-12-05 12:08:42",
-        "severity": "medium",
-        "source": "cred_leak",
-        "vendor": "가온소재",
-        "vendor_id": "V010",
-        "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · gaon-materials.com · 출처 combolist:cloud-2025-mix",
-        "mitre": [],
-        "id": "E00017"
-      },
-      {
-        "ts": "2024-12-24 05:28:53",
+        "ts": "2024-11-16 19:36:06",
         "severity": "medium",
         "source": "cred_leak",
         "vendor": "명성정밀",
         "vendor_id": "V009",
         "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · myungsung-fine.co.kr · 출처 combolist:antipublic-2026",
-        "mitre": [],
-        "id": "E00018"
-      },
-      {
-        "ts": "2025-02-02 15:30:13",
-        "severity": "medium",
-        "source": "cred_leak",
-        "vendor": "세종전술통신",
-        "vendor_id": "V003",
-        "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · sejong-tactcom.co.kr · 출처 breach:vendorportal-2024",
-        "mitre": [],
-        "id": "E00019"
-      },
-      {
-        "ts": "2025-02-04 20:19:29",
-        "severity": "medium",
-        "source": "cred_leak",
-        "vendor": "대양유도시스템",
-        "vendor_id": "V002",
-        "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · daeyang-guidance.com · 출처 combolist:antipublic-2026",
+        "message": "유출 자격증명 관측 · myungsung-fine.co.kr · 출처 telegram_channel:leakbase-kr",
         "mitre": [],
         "id": "E00020"
       },
       {
-        "ts": "2025-02-19 10:15:16",
+        "ts": "2025-01-07 01:03:37",
+        "severity": "high",
+        "source": "cred_leak",
+        "vendor": "세종전술통신",
+        "vendor_id": "V003",
+        "rule": "CRED-LEAK",
+        "message": "유출 자격증명 관측 · sejong-tactcom.co.kr · 출처 darkweb_forum:breachforums-repost",
+        "mitre": [],
+        "id": "E00021"
+      },
+      {
+        "ts": "2025-02-02 17:28:08",
+        "severity": "high",
+        "source": "cred_leak",
+        "vendor": "우진열처리",
+        "vendor_id": "V008",
+        "rule": "CRED-LEAK",
+        "message": "유출 자격증명 관측 · woojin-heat.com · 출처 breach:vendorportal-2024",
+        "mitre": [],
+        "id": "E00022"
+      },
+      {
+        "ts": "2025-02-15 01:47:20",
+        "severity": "medium",
+        "source": "cred_leak",
+        "vendor": "동방센서텍",
+        "vendor_id": "V006",
+        "rule": "CRED-LEAK",
+        "message": "유출 자격증명 관측 · dongbang-sensor.com · 출처 combolist:antipublic-2026",
+        "mitre": [],
+        "id": "E00023"
+      },
+      {
+        "ts": "2025-03-09 17:06:03",
+        "severity": "high",
+        "source": "cred_leak",
+        "vendor": "누리항공기계",
+        "vendor_id": "V004",
+        "rule": "CRED-LEAK",
+        "message": "유출 자격증명 관측 · nuri-aeromech.com · 출처 telegram_channel:leakbase-kr",
+        "mitre": [],
+        "id": "E00024"
+      },
+      {
+        "ts": "2025-03-22 15:30:13",
         "severity": "high",
         "source": "cred_leak",
         "vendor": "청우기전",
         "vendor_id": "V011",
         "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · chungwoo-elec.co.kr · 출처 telegram_channel:leakbase-kr",
+        "message": "유출 자격증명 관측 · chungwoo-elec.co.kr · 출처 combolist:antipublic-2026",
         "mitre": [],
-        "id": "E00021"
+        "id": "E00025"
       },
       {
-        "ts": "2025-03-13 02:26:42",
-        "severity": "medium",
+        "ts": "2025-04-09 05:04:38",
+        "severity": "high",
         "source": "cred_leak",
-        "vendor": "태성회로",
-        "vendor_id": "V007",
+        "vendor": "명성정밀",
+        "vendor_id": "V009",
         "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · taesung-pcb.co.kr · 출처 telegram_channel:leakbase-kr",
+        "message": "유출 자격증명 관측 · myungsung-fine.co.kr · 출처 combolist:cloud-2025-mix",
         "mitre": [],
-        "id": "E00022"
+        "id": "E00026"
       },
       {
         "ts": "2025-04-17 05:24:00",
@@ -5667,78 +5594,21 @@
         "rule": "CRED-LEAK",
         "message": "유출 자격증명 관측 · nuri-aeromech.com · 출처 telegram_channel:leakbase-kr",
         "mitre": [],
-        "id": "E00023"
-      },
-      {
-        "ts": "2025-05-01 09:13:03",
-        "severity": "high",
-        "source": "cred_leak",
-        "vendor": "청우기전",
-        "vendor_id": "V011",
-        "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · chungwoo-elec.co.kr · 출처 combolist:antipublic-2026",
-        "mitre": [],
-        "id": "E00024"
-      },
-      {
-        "ts": "2025-05-21 06:42:45",
-        "severity": "high",
-        "source": "cred_leak",
-        "vendor": "우진열처리",
-        "vendor_id": "V008",
-        "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · woojin-heat.com · 출처 combolist:antipublic-2026",
-        "mitre": [],
-        "id": "E00025"
-      },
-      {
-        "ts": "2025-05-31 13:14:28",
-        "severity": "high",
-        "source": "stealer",
-        "vendor": "청우기전",
-        "vendor_id": "V011",
-        "rule": "STEALER-INFECTION",
-        "message": "Lumma 감염 탐지 · WIN-1802018",
-        "mitre": [
-          "T1555"
-        ],
-        "id": "E00026"
-      },
-      {
-        "ts": "2025-05-31 18:17:51",
-        "severity": "critical",
-        "source": "c2",
-        "vendor": "청우기전",
-        "vendor_id": "V011",
-        "rule": "CAMPAIGN-C2",
-        "message": "C2 비콘 관측 · 193.42.33.8 · Lumma",
-        "mitre": [],
         "id": "E00027"
       },
       {
-        "ts": "2025-06-09 12:17:29",
+        "ts": "2025-04-20 17:42:45",
         "severity": "medium",
-        "source": "c2",
-        "vendor": null,
-        "vendor_id": null,
-        "rule": "C2-BEACON",
-        "message": "C2 비콘 관측 · 185.220.101.44 · Lumma",
+        "source": "cred_leak",
+        "vendor": "삼익정밀가공",
+        "vendor_id": "V005",
+        "rule": "CRED-LEAK",
+        "message": "유출 자격증명 관측 · samik-precision.co.kr · 출처 combolist:antipublic-2026",
         "mitre": [],
         "id": "E00028"
       },
       {
-        "ts": "2025-06-11 02:43:55",
-        "severity": "high",
-        "source": "cred_leak",
-        "vendor": "태성회로",
-        "vendor_id": "V007",
-        "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · taesung-pcb.co.kr · 출처 breach:vendorportal-2024",
-        "mitre": [],
-        "id": "E00029"
-      },
-      {
-        "ts": "2025-06-11 20:34:53",
+        "ts": "2025-06-11 11:56:04",
         "severity": "high",
         "source": "cred_leak",
         "vendor": "태성회로",
@@ -5746,32 +5616,10 @@
         "rule": "CRED-LEAK",
         "message": "유출 자격증명 관측 · taesung-pcb.co.kr · 출처 combolist:cloud-2025-mix",
         "mitre": [],
-        "id": "E00030"
+        "id": "E00029"
       },
       {
-        "ts": "2025-06-15 06:48:21",
-        "severity": "critical",
-        "source": "c2",
-        "vendor": null,
-        "vendor_id": null,
-        "rule": "CAMPAIGN-C2",
-        "message": "C2 비콘 관측 · 193.42.33.8 · Raccoon",
-        "mitre": [],
-        "id": "E00031"
-      },
-      {
-        "ts": "2025-06-16 02:48:03",
-        "severity": "critical",
-        "source": "c2",
-        "vendor": "세종전술통신",
-        "vendor_id": "V003",
-        "rule": "CAMPAIGN-C2",
-        "message": "C2 비콘 관측 · 193.42.33.8 · StealC",
-        "mitre": [],
-        "id": "E00032"
-      },
-      {
-        "ts": "2025-06-16 04:32:31",
+        "ts": "2025-06-16 03:09:40",
         "severity": "high",
         "source": "stealer",
         "vendor": "세종전술통신",
@@ -5781,45 +5629,32 @@
         "mitre": [
           "T1555"
         ],
-        "id": "E00033"
+        "id": "E00030"
       },
       {
-        "ts": "2025-06-26 02:13:14",
-        "severity": "high",
-        "source": "stealer",
-        "vendor": "세종전술통신",
-        "vendor_id": "V003",
-        "rule": "STEALER-INFECTION",
-        "message": "Raccoon 감염 탐지 · WIN-9825812",
-        "mitre": [
-          "T1555"
-        ],
-        "id": "E00034"
-      },
-      {
-        "ts": "2025-06-26 16:38:01",
+        "ts": "2025-06-16 05:50:43",
         "severity": "critical",
         "source": "c2",
         "vendor": "세종전술통신",
         "vendor_id": "V003",
         "rule": "CAMPAIGN-C2",
-        "message": "C2 비콘 관측 · 193.42.33.8 · Raccoon",
+        "message": "C2 비콘 관측 · 193.42.33.8 · StealC",
         "mitre": [],
-        "id": "E00035"
+        "id": "E00031"
       },
       {
-        "ts": "2025-07-06 08:29:15",
+        "ts": "2025-06-20 06:42:45",
         "severity": "high",
         "source": "cred_leak",
-        "vendor": "누리항공기계",
-        "vendor_id": "V004",
+        "vendor": "태성회로",
+        "vendor_id": "V007",
         "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · nuri-aeromech.com · 출처 combolist:cloud-2025-mix",
+        "message": "유출 자격증명 관측 · taesung-pcb.co.kr · 출처 telegram_channel:leakbase-kr",
         "mitre": [],
-        "id": "E00036"
+        "id": "E00032"
       },
       {
-        "ts": "2025-07-21 17:45:19",
+        "ts": "2025-07-21 00:05:59",
         "severity": "high",
         "source": "cred_leak",
         "vendor": "우진열처리",
@@ -5827,10 +5662,10 @@
         "rule": "CRED-LEAK",
         "message": "유출 자격증명 관측 · woojin-heat.com · 출처 breach:vendorportal-2024",
         "mitre": [],
-        "id": "E00037"
+        "id": "E00033"
       },
       {
-        "ts": "2025-07-24 12:24:38",
+        "ts": "2025-07-24 17:55:00",
         "severity": "medium",
         "source": "c2",
         "vendor": null,
@@ -5838,10 +5673,10 @@
         "rule": "C2-BEACON",
         "message": "C2 비콘 관측 · 185.220.101.44 · StealC",
         "mitre": [],
-        "id": "E00038"
+        "id": "E00034"
       },
       {
-        "ts": "2025-07-30 21:56:34",
+        "ts": "2025-07-30 10:07:18",
         "severity": "medium",
         "source": "c2",
         "vendor": null,
@@ -5849,10 +5684,10 @@
         "rule": "C2-BEACON",
         "message": "C2 비콘 관측 · 185.220.101.44 · RedLine",
         "mitre": [],
-        "id": "E00039"
+        "id": "E00035"
       },
       {
-        "ts": "2025-08-03 00:07:59",
+        "ts": "2025-08-03 09:15:03",
         "severity": "critical",
         "source": "c2",
         "vendor": "청우기전",
@@ -5860,10 +5695,10 @@
         "rule": "CAMPAIGN-C2",
         "message": "C2 비콘 관측 · 193.42.33.8 · RedLine",
         "mitre": [],
-        "id": "E00040"
+        "id": "E00036"
       },
       {
-        "ts": "2025-08-03 19:20:31",
+        "ts": "2025-08-03 11:56:53",
         "severity": "high",
         "source": "stealer",
         "vendor": "청우기전",
@@ -5873,32 +5708,81 @@
         "mitre": [
           "T1555"
         ],
+        "id": "E00037"
+      },
+      {
+        "ts": "2025-08-14 17:12:45",
+        "severity": "critical",
+        "source": "stealer",
+        "vendor": "명성정밀",
+        "vendor_id": "V009",
+        "rule": "ACTIVE-COMPROMISE",
+        "message": "RedLine 감염 · WIN-2739191 · 내부망 유출 (클라우드콘솔, VPN)",
+        "mitre": [
+          "T1555",
+          "T1078"
+        ],
+        "id": "E00038"
+      },
+      {
+        "ts": "2025-08-14 20:44:34",
+        "severity": "critical",
+        "source": "c2",
+        "vendor": "명성정밀",
+        "vendor_id": "V009",
+        "rule": "CAMPAIGN-C2",
+        "message": "C2 비콘 관측 · 193.42.33.8 · RedLine",
+        "mitre": [],
+        "id": "E00039"
+      },
+      {
+        "ts": "2025-08-16 12:57:03",
+        "severity": "high",
+        "source": "cred_leak",
+        "vendor": "대양유도시스템",
+        "vendor_id": "V002",
+        "rule": "CRED-LEAK",
+        "message": "유출 자격증명 관측 · daeyang-guidance.com · 출처 breach:vendorportal-2024",
+        "mitre": [],
+        "id": "E00040"
+      },
+      {
+        "ts": "2025-08-21 00:07:59",
+        "severity": "critical",
+        "source": "c2",
+        "vendor": "동방센서텍",
+        "vendor_id": "V006",
+        "rule": "CAMPAIGN-C2",
+        "message": "C2 비콘 관측 · 193.42.33.8 · RedLine",
+        "mitre": [],
         "id": "E00041"
       },
       {
-        "ts": "2025-08-09 22:04:02",
-        "severity": "medium",
-        "source": "c2",
+        "ts": "2025-08-21 09:00:00",
+        "severity": "critical",
+        "source": "early_warning",
         "vendor": null,
         "vendor_id": null,
-        "rule": "C2-BEACON",
-        "message": "C2 비콘 관측 · 45.147.230.11 · Raccoon",
+        "rule": "EARLY-WARNING",
+        "message": "조기경보 발령 · CAMP-RedLine-193.42 공급망 표적 정황",
         "mitre": [],
         "id": "E00042"
       },
       {
-        "ts": "2025-08-17 01:03:37",
-        "severity": "high",
-        "source": "cred_leak",
-        "vendor": "삼익정밀가공",
-        "vendor_id": "V005",
-        "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · samik-precision.co.kr · 출처 combolist:cloud-2025-mix",
-        "mitre": [],
+        "ts": "2025-08-21 17:19:59",
+        "severity": "critical",
+        "source": "correlation",
+        "vendor": null,
+        "vendor_id": null,
+        "rule": "CAMPAIGN-CORRELATION",
+        "message": "조율 캠페인 탐지 · CAMP-RedLine-193.42 · 3개 협력사 · 동일 C2(193.42.33.8)/스틸러(RedLine)",
+        "mitre": [
+          "T1195.002"
+        ],
         "id": "E00043"
       },
       {
-        "ts": "2025-08-21 05:34:49",
+        "ts": "2025-08-21 19:20:31",
         "severity": "high",
         "source": "stealer",
         "vendor": "동방센서텍",
@@ -5911,42 +5795,7 @@
         "id": "E00044"
       },
       {
-        "ts": "2025-08-21 09:00:00",
-        "severity": "critical",
-        "source": "early_warning",
-        "vendor": null,
-        "vendor_id": null,
-        "rule": "EARLY-WARNING",
-        "message": "조기경보 발령 · CAMP-RedLine-193.42 공급망 표적 정황",
-        "mitre": [],
-        "id": "E00045"
-      },
-      {
-        "ts": "2025-08-21 16:58:00",
-        "severity": "critical",
-        "source": "c2",
-        "vendor": "동방센서텍",
-        "vendor_id": "V006",
-        "rule": "CAMPAIGN-C2",
-        "message": "C2 비콘 관측 · 193.42.33.8 · RedLine",
-        "mitre": [],
-        "id": "E00046"
-      },
-      {
-        "ts": "2025-08-21 17:19:59",
-        "severity": "critical",
-        "source": "correlation",
-        "vendor": null,
-        "vendor_id": null,
-        "rule": "CAMPAIGN-CORRELATION",
-        "message": "조율 캠페인 탐지 · CAMP-RedLine-193.42 · 2개 협력사 · 동일 C2(193.42.33.8)/스틸러(RedLine)",
-        "mitre": [
-          "T1195.002"
-        ],
-        "id": "E00047"
-      },
-      {
-        "ts": "2025-08-25 01:51:20",
+        "ts": "2025-08-25 06:58:36",
         "severity": "medium",
         "source": "c2",
         "vendor": null,
@@ -5954,32 +5803,43 @@
         "rule": "C2-BEACON",
         "message": "C2 비콘 관측 · 185.220.101.44 · Vidar",
         "mitre": [],
+        "id": "E00045"
+      },
+      {
+        "ts": "2025-08-29 06:48:21",
+        "severity": "critical",
+        "source": "c2",
+        "vendor": null,
+        "vendor_id": null,
+        "rule": "CAMPAIGN-C2",
+        "message": "C2 비콘 관측 · 193.42.33.8 · StealC",
+        "mitre": [],
+        "id": "E00046"
+      },
+      {
+        "ts": "2025-08-31 00:46:56",
+        "severity": "critical",
+        "source": "c2",
+        "vendor": null,
+        "vendor_id": null,
+        "rule": "CAMPAIGN-C2",
+        "message": "C2 비콘 관측 · 193.42.33.8 · Raccoon",
+        "mitre": [],
+        "id": "E00047"
+      },
+      {
+        "ts": "2025-08-31 13:13:59",
+        "severity": "medium",
+        "source": "c2",
+        "vendor": "대양유도시스템",
+        "vendor_id": "V002",
+        "rule": "C2-BEACON",
+        "message": "C2 비콘 관측 · 185.220.101.44 · Raccoon",
+        "mitre": [],
         "id": "E00048"
       },
       {
-        "ts": "2025-08-25 02:28:51",
-        "severity": "high",
-        "source": "cred_leak",
-        "vendor": "명성정밀",
-        "vendor_id": "V009",
-        "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · myungsung-fine.co.kr · 출처 telegram_channel:leakbase-kr",
-        "mitre": [],
-        "id": "E00049"
-      },
-      {
-        "ts": "2025-08-27 07:25:07",
-        "severity": "medium",
-        "source": "cred_leak",
-        "vendor": "세종전술통신",
-        "vendor_id": "V003",
-        "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · sejong-tactcom.co.kr · 출처 telegram_channel:leakbase-kr",
-        "mitre": [],
-        "id": "E00050"
-      },
-      {
-        "ts": "2025-08-31 04:42:30",
+        "ts": "2025-08-31 16:55:38",
         "severity": "critical",
         "source": "stealer",
         "vendor": "대양유도시스템",
@@ -5990,32 +5850,10 @@
           "T1555",
           "T1078"
         ],
-        "id": "E00051"
+        "id": "E00049"
       },
       {
-        "ts": "2025-08-31 10:07:18",
-        "severity": "critical",
-        "source": "c2",
-        "vendor": null,
-        "vendor_id": null,
-        "rule": "CAMPAIGN-C2",
-        "message": "C2 비콘 관측 · 193.42.33.8 · Raccoon",
-        "mitre": [],
-        "id": "E00052"
-      },
-      {
-        "ts": "2025-08-31 17:10:16",
-        "severity": "medium",
-        "source": "c2",
-        "vendor": "대양유도시스템",
-        "vendor_id": "V002",
-        "rule": "C2-BEACON",
-        "message": "C2 비콘 관측 · 185.220.101.44 · Raccoon",
-        "mitre": [],
-        "id": "E00053"
-      },
-      {
-        "ts": "2025-09-01 14:24:17",
+        "ts": "2025-09-01 07:43:20",
         "severity": "medium",
         "source": "c2",
         "vendor": null,
@@ -6023,21 +5861,56 @@
         "rule": "C2-BEACON",
         "message": "C2 비콘 관측 · 185.220.101.44 · RedLine",
         "mitre": [],
+        "id": "E00050"
+      },
+      {
+        "ts": "2025-09-03 09:05:54",
+        "severity": "critical",
+        "source": "c2",
+        "vendor": "청우기전",
+        "vendor_id": "V011",
+        "rule": "CAMPAIGN-C2",
+        "message": "C2 비콘 관측 · 193.42.33.8 · Lumma",
+        "mitre": [],
+        "id": "E00051"
+      },
+      {
+        "ts": "2025-09-03 21:14:49",
+        "severity": "high",
+        "source": "stealer",
+        "vendor": "청우기전",
+        "vendor_id": "V011",
+        "rule": "STEALER-INFECTION",
+        "message": "Lumma 감염 탐지 · WIN-7989166",
+        "mitre": [
+          "T1555"
+        ],
+        "id": "E00052"
+      },
+      {
+        "ts": "2025-09-08 20:19:29",
+        "severity": "medium",
+        "source": "cred_leak",
+        "vendor": "삼익정밀가공",
+        "vendor_id": "V005",
+        "rule": "CRED-LEAK",
+        "message": "유출 자격증명 관측 · samik-precision.co.kr · 출처 darkweb_forum:breachforums-repost",
+        "mitre": [],
+        "id": "E00053"
+      },
+      {
+        "ts": "2025-09-24 19:56:55",
+        "severity": "medium",
+        "source": "c2",
+        "vendor": null,
+        "vendor_id": null,
+        "rule": "C2-BEACON",
+        "message": "C2 비콘 관측 · 45.147.230.11 · StealC",
+        "mitre": [],
         "id": "E00054"
       },
       {
-        "ts": "2025-09-19 06:34:28",
-        "severity": "high",
-        "source": "cred_leak",
-        "vendor": "명성정밀",
-        "vendor_id": "V009",
-        "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · myungsung-fine.co.kr · 출처 darkweb_forum:breachforums-repost",
-        "mitre": [],
-        "id": "E00055"
-      },
-      {
-        "ts": "2025-10-08 00:46:56",
+        "ts": "2025-10-08 05:32:58",
         "severity": "medium",
         "source": "c2",
         "vendor": "청우기전",
@@ -6045,10 +5918,10 @@
         "rule": "C2-BEACON",
         "message": "C2 비콘 관측 · 185.220.101.44 · StealC",
         "mitre": [],
-        "id": "E00056"
+        "id": "E00055"
       },
       {
-        "ts": "2025-10-08 13:10:29",
+        "ts": "2025-10-08 23:16:32",
         "severity": "critical",
         "source": "stealer",
         "vendor": "청우기전",
@@ -6059,10 +5932,21 @@
           "T1555",
           "T1078"
         ],
+        "id": "E00056"
+      },
+      {
+        "ts": "2025-10-10 12:24:38",
+        "severity": "medium",
+        "source": "c2",
+        "vendor": "세종전술통신",
+        "vendor_id": "V003",
+        "rule": "C2-BEACON",
+        "message": "C2 비콘 관측 · 185.220.101.44 · Vidar",
+        "mitre": [],
         "id": "E00057"
       },
       {
-        "ts": "2025-10-10 03:09:40",
+        "ts": "2025-10-10 13:38:04",
         "severity": "high",
         "source": "stealer",
         "vendor": "세종전술통신",
@@ -6075,18 +5959,29 @@
         "id": "E00058"
       },
       {
-        "ts": "2025-10-10 05:50:43",
+        "ts": "2025-10-11 22:04:02",
+        "severity": "medium",
+        "source": "c2",
+        "vendor": null,
+        "vendor_id": null,
+        "rule": "C2-BEACON",
+        "message": "C2 비콘 관측 · 45.147.230.11 · RedLine",
+        "mitre": [],
+        "id": "E00059"
+      },
+      {
+        "ts": "2025-10-13 14:24:17",
         "severity": "medium",
         "source": "c2",
         "vendor": "세종전술통신",
         "vendor_id": "V003",
         "rule": "C2-BEACON",
-        "message": "C2 비콘 관측 · 185.220.101.44 · Vidar",
+        "message": "C2 비콘 관측 · 45.147.230.11 · Raccoon",
         "mitre": [],
-        "id": "E00059"
+        "id": "E00060"
       },
       {
-        "ts": "2025-10-13 20:04:38",
+        "ts": "2025-10-13 23:15:10",
         "severity": "critical",
         "source": "stealer",
         "vendor": "세종전술통신",
@@ -6097,45 +5992,10 @@
           "T1555",
           "T1078"
         ],
-        "id": "E00060"
-      },
-      {
-        "ts": "2025-10-13 20:10:34",
-        "severity": "medium",
-        "source": "c2",
-        "vendor": "세종전술통신",
-        "vendor_id": "V003",
-        "rule": "C2-BEACON",
-        "message": "C2 비콘 관측 · 45.147.230.11 · Raccoon",
-        "mitre": [],
         "id": "E00061"
       },
       {
-        "ts": "2025-10-22 05:23:22",
-        "severity": "medium",
-        "source": "c2",
-        "vendor": "우진열처리",
-        "vendor_id": "V008",
-        "rule": "C2-BEACON",
-        "message": "C2 비콘 관측 · 45.147.230.11 · Vidar",
-        "mitre": [],
-        "id": "E00062"
-      },
-      {
-        "ts": "2025-10-22 20:53:23",
-        "severity": "high",
-        "source": "stealer",
-        "vendor": "우진열처리",
-        "vendor_id": "V008",
-        "rule": "STEALER-INFECTION",
-        "message": "Vidar 감염 탐지 · WIN-8895137",
-        "mitre": [
-          "T1555"
-        ],
-        "id": "E00063"
-      },
-      {
-        "ts": "2025-11-04 02:00:29",
+        "ts": "2025-11-04 19:02:39",
         "severity": "medium",
         "source": "cred_leak",
         "vendor": "청우기전",
@@ -6143,10 +6003,10 @@
         "rule": "CRED-LEAK",
         "message": "유출 자격증명 관측 · chungwoo-elec.co.kr · 출처 combolist:antipublic-2026",
         "mitre": [],
-        "id": "E00064"
+        "id": "E00062"
       },
       {
-        "ts": "2025-11-07 19:36:06",
+        "ts": "2025-11-07 02:00:29",
         "severity": "medium",
         "source": "cred_leak",
         "vendor": "누리항공기계",
@@ -6154,34 +6014,10 @@
         "rule": "CRED-LEAK",
         "message": "유출 자격증명 관측 · nuri-aeromech.com · 출처 combolist:cloud-2025-mix",
         "mitre": [],
-        "id": "E00065"
+        "id": "E00063"
       },
       {
-        "ts": "2025-11-11 13:13:59",
-        "severity": "medium",
-        "source": "c2",
-        "vendor": "가온소재",
-        "vendor_id": "V010",
-        "rule": "C2-BEACON",
-        "message": "C2 비콘 관측 · 45.147.230.11 · Lumma",
-        "mitre": [],
-        "id": "E00066"
-      },
-      {
-        "ts": "2025-11-11 16:55:38",
-        "severity": "high",
-        "source": "stealer",
-        "vendor": "가온소재",
-        "vendor_id": "V010",
-        "rule": "STEALER-INFECTION",
-        "message": "Lumma 감염 탐지 · WIN-6379868",
-        "mitre": [
-          "T1555"
-        ],
-        "id": "E00067"
-      },
-      {
-        "ts": "2025-11-13 08:47:37",
+        "ts": "2025-11-13 12:23:14",
         "severity": "critical",
         "source": "c2",
         "vendor": "동방센서텍",
@@ -6189,21 +6025,10 @@
         "rule": "CAMPAIGN-C2",
         "message": "C2 비콘 관측 · 193.42.33.8 · Vidar",
         "mitre": [],
-        "id": "E00068"
+        "id": "E00064"
       },
       {
-        "ts": "2025-11-13 18:36:33",
-        "severity": "medium",
-        "source": "cred_leak",
-        "vendor": "우진열처리",
-        "vendor_id": "V008",
-        "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · woojin-heat.com · 출처 combolist:antipublic-2026",
-        "mitre": [],
-        "id": "E00069"
-      },
-      {
-        "ts": "2025-11-13 23:35:34",
+        "ts": "2025-11-13 13:57:37",
         "severity": "critical",
         "source": "stealer",
         "vendor": "동방센서텍",
@@ -6214,10 +6039,10 @@
           "T1555",
           "T1078"
         ],
-        "id": "E00070"
+        "id": "E00065"
       },
       {
-        "ts": "2025-11-17 12:23:14",
+        "ts": "2025-11-17 02:48:03",
         "severity": "medium",
         "source": "c2",
         "vendor": "태성회로",
@@ -6225,10 +6050,10 @@
         "rule": "C2-BEACON",
         "message": "C2 비콘 관측 · 185.220.101.44 · Lumma",
         "mitre": [],
-        "id": "E00071"
+        "id": "E00066"
       },
       {
-        "ts": "2025-11-17 13:57:37",
+        "ts": "2025-11-17 04:32:31",
         "severity": "high",
         "source": "stealer",
         "vendor": "태성회로",
@@ -6238,45 +6063,10 @@
         "mitre": [
           "T1555"
         ],
-        "id": "E00072"
+        "id": "E00067"
       },
       {
-        "ts": "2025-11-22 00:48:51",
-        "severity": "high",
-        "source": "stealer",
-        "vendor": "대양유도시스템",
-        "vendor_id": "V002",
-        "rule": "STEALER-INFECTION",
-        "message": "Vidar 감염 탐지 · WIN-1962308",
-        "mitre": [
-          "T1555"
-        ],
-        "id": "E00073"
-      },
-      {
-        "ts": "2025-11-22 05:44:27",
-        "severity": "medium",
-        "source": "c2",
-        "vendor": "대양유도시스템",
-        "vendor_id": "V002",
-        "rule": "C2-BEACON",
-        "message": "C2 비콘 관측 · 185.220.101.44 · Vidar",
-        "mitre": [],
-        "id": "E00074"
-      },
-      {
-        "ts": "2025-11-23 16:05:54",
-        "severity": "high",
-        "source": "cred_leak",
-        "vendor": "대양유도시스템",
-        "vendor_id": "V002",
-        "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · daeyang-guidance.com · 출처 darkweb_forum:breachforums-repost",
-        "mitre": [],
-        "id": "E00075"
-      },
-      {
-        "ts": "2025-11-25 01:47:20",
+        "ts": "2025-11-25 05:28:53",
         "severity": "high",
         "source": "cred_leak",
         "vendor": "우진열처리",
@@ -6284,10 +6074,10 @@
         "rule": "CRED-LEAK",
         "message": "유출 자격증명 관측 · woojin-heat.com · 출처 breach:vendorportal-2024",
         "mitre": [],
-        "id": "E00076"
+        "id": "E00068"
       },
       {
-        "ts": "2025-12-02 08:08:15",
+        "ts": "2025-12-02 08:47:37",
         "severity": "medium",
         "source": "c2",
         "vendor": null,
@@ -6295,21 +6085,10 @@
         "rule": "C2-BEACON",
         "message": "C2 비콘 관측 · 45.147.230.11 · Lumma",
         "mitre": [],
-        "id": "E00077"
+        "id": "E00069"
       },
       {
-        "ts": "2025-12-04 07:43:20",
-        "severity": "critical",
-        "source": "c2",
-        "vendor": "태성회로",
-        "vendor_id": "V007",
-        "rule": "CAMPAIGN-C2",
-        "message": "C2 비콘 관측 · 193.42.33.8 · Lumma",
-        "mitre": [],
-        "id": "E00078"
-      },
-      {
-        "ts": "2025-12-04 20:44:35",
+        "ts": "2025-12-04 01:14:52",
         "severity": "high",
         "source": "stealer",
         "vendor": "태성회로",
@@ -6319,10 +6098,43 @@
         "mitre": [
           "T1555"
         ],
-        "id": "E00079"
+        "id": "E00070"
       },
       {
-        "ts": "2025-12-21 03:55:40",
+        "ts": "2025-12-04 01:51:20",
+        "severity": "critical",
+        "source": "c2",
+        "vendor": "태성회로",
+        "vendor_id": "V007",
+        "rule": "CAMPAIGN-C2",
+        "message": "C2 비콘 관측 · 193.42.33.8 · Lumma",
+        "mitre": [],
+        "id": "E00071"
+      },
+      {
+        "ts": "2025-12-12 01:46:29",
+        "severity": "medium",
+        "source": "c2",
+        "vendor": null,
+        "vendor_id": null,
+        "rule": "C2-BEACON",
+        "message": "C2 비콘 관측 · 185.220.101.44 · Vidar",
+        "mitre": [],
+        "id": "E00072"
+      },
+      {
+        "ts": "2025-12-21 04:23:48",
+        "severity": "medium",
+        "source": "c2",
+        "vendor": "동방센서텍",
+        "vendor_id": "V006",
+        "rule": "C2-BEACON",
+        "message": "C2 비콘 관측 · 185.220.101.44 · Vidar",
+        "mitre": [],
+        "id": "E00073"
+      },
+      {
+        "ts": "2025-12-21 16:38:12",
         "severity": "high",
         "source": "stealer",
         "vendor": "동방센서텍",
@@ -6332,102 +6144,21 @@
         "mitre": [
           "T1555"
         ],
-        "id": "E00080"
+        "id": "E00074"
       },
       {
-        "ts": "2025-12-21 09:53:40",
-        "severity": "medium",
-        "source": "c2",
-        "vendor": "동방센서텍",
-        "vendor_id": "V006",
-        "rule": "C2-BEACON",
-        "message": "C2 비콘 관측 · 185.220.101.44 · Vidar",
-        "mitre": [],
-        "id": "E00081"
-      },
-      {
-        "ts": "2025-12-26 03:05:24",
-        "severity": "high",
-        "source": "stealer",
-        "vendor": "세종전술통신",
-        "vendor_id": "V003",
-        "rule": "STEALER-INFECTION",
-        "message": "StealC 감염 탐지 · WIN-3057514",
-        "mitre": [
-          "T1555"
-        ],
-        "id": "E00082"
-      },
-      {
-        "ts": "2025-12-26 03:22:54",
-        "severity": "medium",
-        "source": "c2",
-        "vendor": "세종전술통신",
-        "vendor_id": "V003",
-        "rule": "C2-BEACON",
-        "message": "C2 비콘 관측 · 185.220.101.44 · StealC",
-        "mitre": [],
-        "id": "E00083"
-      },
-      {
-        "ts": "2025-12-26 15:09:12",
+        "ts": "2025-12-26 16:10:03",
         "severity": "high",
         "source": "cred_leak",
-        "vendor": "가온소재",
-        "vendor_id": "V010",
+        "vendor": "한결시스템",
+        "vendor_id": "V012",
         "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · gaon-materials.com · 출처 combolist:antipublic-2026",
+        "message": "유출 자격증명 관측 · hangyul-sys.com · 출처 combolist:cloud-2025-mix",
         "mitre": [],
-        "id": "E00084"
+        "id": "E00075"
       },
       {
-        "ts": "2025-12-27 16:16:08",
-        "severity": "high",
-        "source": "cred_leak",
-        "vendor": "태성회로",
-        "vendor_id": "V007",
-        "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · taesung-pcb.co.kr · 출처 breach:vendorportal-2024",
-        "mitre": [],
-        "id": "E00085"
-      },
-      {
-        "ts": "2026-01-31 02:05:46",
-        "severity": "medium",
-        "source": "c2",
-        "vendor": null,
-        "vendor_id": null,
-        "rule": "C2-BEACON",
-        "message": "C2 비콘 관측 · 45.147.230.11 · RedLine",
-        "mitre": [],
-        "id": "E00086"
-      },
-      {
-        "ts": "2026-02-01 09:05:54",
-        "severity": "medium",
-        "source": "c2",
-        "vendor": "누리항공기계",
-        "vendor_id": "V004",
-        "rule": "C2-BEACON",
-        "message": "C2 비콘 관측 · 185.220.101.44 · StealC",
-        "mitre": [],
-        "id": "E00087"
-      },
-      {
-        "ts": "2026-02-01 21:14:49",
-        "severity": "high",
-        "source": "stealer",
-        "vendor": "누리항공기계",
-        "vendor_id": "V004",
-        "rule": "STEALER-INFECTION",
-        "message": "StealC 감염 탐지 · WIN-6357240",
-        "mitre": [
-          "T1555"
-        ],
-        "id": "E00088"
-      },
-      {
-        "ts": "2026-02-06 06:58:36",
+        "ts": "2026-01-02 05:44:27",
         "severity": "medium",
         "source": "c2",
         "vendor": null,
@@ -6435,10 +6166,78 @@
         "rule": "C2-BEACON",
         "message": "C2 비콘 관측 · 45.147.230.11 · Vidar",
         "mitre": [],
-        "id": "E00089"
+        "id": "E00076"
       },
       {
-        "ts": "2026-02-22 04:23:48",
+        "ts": "2026-01-31 17:49:08",
+        "severity": "medium",
+        "source": "c2",
+        "vendor": null,
+        "vendor_id": null,
+        "rule": "C2-BEACON",
+        "message": "C2 비콘 관측 · 45.147.230.11 · RedLine",
+        "mitre": [],
+        "id": "E00077"
+      },
+      {
+        "ts": "2026-02-05 07:55:06",
+        "severity": "high",
+        "source": "stealer",
+        "vendor": "청우기전",
+        "vendor_id": "V011",
+        "rule": "STEALER-INFECTION",
+        "message": "Raccoon 감염 탐지 · WIN-3193891",
+        "mitre": [
+          "T1555"
+        ],
+        "id": "E00078"
+      },
+      {
+        "ts": "2026-02-05 12:05:35",
+        "severity": "medium",
+        "source": "c2",
+        "vendor": null,
+        "vendor_id": null,
+        "rule": "C2-BEACON",
+        "message": "C2 비콘 관측 · 185.220.101.44 · Raccoon",
+        "mitre": [],
+        "id": "E00079"
+      },
+      {
+        "ts": "2026-02-05 12:17:29",
+        "severity": "critical",
+        "source": "c2",
+        "vendor": "청우기전",
+        "vendor_id": "V011",
+        "rule": "CAMPAIGN-C2",
+        "message": "C2 비콘 관측 · 193.42.33.8 · Raccoon",
+        "mitre": [],
+        "id": "E00080"
+      },
+      {
+        "ts": "2026-02-06 20:31:25",
+        "severity": "medium",
+        "source": "c2",
+        "vendor": null,
+        "vendor_id": null,
+        "rule": "C2-BEACON",
+        "message": "C2 비콘 관측 · 45.147.230.11 · Vidar",
+        "mitre": [],
+        "id": "E00081"
+      },
+      {
+        "ts": "2026-02-07 16:38:01",
+        "severity": "medium",
+        "source": "c2",
+        "vendor": null,
+        "vendor_id": null,
+        "rule": "C2-BEACON",
+        "message": "C2 비콘 관측 · 185.220.101.44 · RedLine",
+        "mitre": [],
+        "id": "E00082"
+      },
+      {
+        "ts": "2026-02-22 16:58:00",
         "severity": "medium",
         "source": "c2",
         "vendor": null,
@@ -6446,21 +6245,10 @@
         "rule": "C2-BEACON",
         "message": "C2 비콘 관측 · 185.220.101.44 · Vidar",
         "mitre": [],
-        "id": "E00090"
+        "id": "E00083"
       },
       {
-        "ts": "2026-02-26 10:59:16",
-        "severity": "medium",
-        "source": "cred_leak",
-        "vendor": "청우기전",
-        "vendor_id": "V011",
-        "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · chungwoo-elec.co.kr · 출처 darkweb_forum:breachforums-repost",
-        "mitre": [],
-        "id": "E00091"
-      },
-      {
-        "ts": "2026-03-01 20:31:25",
+        "ts": "2026-03-01 08:08:15",
         "severity": "medium",
         "source": "c2",
         "vendor": null,
@@ -6468,10 +6256,45 @@
         "rule": "C2-BEACON",
         "message": "C2 비콘 관측 · 45.147.230.11 · Lumma",
         "mitre": [],
-        "id": "E00092"
+        "id": "E00084"
       },
       {
-        "ts": "2026-03-09 15:52:04",
+        "ts": "2026-03-02 05:23:22",
+        "severity": "medium",
+        "source": "c2",
+        "vendor": "대양유도시스템",
+        "vendor_id": "V002",
+        "rule": "C2-BEACON",
+        "message": "C2 비콘 관측 · 185.220.101.44 · Vidar",
+        "mitre": [],
+        "id": "E00085"
+      },
+      {
+        "ts": "2026-03-02 20:53:23",
+        "severity": "high",
+        "source": "stealer",
+        "vendor": "대양유도시스템",
+        "vendor_id": "V002",
+        "rule": "STEALER-INFECTION",
+        "message": "Vidar 감염 탐지 · WIN-3679315",
+        "mitre": [
+          "T1555"
+        ],
+        "id": "E00086"
+      },
+      {
+        "ts": "2026-03-05 02:28:51",
+        "severity": "high",
+        "source": "cred_leak",
+        "vendor": "가온소재",
+        "vendor_id": "V010",
+        "rule": "CRED-LEAK",
+        "message": "유출 자격증명 관측 · gaon-materials.com · 출처 telegram_channel:leakbase-kr",
+        "mitre": [],
+        "id": "E00087"
+      },
+      {
+        "ts": "2026-03-09 04:42:30",
         "severity": "high",
         "source": "stealer",
         "vendor": "우진열처리",
@@ -6481,10 +6304,10 @@
         "mitre": [
           "T1555"
         ],
-        "id": "E00093"
+        "id": "E00088"
       },
       {
-        "ts": "2026-03-09 17:49:08",
+        "ts": "2026-03-09 17:10:16",
         "severity": "medium",
         "source": "c2",
         "vendor": "우진열처리",
@@ -6492,10 +6315,10 @@
         "rule": "C2-BEACON",
         "message": "C2 비콘 관측 · 185.220.101.44 · StealC",
         "mitre": [],
-        "id": "E00094"
+        "id": "E00089"
       },
       {
-        "ts": "2026-03-14 05:32:58",
+        "ts": "2026-03-14 09:53:40",
         "severity": "medium",
         "source": "c2",
         "vendor": null,
@@ -6503,29 +6326,29 @@
         "rule": "C2-BEACON",
         "message": "C2 비콘 관측 · 185.220.101.44 · Raccoon",
         "mitre": [],
-        "id": "E00095"
+        "id": "E00090"
       },
       {
-        "ts": "2026-04-01 19:56:55",
+        "ts": "2026-03-26 15:09:12",
+        "severity": "high",
+        "source": "cred_leak",
+        "vendor": "청우기전",
+        "vendor_id": "V011",
+        "rule": "CRED-LEAK",
+        "message": "유출 자격증명 관측 · chungwoo-elec.co.kr · 출처 telegram_channel:leakbase-kr",
+        "mitre": [],
+        "id": "E00091"
+      },
+      {
+        "ts": "2026-03-28 22:59:43",
         "severity": "medium",
         "source": "c2",
         "vendor": null,
         "vendor_id": null,
         "rule": "C2-BEACON",
-        "message": "C2 비콘 관측 · 45.147.230.11 · Raccoon",
+        "message": "C2 비콘 관측 · 45.147.230.11 · Vidar",
         "mitre": [],
-        "id": "E00096"
-      },
-      {
-        "ts": "2026-04-10 19:02:39",
-        "severity": "high",
-        "source": "cred_leak",
-        "vendor": "대양유도시스템",
-        "vendor_id": "V002",
-        "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · daeyang-guidance.com · 출처 telegram_channel:leakbase-kr",
-        "mitre": [],
-        "id": "E00097"
+        "id": "E00092"
       },
       {
         "ts": "2026-04-10 22:46:50",
@@ -6536,10 +6359,32 @@
         "rule": "CRED-LEAK",
         "message": "유출 자격증명 관측 · woojin-heat.com · 출처 darkweb_forum:breachforums-repost",
         "mitre": [],
-        "id": "E00098"
+        "id": "E00093"
       },
       {
-        "ts": "2026-04-26 06:42:17",
+        "ts": "2026-04-12 14:15:55",
+        "severity": "high",
+        "source": "cred_leak",
+        "vendor": "삼익정밀가공",
+        "vendor_id": "V005",
+        "rule": "CRED-LEAK",
+        "message": "유출 자격증명 관측 · samik-precision.co.kr · 출처 combolist:antipublic-2026",
+        "mitre": [],
+        "id": "E00094"
+      },
+      {
+        "ts": "2026-04-20 16:05:54",
+        "severity": "high",
+        "source": "cred_leak",
+        "vendor": "누리항공기계",
+        "vendor_id": "V004",
+        "rule": "CRED-LEAK",
+        "message": "유출 자격증명 관측 · nuri-aeromech.com · 출처 breach:vendorportal-2024",
+        "mitre": [],
+        "id": "E00095"
+      },
+      {
+        "ts": "2026-04-26 20:04:38",
         "severity": "critical",
         "source": "stealer",
         "vendor": "대양유도시스템",
@@ -6550,10 +6395,10 @@
           "T1555",
           "T1078"
         ],
-        "id": "E00099"
+        "id": "E00096"
       },
       {
-        "ts": "2026-04-26 22:59:43",
+        "ts": "2026-04-26 20:10:34",
         "severity": "medium",
         "source": "c2",
         "vendor": "대양유도시스템",
@@ -6561,59 +6406,46 @@
         "rule": "C2-BEACON",
         "message": "C2 비콘 관측 · 185.220.101.44 · StealC",
         "mitre": [],
-        "id": "E00100"
+        "id": "E00097"
       },
       {
-        "ts": "2026-05-07 09:25:42",
-        "severity": "critical",
-        "source": "stealer",
-        "vendor": "동방센서텍",
-        "vendor_id": "V006",
-        "rule": "ACTIVE-COMPROMISE",
-        "message": "RedLine 감염 · WIN-DECOY-STALE58 · 내부망 유출 (SSO, VPN)",
-        "mitre": [
-          "T1555",
-          "T1078"
-        ],
-        "id": "E00101"
-      },
-      {
-        "ts": "2026-05-20 01:46:29",
-        "severity": "critical",
-        "source": "c2",
-        "vendor": "세종전술통신",
-        "vendor_id": "V003",
-        "rule": "CAMPAIGN-C2",
-        "message": "C2 비콘 관측 · 193.42.33.8 · StealC",
-        "mitre": [],
-        "id": "E00102"
-      },
-      {
-        "ts": "2026-05-20 11:38:16",
-        "severity": "high",
-        "source": "stealer",
-        "vendor": "세종전술통신",
-        "vendor_id": "V003",
-        "rule": "STEALER-INFECTION",
-        "message": "StealC 감염 탐지 · WIN-7189302",
-        "mitre": [
-          "T1555"
-        ],
-        "id": "E00103"
-      },
-      {
-        "ts": "2026-05-20 12:05:35",
+        "ts": "2026-04-30 03:22:54",
         "severity": "medium",
         "source": "c2",
         "vendor": null,
         "vendor_id": null,
         "rule": "C2-BEACON",
-        "message": "C2 비콘 관측 · 45.147.230.11 · Raccoon",
+        "message": "C2 비콘 관측 · 45.147.230.11 · RedLine",
         "mitre": [],
-        "id": "E00104"
+        "id": "E00098"
       },
       {
-        "ts": "2026-05-23 17:55:00",
+        "ts": "2026-05-07 09:25:42",
+        "severity": "critical",
+        "source": "stealer",
+        "vendor": "태성회로",
+        "vendor_id": "V007",
+        "rule": "ACTIVE-COMPROMISE",
+        "message": "Raccoon 감염 · WIN-DECOY-STALE58 · 내부망 유출 (SSO, VPN)",
+        "mitre": [
+          "T1555",
+          "T1078"
+        ],
+        "id": "E00099"
+      },
+      {
+        "ts": "2026-05-07 10:59:16",
+        "severity": "medium",
+        "source": "cred_leak",
+        "vendor": "세종전술통신",
+        "vendor_id": "V003",
+        "rule": "CRED-LEAK",
+        "message": "유출 자격증명 관측 · sejong-tactcom.co.kr · 출처 breach:vendorportal-2024",
+        "mitre": [],
+        "id": "E00100"
+      },
+      {
+        "ts": "2026-05-23 21:56:34",
         "severity": "critical",
         "source": "c2",
         "vendor": null,
@@ -6621,49 +6453,49 @@
         "rule": "CAMPAIGN-C2",
         "message": "C2 비콘 관측 · 193.42.33.8 · StealC",
         "mitre": [],
-        "id": "E00105"
+        "id": "E00101"
       },
       {
         "ts": "2026-05-24 22:12:45",
         "severity": "critical",
         "source": "stealer",
-        "vendor": "동방센서텍",
-        "vendor_id": "V006",
+        "vendor": "세종전술통신",
+        "vendor_id": "V003",
         "rule": "ACTIVE-COMPROMISE",
-        "message": "Lumma 감염 · WIN-DECOY-STALE41 · 내부망 유출 (SSO, VPN)",
+        "message": "Raccoon 감염 · WIN-DECOY-STALE41 · 내부망 유출 (SSO, VPN)",
         "mitre": [
           "T1555",
           "T1078"
         ],
-        "id": "E00106"
+        "id": "E00102"
       },
       {
         "ts": "2026-05-31 17:48:46",
         "severity": "critical",
         "source": "stealer",
-        "vendor": "한결시스템",
-        "vendor_id": "V012",
+        "vendor": "우진열처리",
+        "vendor_id": "V008",
         "rule": "ACTIVE-COMPROMISE",
-        "message": "StealC 감염 · WIN-DECOY-STALE34 · 내부망 유출 (SSO, VPN)",
+        "message": "RedLine 감염 · WIN-DECOY-STALE34 · 내부망 유출 (SSO, VPN)",
         "mitre": [
           "T1555",
           "T1078"
         ],
-        "id": "E00107"
+        "id": "E00103"
       },
       {
-        "ts": "2026-06-04 00:05:59",
+        "ts": "2026-06-11 18:17:51",
         "severity": "medium",
-        "source": "cred_leak",
-        "vendor": "누리항공기계",
-        "vendor_id": "V004",
-        "rule": "CRED-LEAK",
-        "message": "유출 자격증명 관측 · nuri-aeromech.com · 출처 combolist:antipublic-2026",
+        "source": "c2",
+        "vendor": null,
+        "vendor_id": null,
+        "rule": "C2-BEACON",
+        "message": "C2 비콘 관측 · 185.220.101.44 · Lumma",
         "mitre": [],
-        "id": "E00108"
+        "id": "E00104"
       },
       {
-        "ts": "2026-06-12 09:15:03",
+        "ts": "2026-06-12 02:05:46",
         "severity": "medium",
         "source": "c2",
         "vendor": "대양유도시스템",
@@ -6671,10 +6503,10 @@
         "rule": "C2-BEACON",
         "message": "C2 비콘 관측 · 45.147.230.11 · Raccoon",
         "mitre": [],
-        "id": "E00109"
+        "id": "E00105"
       },
       {
-        "ts": "2026-06-12 11:56:53",
+        "ts": "2026-06-12 07:56:36",
         "severity": "critical",
         "source": "stealer",
         "vendor": "대양유도시스템",
@@ -6685,10 +6517,10 @@
           "T1555",
           "T1078"
         ],
-        "id": "E00110"
+        "id": "E00106"
       },
       {
-        "ts": "2026-06-19 07:10:26",
+        "ts": "2026-06-16 07:10:26",
         "severity": "high",
         "source": "cred_leak",
         "vendor": "태성회로",
@@ -6696,20 +6528,20 @@
         "rule": "CRED-LEAK",
         "message": "유출 자격증명 관측 · taesung-pcb.co.kr · 출처 telegram_channel:leakbase-kr",
         "mitre": [],
-        "id": "E00111"
+        "id": "E00107"
       },
       {
         "ts": "2026-06-19 07:14:04",
         "severity": "high",
         "source": "stealer",
-        "vendor": "청우기전",
-        "vendor_id": "V011",
+        "vendor": "동방센서텍",
+        "vendor_id": "V006",
         "rule": "STEALER-INFECTION",
-        "message": "Lumma 감염 탐지 · WIN-DECOY-LOW15",
+        "message": "Raccoon 감염 탐지 · WIN-DECOY-LOW15",
         "mitre": [
           "T1555"
         ],
-        "id": "E00112"
+        "id": "E00108"
       },
       {
         "ts": "2026-06-22 20:07:01",
@@ -6723,7 +6555,7 @@
           "T1555",
           "T1078"
         ],
-        "id": "E00113"
+        "id": "E00109"
       },
       {
         "ts": "2026-06-22 23:17:15",
@@ -6734,18 +6566,7 @@
         "rule": "CAMPAIGN-C2",
         "message": "C2 비콘 관측 · cdn-update-sync.net · RedLine",
         "mitre": [],
-        "id": "E00114"
-      },
-      {
-        "ts": "2026-06-23 20:44:34",
-        "severity": "medium",
-        "source": "c2",
-        "vendor": null,
-        "vendor_id": null,
-        "rule": "C2-BEACON",
-        "message": "C2 비콘 관측 · 185.220.101.44 · Raccoon",
-        "mitre": [],
-        "id": "E00115"
+        "id": "E00110"
       },
       {
         "ts": "2026-06-25 03:43:47",
@@ -6756,7 +6577,7 @@
         "rule": "CAMPAIGN-C2",
         "message": "C2 비콘 관측 · cdn-update-sync.net · RedLine",
         "mitre": [],
-        "id": "E00116"
+        "id": "E00111"
       },
       {
         "ts": "2026-06-25 07:08:47",
@@ -6770,33 +6591,44 @@
           "T1555",
           "T1078"
         ],
-        "id": "E00117"
+        "id": "E00112"
       },
       {
         "ts": "2026-06-26 16:28:07",
         "severity": "high",
         "source": "stealer",
-        "vendor": "한결시스템",
-        "vendor_id": "V012",
+        "vendor": "세종전술통신",
+        "vendor_id": "V003",
         "rule": "STEALER-INFECTION",
-        "message": "StealC 감염 탐지 · WIN-DECOY-LOW8",
+        "message": "Lumma 감염 탐지 · WIN-DECOY-LOW8",
         "mitre": [
           "T1555"
         ],
-        "id": "E00118"
+        "id": "E00113"
+      },
+      {
+        "ts": "2026-06-27 02:43:55",
+        "severity": "high",
+        "source": "cred_leak",
+        "vendor": "누리항공기계",
+        "vendor_id": "V004",
+        "rule": "CRED-LEAK",
+        "message": "유출 자격증명 관측 · nuri-aeromech.com · 출처 telegram_channel:leakbase-kr",
+        "mitre": [],
+        "id": "E00114"
       },
       {
         "ts": "2026-07-01 20:23:28",
         "severity": "high",
         "source": "stealer",
-        "vendor": "가온소재",
-        "vendor_id": "V010",
+        "vendor": "세종전술통신",
+        "vendor_id": "V003",
         "rule": "STEALER-INFECTION",
-        "message": "StealC 감염 탐지 · WIN-DECOY-LOW3",
+        "message": "Vidar 감염 탐지 · WIN-DECOY-LOW3",
         "mitre": [
           "T1555"
         ],
-        "id": "E00119"
+        "id": "E00115"
       },
       {
         "ts": "2026-07-03 09:00:00",
@@ -6807,7 +6639,7 @@
         "rule": "EARLY-WARNING",
         "message": "조기경보 발령 · CAMP-REDLINE-KR-0714 공급망 표적 정황",
         "mitre": [],
-        "id": "E00120"
+        "id": "E00116"
       },
       {
         "ts": "2026-07-03 13:02:01",
@@ -6818,7 +6650,7 @@
         "rule": "CAMPAIGN-C2",
         "message": "C2 비콘 관측 · cdn-update-sync.net · RedLine",
         "mitre": [],
-        "id": "E00121"
+        "id": "E00117"
       },
       {
         "ts": "2026-07-03 16:00:42",
@@ -6831,7 +6663,7 @@
         "mitre": [
           "T1195.002"
         ],
-        "id": "E00122"
+        "id": "E00118"
       },
       {
         "ts": "2026-07-03 17:05:37",
@@ -6845,20 +6677,20 @@
           "T1555",
           "T1078"
         ],
-        "id": "E00123"
+        "id": "E00119"
       }
     ],
     "stats": {
-      "total": 123,
+      "total": 119,
       "by_severity": {
-        "critical": 30,
-        "high": 44,
-        "medium": 49,
+        "critical": 31,
+        "high": 42,
+        "medium": 46,
         "low": 0
       },
       "by_source": {
         "cred_leak": 45,
-        "stealer": 31,
+        "stealer": 27,
         "c2": 43,
         "early_warning": 2,
         "correlation": 2
@@ -6895,12 +6727,12 @@
       "f1": 1.0,
       "naive_baseline": {
         "rule": "회사 도메인 감염이면 활성으로 간주",
-        "precision": 0.129,
+        "precision": 0.148,
         "recall": 1.0,
-        "false_positive": 27
+        "false_positive": 23
       },
-      "decoy_cases": 27,
-      "false_positive_reduction": 27,
+      "decoy_cases": 23,
+      "false_positive_reduction": 23,
       "false_positive_reduction_pct": 100
     },
     "lead_time": {
@@ -6912,7 +6744,7 @@
     "notes": [
       "모든 회사명·도메인·행위자·C2는 합성/가공 데이터",
       "정답셋은 탐지기와 독립인 gt_active 라벨(4개 양성) 기준",
-      "함정 27건(오래된 감염·LOW 전용) 포함 — 나이브 대비 오탐 27건 감소"
+      "함정 23건(오래된 감염·LOW 전용) 포함 — 나이브 대비 오탐 23건 감소"
     ]
   }
 }

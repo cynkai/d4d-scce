@@ -205,9 +205,23 @@ def assess_reach(exposed_categories) -> dict:
 
 
 def classify(rank_row: dict) -> str:
-    """상태 라벨. 활성 침해가 있으면 무조건 CRITICAL."""
+    """
+    상태 라벨. 활성 침해가 있으면 무조건 CRITICAL.
+
+    NO SIGNAL 구분 (관측편향 대응):
+      SCCE는 다크웹·스틸러 채널에 '관측된' 흔적만 볼 수 있다. 어떤 협력사가
+      실제로 침해당했더라도 그 흔적이 공격자 쪽 유통망(재판매·재유출)에
+      노출되지 않았다면 여기서는 보이지 않는다. 그래서 신호가 전혀 없는
+      협력사를 "LOW(안전 확인됨)"로 부르면 "관측 안 됨"과 "실제로 안전함"을
+      혼동시킨다. SCCE는 이 둘을 명시적으로 분리한다:
+        - LOW      : 신호가 있지만 위험도가 낮음(관측됨 + 경미)
+        - NO SIGNAL: 관측된 신호가 전혀 없음(안전 증명 아님 — 관측 공백)
+    """
     if rank_row["counts"]["active_incidents"] > 0:
         return "CRITICAL — 즉시 조치"
+    c = rank_row["counts"]
+    if c["leaked_records"] == 0 and c["infected_machines"] == 0:
+        return "NO SIGNAL — 관측 공백"
     s = rank_row["risk_score"]
     if s >= 15:
         return "HIGH"

@@ -45,6 +45,10 @@ VENDORS = [
     {"name": "가온소재",       "tier": 2, "domains": ["gaon-materials.com"],    "criticality": "복합소재",       "employees": 120},
     {"name": "청우기전",       "tier": 2, "domains": ["chungwoo-elec.co.kr"],   "criticality": "전원공급장치",   "employees": 55},
     {"name": "한결시스템",     "tier": 2, "domains": ["hangyul-sys.com"],       "criticality": "임베디드 SW",     "employees": 33},
+    # [관측편향 데모용] 실제로는 어떤 상태일지 알 수 없는 협력사 — 아래 main()에서
+    # 이 업체로 귀속되는 유출/스틸러 레코드를 의도적으로 전부 제거해 "NO SIGNAL"을
+    # 재현한다. SCCE가 "신호 없음"을 "안전 확인"으로 오독하지 않는다는 것을 보여주기 위함.
+    {"name": "성일방산소재",     "tier": 2, "domains": ["seongil-defense.co.kr"], "criticality": "특수합금 원소재", "employees": 48},
 ]
 
 FIRST_NAMES = ["minjun", "jiwoo", "seoyeon", "hyun", "jae", "eunji", "doyoon",
@@ -286,6 +290,14 @@ def main():
     stealer = build_stealer_logs(rng, vendors)
     stealer.extend(build_decoys(rng, vendors))   # 평가용 함정(정답=비활성)
     campaign = inject_campaign_and_hero(rng, vendors, leaked, stealer)
+
+    # [관측편향 데모용] "성일방산소재"로 귀속된 레코드를 전부 제거 —
+    # 관측 채널(다크웹·스틸러)에 아무 흔적도 없는 상태를 강제로 재현한다.
+    # (이 회사가 실제로 안전한지는 SCCE가 알 수 없다 — 그게 핵심이다.)
+    NO_SIGNAL_VENDOR = "성일방산소재"
+    ns_id = next(v["vendor_id"] for v in vendors if v["name"] == NO_SIGNAL_VENDOR)
+    leaked = [r for r in leaked if r.get("vendor_id") != ns_id]
+    stealer = [s for s in stealer if s.get("vendor_id") != ns_id]
 
     for fname, data in {"vendors.json": vendors,
                         "leaked_credentials.json": leaked,

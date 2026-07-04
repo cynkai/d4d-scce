@@ -118,5 +118,15 @@
     ],
     "criticality": "임베디드 SW",
     "employees": 33
+  },
+  {
+    "vendor_id": "V013",
+    "name": "성일방산소재",
+    "tier": 2,
+    "domains": [
+      "seongil-defense.co.kr"
+    ],
+    "criticality": "특수합금 원소재",
+    "employees": 48
   }
 ]
