@@ -1,0 +1,7 @@
+fastapi>=0.110
+uvicorn[standard]>=0.29
+
+# 파트너(StealthMole) 연동 옵션 — MockAdapter만 쓰면 필요 없음
+python-dotenv>=1.0
+PyJWT>=2.8
+requests>=2.31

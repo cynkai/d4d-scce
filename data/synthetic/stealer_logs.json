@@ -1,0 +1,2078 @@
+[
+  {
+    "log_id": "S00020",
+    "stealer_family": "RedLine",
+    "infection_date": "2026-06-22",
+    "machine_id": "WIN-QA-05",
+    "country": "KR",
+    "vendor_id": "V006",
+    "is_corporate": true,
+    "c2_host": "cdn-update-sync.example",
+    "campaign_id": "CAMP-REDLINE-KR-0714",
+    "threat_actor": "Shadow Chisel",
+    "active_compromise": true,
+    "gt_active": true,
+    "credentials": [
+      {
+        "url": "https://sso.dongbang-sensor.example/adfs/ls",
+        "category": "sso",
+        "username": "yerin.choi@dongbang-sensor.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.dongbang-sensor.example/owa",
+        "category": "webmail",
+        "username": "kanghee.han@dongbang-sensor.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.dongbang-sensor.example/login",
+        "category": "generic",
+        "username": "jae.oh@dongbang-sensor.example",
+        "password_type": "plaintext"
+      }
+    ]
+  },
+  {
+    "log_id": "S00010",
+    "stealer_family": "RedLine",
+    "infection_date": "2026-06-25",
+    "machine_id": "WIN-ENG-22",
+    "country": "KR",
+    "vendor_id": "V003",
+    "is_corporate": true,
+    "c2_host": "cdn-update-sync.example",
+    "campaign_id": "CAMP-REDLINE-KR-0714",
+    "threat_actor": "Shadow Chisel",
+    "active_compromise": true,
+    "gt_active": true,
+    "credentials": [
+      {
+        "url": "https://vpn.sejong-tactcom.example/remote/login",
+        "category": "vpn",
+        "username": "seoyeon.shin@sejong-tactcom.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://sso.sejong-tactcom.example/adfs/ls",
+        "category": "sso",
+        "username": "hana.han@sejong-tactcom.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.sejong-tactcom.example/owa",
+        "category": "webmail",
+        "username": "mira.park@sejong-tactcom.example",
+        "password_type": "plaintext"
+      }
+    ]
+  },
+  {
+    "log_id": "S00000",
+    "stealer_family": "RedLine",
+    "infection_date": "2026-07-03",
+    "machine_id": "WIN-CAD-07",
+    "country": "KR",
+    "vendor_id": "V007",
+    "is_corporate": true,
+    "c2_host": "cdn-update-sync.example",
+    "campaign_id": "CAMP-REDLINE-KR-0714",
+    "threat_actor": "Shadow Chisel",
+    "active_compromise": true,
+    "gt_active": true,
+    "credentials": [
+      {
+        "url": "https://vpn.taesung-pcb.example/remote/login",
+        "category": "vpn",
+        "username": "doyoon.lim@taesung-pcb.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://sso.taesung-pcb.example/adfs/ls",
+        "category": "sso",
+        "username": "seunghyun.park@taesung-pcb.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://console.taesung-pcb.example/login",
+        "category": "cloud_console",
+        "username": "seunghyun.kim@taesung-pcb.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://erp.taesung-pcb.example/admin",
+        "category": "admin_panel",
+        "username": "junho.oh@taesung-pcb.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://git.taesung-pcb.example/users/sign_in",
+        "category": "code_repo",
+        "username": "doyoon.yoon@taesung-pcb.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.taesung-pcb.example/owa",
+        "category": "webmail",
+        "username": "yerin.shin@taesung-pcb.example",
+        "password_type": "plaintext"
+      }
+    ]
+  },
+  {
+    "stealer_family": "RedLine",
+    "infection_date": "2026-02-07",
+    "machine_id": "WIN-2859886",
+    "country": "CN",
+    "vendor_id": null,
+    "is_corporate": false,
+    "c2_host": "198.51.100.44",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://mail.example.com/owa",
+        "category": "webmail",
+        "username": "mira.yoon@example.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/google.com",
+        "category": "saas",
+        "username": "seoyeon.kim@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.google.com/login",
+        "category": "generic",
+        "username": "jae.jang@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/example.com",
+        "category": "saas",
+        "username": "wonjin.cho@example.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.facebook.com/owa",
+        "category": "webmail",
+        "username": "sujin.jung@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.google.com/owa",
+        "category": "webmail",
+        "username": "sujin.cho@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/example.com",
+        "category": "saas",
+        "username": "junho.lee@example.com",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00001"
+  },
+  {
+    "stealer_family": "RedLine",
+    "infection_date": "2025-08-14",
+    "machine_id": "WIN-2739191",
+    "country": "KR",
+    "vendor_id": "V009",
+    "is_corporate": true,
+    "c2_host": "192.0.2.8",
+    "campaign_id": null,
+    "active_compromise": true,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://console.myungsung-fine.example/login",
+        "category": "cloud_console",
+        "username": "minjun.lim@myungsung-fine.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.myungsung-fine.example/owa",
+        "category": "webmail",
+        "username": "seoyeon.jang@myungsung-fine.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.myungsung-fine.example/owa",
+        "category": "webmail",
+        "username": "seunghyun.jang@myungsung-fine.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/myungsung-fine.example",
+        "category": "saas",
+        "username": "minjun.cho@myungsung-fine.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.myungsung-fine.example/owa",
+        "category": "webmail",
+        "username": "sangwoo.kang@myungsung-fine.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://vpn.myungsung-fine.example/remote/login",
+        "category": "vpn",
+        "username": "nari.choi@myungsung-fine.example",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00002"
+  },
+  {
+    "stealer_family": "Lumma",
+    "infection_date": "2026-06-11",
+    "machine_id": "WIN-8942330",
+    "country": "KR",
+    "vendor_id": null,
+    "is_corporate": false,
+    "c2_host": "198.51.100.44",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://portal.example.net/login",
+        "category": "generic",
+        "username": "eunji.shin@example.net",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/facebook.com",
+        "category": "saas",
+        "username": "mira.han@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.google.com/owa",
+        "category": "webmail",
+        "username": "seoyeon.oh@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.google.com/login",
+        "category": "generic",
+        "username": "yerin.choi@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.google.com/owa",
+        "category": "webmail",
+        "username": "jiwoo.kang@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.example.net/login",
+        "category": "generic",
+        "username": "sangwoo.shin@example.net",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00003"
+  },
+  {
+    "stealer_family": "Vidar",
+    "infection_date": "2026-01-02",
+    "machine_id": "WIN-2721307",
+    "country": "KR",
+    "vendor_id": null,
+    "is_corporate": false,
+    "c2_host": "203.0.113.11",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://portal.facebook.com/login",
+        "category": "generic",
+        "username": "hyun.seo@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.facebook.com/login",
+        "category": "generic",
+        "username": "sangwoo.oh@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.facebook.com/login",
+        "category": "generic",
+        "username": "taeho.park@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.example.com/login",
+        "category": "generic",
+        "username": "mira.kang@example.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/facebook.com",
+        "category": "saas",
+        "username": "seoyeon.oh@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.google.com/login",
+        "category": "generic",
+        "username": "hana.lim@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.example.com/owa",
+        "category": "webmail",
+        "username": "yerin.kang@example.com",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00004"
+  },
+  {
+    "stealer_family": "StealC",
+    "infection_date": "2025-08-29",
+    "machine_id": "WIN-3395441",
+    "country": "CN",
+    "vendor_id": null,
+    "is_corporate": false,
+    "c2_host": "192.0.2.8",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://mail.example.net/owa",
+        "category": "webmail",
+        "username": "junho.kang@example.net",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.google.com/login",
+        "category": "generic",
+        "username": "nari.lim@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.facebook.com/login",
+        "category": "generic",
+        "username": "jiwoo.lee@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/example.net",
+        "category": "saas",
+        "username": "sangwoo.kang@example.net",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/example.net",
+        "category": "saas",
+        "username": "eunji.kim@example.net",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00005"
+  },
+  {
+    "stealer_family": "RedLine",
+    "infection_date": "2026-04-30",
+    "machine_id": "WIN-8448065",
+    "country": "KR",
+    "vendor_id": null,
+    "is_corporate": false,
+    "c2_host": "203.0.113.11",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://chat.saas.example/facebook.com",
+        "category": "saas",
+        "username": "nari.cho@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/google.com",
+        "category": "saas",
+        "username": "gitae.park@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/facebook.com",
+        "category": "saas",
+        "username": "nari.kang@facebook.com",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00006"
+  },
+  {
+    "stealer_family": "Vidar",
+    "infection_date": "2025-12-12",
+    "machine_id": "WIN-6361793",
+    "country": "KR",
+    "vendor_id": null,
+    "is_corporate": false,
+    "c2_host": "198.51.100.44",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://portal.google.com/login",
+        "category": "generic",
+        "username": "hyun.kim@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/google.com",
+        "category": "saas",
+        "username": "mira.jang@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.example.org/login",
+        "category": "generic",
+        "username": "hyun.jung@example.org",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.example.org/login",
+        "category": "generic",
+        "username": "junho.choi@example.org",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/facebook.com",
+        "category": "saas",
+        "username": "mira.choi@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.google.com/owa",
+        "category": "webmail",
+        "username": "seoyeon.yoon@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.example.org/owa",
+        "category": "webmail",
+        "username": "junho.lee@example.org",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00007"
+  },
+  {
+    "stealer_family": "Raccoon",
+    "infection_date": "2026-02-05",
+    "machine_id": "WIN-9288312",
+    "country": "KR",
+    "vendor_id": null,
+    "is_corporate": false,
+    "c2_host": "198.51.100.44",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://chat.saas.example/example.org",
+        "category": "saas",
+        "username": "eunji.seo@example.org",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.example.org/login",
+        "category": "generic",
+        "username": "sujin.lee@example.org",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.google.com/owa",
+        "category": "webmail",
+        "username": "sujin.seo@google.com",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00008"
+  },
+  {
+    "stealer_family": "StealC",
+    "infection_date": "2025-09-24",
+    "machine_id": "WIN-3164813",
+    "country": "KR",
+    "vendor_id": null,
+    "is_corporate": false,
+    "c2_host": "203.0.113.11",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://mail.google.com/owa",
+        "category": "webmail",
+        "username": "yerin.cho@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/example.net",
+        "category": "saas",
+        "username": "mira.jang@example.net",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.facebook.com/login",
+        "category": "generic",
+        "username": "bora.lee@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.facebook.com/owa",
+        "category": "webmail",
+        "username": "seoyeon.yoon@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.example.net/login",
+        "category": "generic",
+        "username": "wonjin.kang@example.net",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.example.net/owa",
+        "category": "webmail",
+        "username": "bora.park@example.net",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00009"
+  },
+  {
+    "stealer_family": "RedLine",
+    "infection_date": "2025-10-11",
+    "machine_id": "WIN-6080553",
+    "country": "KR",
+    "vendor_id": null,
+    "is_corporate": false,
+    "c2_host": "203.0.113.11",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://mail.google.com/owa",
+        "category": "webmail",
+        "username": "taeho.kwon@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/google.com",
+        "category": "saas",
+        "username": "nari.jang@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.google.com/login",
+        "category": "generic",
+        "username": "kanghee.choi@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/example.com",
+        "category": "saas",
+        "username": "kanghee.park@example.com",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00010"
+  },
+  {
+    "stealer_family": "Lumma",
+    "infection_date": "2025-09-03",
+    "machine_id": "WIN-7989166",
+    "country": "KR",
+    "vendor_id": "V011",
+    "is_corporate": true,
+    "c2_host": "192.0.2.8",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://chat.saas.example/chungwoo-elec.example",
+        "category": "saas",
+        "username": "taeho.shin@chungwoo-elec.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.google.com/owa",
+        "category": "webmail",
+        "username": "seoyeon.kim@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/facebook.com",
+        "category": "saas",
+        "username": "doyoon.seo@facebook.com",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00011"
+  },
+  {
+    "stealer_family": "Raccoon",
+    "infection_date": "2026-02-05",
+    "machine_id": "WIN-3193891",
+    "country": "KR",
+    "vendor_id": "V011",
+    "is_corporate": true,
+    "c2_host": "192.0.2.8",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://chat.saas.example/chungwoo-elec.example",
+        "category": "saas",
+        "username": "sangwoo.jung@chungwoo-elec.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.chungwoo-elec.example/owa",
+        "category": "webmail",
+        "username": "junho.cho@chungwoo-elec.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/chungwoo-elec.example",
+        "category": "saas",
+        "username": "jae.kang@chungwoo-elec.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.chungwoo-elec.example/login",
+        "category": "generic",
+        "username": "nari.cho@chungwoo-elec.example",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00012"
+  },
+  {
+    "stealer_family": "Vidar",
+    "infection_date": "2026-03-02",
+    "machine_id": "WIN-3679315",
+    "country": "KR",
+    "vendor_id": "V002",
+    "is_corporate": true,
+    "c2_host": "198.51.100.44",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://mail.daeyang-guidance.example/owa",
+        "category": "webmail",
+        "username": "jiwoo.jung@daeyang-guidance.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/facebook.com",
+        "category": "saas",
+        "username": "sujin.shin@facebook.com",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00013"
+  },
+  {
+    "stealer_family": "Vidar",
+    "infection_date": "2026-03-28",
+    "machine_id": "WIN-8895137",
+    "country": "KR",
+    "vendor_id": null,
+    "is_corporate": false,
+    "c2_host": "203.0.113.11",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://chat.saas.example/facebook.com",
+        "category": "saas",
+        "username": "mira.kwon@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.facebook.com/login",
+        "category": "generic",
+        "username": "minjun.lee@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.example.org/login",
+        "category": "generic",
+        "username": "junho.choi@example.org",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.example.org/owa",
+        "category": "webmail",
+        "username": "nari.kim@example.org",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.facebook.com/owa",
+        "category": "webmail",
+        "username": "mira.lim@facebook.com",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00014"
+  },
+  {
+    "stealer_family": "StealC",
+    "infection_date": "2026-04-26",
+    "machine_id": "WIN-6587495",
+    "country": "KR",
+    "vendor_id": "V002",
+    "is_corporate": true,
+    "c2_host": "198.51.100.44",
+    "campaign_id": null,
+    "active_compromise": true,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://mail.daeyang-guidance.example/owa",
+        "category": "webmail",
+        "username": "sangwoo.kim@daeyang-guidance.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.facebook.com/owa",
+        "category": "webmail",
+        "username": "seunghyun.jung@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/daeyang-guidance.example",
+        "category": "saas",
+        "username": "kanghee.shin@daeyang-guidance.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/daeyang-guidance.example",
+        "category": "saas",
+        "username": "hyun.park@daeyang-guidance.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.facebook.com/login",
+        "category": "generic",
+        "username": "taeho.jang@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.google.com/owa",
+        "category": "webmail",
+        "username": "gitae.jang@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://vpn.daeyang-guidance.example/remote/login",
+        "category": "vpn",
+        "username": "jae.oh@daeyang-guidance.example",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00015"
+  },
+  {
+    "stealer_family": "Raccoon",
+    "infection_date": "2025-10-13",
+    "machine_id": "WIN-6161977",
+    "country": "KR",
+    "vendor_id": "V003",
+    "is_corporate": true,
+    "c2_host": "203.0.113.11",
+    "campaign_id": null,
+    "active_compromise": true,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://portal.google.com/login",
+        "category": "generic",
+        "username": "sangwoo.lim@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.sejong-tactcom.example/login",
+        "category": "generic",
+        "username": "taeho.jang@sejong-tactcom.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/facebook.com",
+        "category": "saas",
+        "username": "bora.jung@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://erp.sejong-tactcom.example/admin",
+        "category": "admin_panel",
+        "username": "hyun.cho@sejong-tactcom.example",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00016"
+  },
+  {
+    "stealer_family": "RedLine",
+    "infection_date": "2025-09-01",
+    "machine_id": "WIN-2843740",
+    "country": "KR",
+    "vendor_id": null,
+    "is_corporate": false,
+    "c2_host": "198.51.100.44",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://chat.saas.example/example.org",
+        "category": "saas",
+        "username": "bora.choi@example.org",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/google.com",
+        "category": "saas",
+        "username": "bora.yoon@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.example.org/owa",
+        "category": "webmail",
+        "username": "gitae.seo@example.org",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.google.com/login",
+        "category": "generic",
+        "username": "sujin.kim@google.com",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00017"
+  },
+  {
+    "stealer_family": "Lumma",
+    "infection_date": "2025-12-04",
+    "machine_id": "WIN-6943949",
+    "country": "KR",
+    "vendor_id": "V007",
+    "is_corporate": true,
+    "c2_host": "192.0.2.8",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://portal.taesung-pcb.example/login",
+        "category": "generic",
+        "username": "jiwoo.oh@taesung-pcb.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.taesung-pcb.example/login",
+        "category": "generic",
+        "username": "mira.jang@taesung-pcb.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.taesung-pcb.example/login",
+        "category": "generic",
+        "username": "seunghyun.kang@taesung-pcb.example",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00018"
+  },
+  {
+    "stealer_family": "Vidar",
+    "infection_date": "2025-08-25",
+    "machine_id": "WIN-9049765",
+    "country": "KR",
+    "vendor_id": null,
+    "is_corporate": false,
+    "c2_host": "198.51.100.44",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://mail.facebook.com/owa",
+        "category": "webmail",
+        "username": "seunghyun.jung@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.facebook.com/owa",
+        "category": "webmail",
+        "username": "yerin.oh@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.example.org/owa",
+        "category": "webmail",
+        "username": "mira.kang@example.org",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00019"
+  },
+  {
+    "stealer_family": "Vidar",
+    "infection_date": "2026-02-06",
+    "machine_id": "WIN-5557052",
+    "country": "KR",
+    "vendor_id": null,
+    "is_corporate": false,
+    "c2_host": "203.0.113.11",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://chat.saas.example/example.org",
+        "category": "saas",
+        "username": "sangwoo.kwon@example.org",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.facebook.com/login",
+        "category": "generic",
+        "username": "jae.jung@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.facebook.com/owa",
+        "category": "webmail",
+        "username": "seoyeon.kang@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.example.org/login",
+        "category": "generic",
+        "username": "kanghee.oh@example.org",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.google.com/login",
+        "category": "generic",
+        "username": "doyoon.shin@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/facebook.com",
+        "category": "saas",
+        "username": "seunghyun.oh@facebook.com",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00020"
+  },
+  {
+    "stealer_family": "Lumma",
+    "infection_date": "2026-03-01",
+    "machine_id": "WIN-9978365",
+    "country": "KR",
+    "vendor_id": null,
+    "is_corporate": false,
+    "c2_host": "203.0.113.11",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://chat.saas.example/google.com",
+        "category": "saas",
+        "username": "sujin.kim@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.facebook.com/owa",
+        "category": "webmail",
+        "username": "taeho.oh@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.google.com/login",
+        "category": "generic",
+        "username": "jae.kim@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/google.com",
+        "category": "saas",
+        "username": "hana.han@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.facebook.com/login",
+        "category": "generic",
+        "username": "doyoon.seo@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.facebook.com/login",
+        "category": "generic",
+        "username": "yerin.han@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.google.com/owa",
+        "category": "webmail",
+        "username": "bora.choi@google.com",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00021"
+  },
+  {
+    "stealer_family": "Lumma",
+    "infection_date": "2025-12-02",
+    "machine_id": "WIN-6006190",
+    "country": "KR",
+    "vendor_id": null,
+    "is_corporate": false,
+    "c2_host": "203.0.113.11",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://portal.facebook.com/login",
+        "category": "generic",
+        "username": "eunji.kwon@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/facebook.com",
+        "category": "saas",
+        "username": "jiwoo.kim@facebook.com",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00022"
+  },
+  {
+    "stealer_family": "Vidar",
+    "infection_date": "2025-11-13",
+    "machine_id": "WIN-6429135",
+    "country": "RU",
+    "vendor_id": "V006",
+    "is_corporate": true,
+    "c2_host": "192.0.2.8",
+    "campaign_id": null,
+    "active_compromise": true,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://mail.dongbang-sensor.example/owa",
+        "category": "webmail",
+        "username": "junho.jung@dongbang-sensor.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://sso.dongbang-sensor.example/adfs/ls",
+        "category": "sso",
+        "username": "junho.han@dongbang-sensor.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/dongbang-sensor.example",
+        "category": "saas",
+        "username": "taeho.seo@dongbang-sensor.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.dongbang-sensor.example/owa",
+        "category": "webmail",
+        "username": "eunji.lim@dongbang-sensor.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.facebook.com/login",
+        "category": "generic",
+        "username": "wonjin.kang@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.dongbang-sensor.example/owa",
+        "category": "webmail",
+        "username": "jae.yoon@dongbang-sensor.example",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00023"
+  },
+  {
+    "stealer_family": "Lumma",
+    "infection_date": "2025-11-17",
+    "machine_id": "WIN-4705235",
+    "country": "KR",
+    "vendor_id": "V007",
+    "is_corporate": true,
+    "c2_host": "198.51.100.44",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://mail.taesung-pcb.example/owa",
+        "category": "webmail",
+        "username": "kanghee.han@taesung-pcb.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/taesung-pcb.example",
+        "category": "saas",
+        "username": "hyun.yoon@taesung-pcb.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/taesung-pcb.example",
+        "category": "saas",
+        "username": "yerin.oh@taesung-pcb.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.taesung-pcb.example/login",
+        "category": "generic",
+        "username": "nari.lim@taesung-pcb.example",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00024"
+  },
+  {
+    "stealer_family": "StealC",
+    "infection_date": "2025-06-16",
+    "machine_id": "WIN-9480665",
+    "country": "KR",
+    "vendor_id": "V003",
+    "is_corporate": true,
+    "c2_host": "192.0.2.8",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://portal.sejong-tactcom.example/login",
+        "category": "generic",
+        "username": "seunghyun.seo@sejong-tactcom.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.google.com/owa",
+        "category": "webmail",
+        "username": "gitae.shin@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/facebook.com",
+        "category": "saas",
+        "username": "wonjin.oh@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.sejong-tactcom.example/owa",
+        "category": "webmail",
+        "username": "jiwoo.shin@sejong-tactcom.example",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00025"
+  },
+  {
+    "stealer_family": "Vidar",
+    "infection_date": "2025-10-10",
+    "machine_id": "WIN-9610869",
+    "country": "KR",
+    "vendor_id": "V003",
+    "is_corporate": true,
+    "c2_host": "198.51.100.44",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://chat.saas.example/sejong-tactcom.example",
+        "category": "saas",
+        "username": "mira.lee@sejong-tactcom.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.google.com/login",
+        "category": "generic",
+        "username": "junho.park@google.com",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00026"
+  },
+  {
+    "stealer_family": "StealC",
+    "infection_date": "2025-07-24",
+    "machine_id": "WIN-7416943",
+    "country": "KR",
+    "vendor_id": null,
+    "is_corporate": false,
+    "c2_host": "198.51.100.44",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://mail.facebook.com/owa",
+        "category": "webmail",
+        "username": "kanghee.shin@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.example.org/owa",
+        "category": "webmail",
+        "username": "doyoon.lim@example.org",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.google.com/owa",
+        "category": "webmail",
+        "username": "hana.kang@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/google.com",
+        "category": "saas",
+        "username": "seunghyun.kim@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.facebook.com/owa",
+        "category": "webmail",
+        "username": "jiwoo.jung@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.google.com/login",
+        "category": "generic",
+        "username": "jae.seo@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/example.org",
+        "category": "saas",
+        "username": "hana.kang@example.org",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00027"
+  },
+  {
+    "stealer_family": "StealC",
+    "infection_date": "2026-05-23",
+    "machine_id": "WIN-4162177",
+    "country": "RU",
+    "vendor_id": null,
+    "is_corporate": false,
+    "c2_host": "192.0.2.8",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://chat.saas.example/google.com",
+        "category": "saas",
+        "username": "nari.lee@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.example.net/owa",
+        "category": "webmail",
+        "username": "sangwoo.jang@example.net",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.example.net/owa",
+        "category": "webmail",
+        "username": "sujin.shin@example.net",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.google.com/owa",
+        "category": "webmail",
+        "username": "yerin.yoon@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/example.net",
+        "category": "saas",
+        "username": "seunghyun.cho@example.net",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/facebook.com",
+        "category": "saas",
+        "username": "sujin.choi@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.facebook.com/login",
+        "category": "generic",
+        "username": "jae.jung@facebook.com",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00028"
+  },
+  {
+    "stealer_family": "RedLine",
+    "infection_date": "2025-07-30",
+    "machine_id": "WIN-4928578",
+    "country": "KR",
+    "vendor_id": null,
+    "is_corporate": false,
+    "c2_host": "198.51.100.44",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://mail.google.com/owa",
+        "category": "webmail",
+        "username": "doyoon.lee@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.example.com/owa",
+        "category": "webmail",
+        "username": "jiwoo.yoon@example.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/example.com",
+        "category": "saas",
+        "username": "jiwoo.choi@example.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/google.com",
+        "category": "saas",
+        "username": "sangwoo.yoon@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.example.com/owa",
+        "category": "webmail",
+        "username": "doyoon.seo@example.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.google.com/owa",
+        "category": "webmail",
+        "username": "wonjin.jung@google.com",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00029"
+  },
+  {
+    "stealer_family": "Raccoon",
+    "infection_date": "2025-08-31",
+    "machine_id": "WIN-9315137",
+    "country": "KR",
+    "vendor_id": null,
+    "is_corporate": false,
+    "c2_host": "192.0.2.8",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://mail.facebook.com/owa",
+        "category": "webmail",
+        "username": "jae.han@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/google.com",
+        "category": "saas",
+        "username": "hana.jung@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.google.com/login",
+        "category": "generic",
+        "username": "seunghyun.lim@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/google.com",
+        "category": "saas",
+        "username": "hana.jang@google.com",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00030"
+  },
+  {
+    "stealer_family": "StealC",
+    "infection_date": "2025-10-08",
+    "machine_id": "WIN-2221118",
+    "country": "KR",
+    "vendor_id": "V011",
+    "is_corporate": true,
+    "c2_host": "198.51.100.44",
+    "campaign_id": null,
+    "active_compromise": true,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://console.chungwoo-elec.example/login",
+        "category": "cloud_console",
+        "username": "eunji.seo@chungwoo-elec.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.google.com/owa",
+        "category": "webmail",
+        "username": "yerin.shin@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.google.com/login",
+        "category": "generic",
+        "username": "seunghyun.cho@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/chungwoo-elec.example",
+        "category": "saas",
+        "username": "jae.cho@chungwoo-elec.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/chungwoo-elec.example",
+        "category": "saas",
+        "username": "seoyeon.kwon@chungwoo-elec.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/chungwoo-elec.example",
+        "category": "saas",
+        "username": "doyoon.kim@chungwoo-elec.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/chungwoo-elec.example",
+        "category": "saas",
+        "username": "jiwoo.shin@chungwoo-elec.example",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00031"
+  },
+  {
+    "stealer_family": "Raccoon",
+    "infection_date": "2026-03-14",
+    "machine_id": "WIN-4431161",
+    "country": "KR",
+    "vendor_id": null,
+    "is_corporate": false,
+    "c2_host": "198.51.100.44",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://portal.facebook.com/login",
+        "category": "generic",
+        "username": "minjun.choi@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.example.org/owa",
+        "category": "webmail",
+        "username": "hyun.oh@example.org",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.google.com/login",
+        "category": "generic",
+        "username": "gitae.oh@google.com",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00032"
+  },
+  {
+    "stealer_family": "Vidar",
+    "infection_date": "2025-12-21",
+    "machine_id": "WIN-5122665",
+    "country": "KR",
+    "vendor_id": "V006",
+    "is_corporate": true,
+    "c2_host": "198.51.100.44",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://portal.facebook.com/login",
+        "category": "generic",
+        "username": "nari.jang@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.google.com/login",
+        "category": "generic",
+        "username": "mira.seo@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.facebook.com/owa",
+        "category": "webmail",
+        "username": "taeho.cho@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/dongbang-sensor.example",
+        "category": "saas",
+        "username": "jae.kim@dongbang-sensor.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/dongbang-sensor.example",
+        "category": "saas",
+        "username": "hana.jung@dongbang-sensor.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.dongbang-sensor.example/login",
+        "category": "generic",
+        "username": "bora.shin@dongbang-sensor.example",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00033"
+  },
+  {
+    "stealer_family": "Vidar",
+    "infection_date": "2026-02-22",
+    "machine_id": "WIN-3533857",
+    "country": "KR",
+    "vendor_id": null,
+    "is_corporate": false,
+    "c2_host": "198.51.100.44",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://chat.saas.example/example.org",
+        "category": "saas",
+        "username": "mira.yoon@example.org",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.example.org/owa",
+        "category": "webmail",
+        "username": "nari.park@example.org",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.example.org/owa",
+        "category": "webmail",
+        "username": "seunghyun.yoon@example.org",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.example.org/owa",
+        "category": "webmail",
+        "username": "jiwoo.jang@example.org",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.google.com/owa",
+        "category": "webmail",
+        "username": "jiwoo.seo@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.facebook.com/owa",
+        "category": "webmail",
+        "username": "jae.shin@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/google.com",
+        "category": "saas",
+        "username": "seoyeon.oh@google.com",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00034"
+  },
+  {
+    "stealer_family": "RedLine",
+    "infection_date": "2025-08-21",
+    "machine_id": "WIN-5080351",
+    "country": "VN",
+    "vendor_id": "V006",
+    "is_corporate": true,
+    "c2_host": "192.0.2.8",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://portal.dongbang-sensor.example/login",
+        "category": "generic",
+        "username": "mira.kim@dongbang-sensor.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.dongbang-sensor.example/owa",
+        "category": "webmail",
+        "username": "minjun.jang@dongbang-sensor.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/facebook.com",
+        "category": "saas",
+        "username": "minjun.jang@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/facebook.com",
+        "category": "saas",
+        "username": "eunji.lee@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/google.com",
+        "category": "saas",
+        "username": "sujin.choi@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.facebook.com/login",
+        "category": "generic",
+        "username": "kanghee.seo@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.dongbang-sensor.example/login",
+        "category": "generic",
+        "username": "junho.lim@dongbang-sensor.example",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00035"
+  },
+  {
+    "stealer_family": "RedLine",
+    "infection_date": "2025-08-03",
+    "machine_id": "WIN-8279795",
+    "country": "KR",
+    "vendor_id": "V011",
+    "is_corporate": true,
+    "c2_host": "192.0.2.8",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://chat.saas.example/chungwoo-elec.example",
+        "category": "saas",
+        "username": "mira.kim@chungwoo-elec.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/google.com",
+        "category": "saas",
+        "username": "seoyeon.yoon@google.com",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00036"
+  },
+  {
+    "stealer_family": "Raccoon",
+    "infection_date": "2026-06-12",
+    "machine_id": "WIN-3419132",
+    "country": "KR",
+    "vendor_id": "V002",
+    "is_corporate": true,
+    "c2_host": "203.0.113.11",
+    "campaign_id": null,
+    "active_compromise": true,
+    "gt_active": true,
+    "credentials": [
+      {
+        "url": "https://chat.saas.example/daeyang-guidance.example",
+        "category": "saas",
+        "username": "mira.jung@daeyang-guidance.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://erp.daeyang-guidance.example/admin",
+        "category": "admin_panel",
+        "username": "seunghyun.lim@daeyang-guidance.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.facebook.com/owa",
+        "category": "webmail",
+        "username": "minjun.choi@facebook.com",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00037"
+  },
+  {
+    "stealer_family": "RedLine",
+    "infection_date": "2026-01-31",
+    "machine_id": "WIN-6475691",
+    "country": "KR",
+    "vendor_id": null,
+    "is_corporate": false,
+    "c2_host": "203.0.113.11",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://mail.example.net/owa",
+        "category": "webmail",
+        "username": "sangwoo.han@example.net",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/facebook.com",
+        "category": "saas",
+        "username": "sangwoo.seo@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/google.com",
+        "category": "saas",
+        "username": "seoyeon.jang@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/facebook.com",
+        "category": "saas",
+        "username": "jiwoo.lee@facebook.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.google.com/login",
+        "category": "generic",
+        "username": "seoyeon.kang@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/example.net",
+        "category": "saas",
+        "username": "gitae.cho@example.net",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00038"
+  },
+  {
+    "stealer_family": "StealC",
+    "infection_date": "2026-03-09",
+    "machine_id": "WIN-2732967",
+    "country": "KR",
+    "vendor_id": "V008",
+    "is_corporate": true,
+    "c2_host": "198.51.100.44",
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://portal.google.com/login",
+        "category": "generic",
+        "username": "bora.han@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.woojin-heat.example/login",
+        "category": "generic",
+        "username": "sujin.oh@woojin-heat.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.woojin-heat.example/login",
+        "category": "generic",
+        "username": "jae.oh@woojin-heat.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.woojin-heat.example/owa",
+        "category": "webmail",
+        "username": "minjun.jung@woojin-heat.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.woojin-heat.example/owa",
+        "category": "webmail",
+        "username": "jae.lee@woojin-heat.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/woojin-heat.example",
+        "category": "saas",
+        "username": "wonjin.cho@woojin-heat.example",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00039"
+  },
+  {
+    "stealer_family": "Raccoon",
+    "infection_date": "2025-08-31",
+    "machine_id": "WIN-5137094",
+    "country": "KR",
+    "vendor_id": "V002",
+    "is_corporate": true,
+    "c2_host": "198.51.100.44",
+    "campaign_id": null,
+    "active_compromise": true,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://mail.daeyang-guidance.example/owa",
+        "category": "webmail",
+        "username": "seunghyun.kwon@daeyang-guidance.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.daeyang-guidance.example/owa",
+        "category": "webmail",
+        "username": "wonjin.park@daeyang-guidance.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.google.com/owa",
+        "category": "webmail",
+        "username": "kanghee.jung@google.com",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://sso.daeyang-guidance.example/adfs/ls",
+        "category": "sso",
+        "username": "hana.jung@daeyang-guidance.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://mail.daeyang-guidance.example/owa",
+        "category": "webmail",
+        "username": "nari.jung@daeyang-guidance.example",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "S00040"
+  },
+  {
+    "stealer_family": "RedLine",
+    "infection_date": "2026-05-31",
+    "machine_id": "WIN-DECOY-STALE34",
+    "country": "KR",
+    "vendor_id": "V008",
+    "is_corporate": true,
+    "c2_host": null,
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://vpn.woojin-heat.example/remote/login",
+        "category": "vpn",
+        "username": "gitae.lim@woojin-heat.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://sso.woojin-heat.example/adfs/ls",
+        "category": "sso",
+        "username": "doyoon.yoon@woojin-heat.example",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "D00001"
+  },
+  {
+    "stealer_family": "Raccoon",
+    "infection_date": "2026-05-24",
+    "machine_id": "WIN-DECOY-STALE41",
+    "country": "KR",
+    "vendor_id": "V003",
+    "is_corporate": true,
+    "c2_host": null,
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://vpn.sejong-tactcom.example/remote/login",
+        "category": "vpn",
+        "username": "yerin.kim@sejong-tactcom.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://sso.sejong-tactcom.example/adfs/ls",
+        "category": "sso",
+        "username": "sangwoo.kang@sejong-tactcom.example",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "D00002"
+  },
+  {
+    "stealer_family": "Raccoon",
+    "infection_date": "2026-05-07",
+    "machine_id": "WIN-DECOY-STALE58",
+    "country": "KR",
+    "vendor_id": "V007",
+    "is_corporate": true,
+    "c2_host": null,
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://vpn.taesung-pcb.example/remote/login",
+        "category": "vpn",
+        "username": "taeho.yoon@taesung-pcb.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://sso.taesung-pcb.example/adfs/ls",
+        "category": "sso",
+        "username": "taeho.cho@taesung-pcb.example",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "D00003"
+  },
+  {
+    "stealer_family": "Vidar",
+    "infection_date": "2026-07-01",
+    "machine_id": "WIN-DECOY-LOW3",
+    "country": "KR",
+    "vendor_id": "V003",
+    "is_corporate": true,
+    "c2_host": null,
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://mail.sejong-tactcom.example/owa",
+        "category": "webmail",
+        "username": "yerin.kang@sejong-tactcom.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/sejong-tactcom.example",
+        "category": "saas",
+        "username": "gitae.oh@sejong-tactcom.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.sejong-tactcom.example/login",
+        "category": "generic",
+        "username": "doyoon.yoon@sejong-tactcom.example",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "D00004"
+  },
+  {
+    "stealer_family": "Lumma",
+    "infection_date": "2026-06-26",
+    "machine_id": "WIN-DECOY-LOW8",
+    "country": "KR",
+    "vendor_id": "V003",
+    "is_corporate": true,
+    "c2_host": null,
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://mail.sejong-tactcom.example/owa",
+        "category": "webmail",
+        "username": "sangwoo.kang@sejong-tactcom.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/sejong-tactcom.example",
+        "category": "saas",
+        "username": "yerin.oh@sejong-tactcom.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.sejong-tactcom.example/login",
+        "category": "generic",
+        "username": "mira.lim@sejong-tactcom.example",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "D00005"
+  },
+  {
+    "stealer_family": "Raccoon",
+    "infection_date": "2026-06-19",
+    "machine_id": "WIN-DECOY-LOW15",
+    "country": "KR",
+    "vendor_id": "V006",
+    "is_corporate": true,
+    "c2_host": null,
+    "campaign_id": null,
+    "active_compromise": false,
+    "gt_active": false,
+    "credentials": [
+      {
+        "url": "https://mail.dongbang-sensor.example/owa",
+        "category": "webmail",
+        "username": "sangwoo.jung@dongbang-sensor.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://chat.saas.example/dongbang-sensor.example",
+        "category": "saas",
+        "username": "sangwoo.kang@dongbang-sensor.example",
+        "password_type": "plaintext"
+      },
+      {
+        "url": "https://portal.dongbang-sensor.example/login",
+        "category": "generic",
+        "username": "hyun.kwon@dongbang-sensor.example",
+        "password_type": "plaintext"
+      }
+    ],
+    "log_id": "D00006"
+  }
+]

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCCE · 방산 공급망 조기경보 보안관제 콘솔</title>
+<link rel="stylesheet" href="styles.css?v=16">
+</head>
+<body>
+
+<header class="cmdbar">
+  <span class="view-crumb" id="view-crumb">개요</span>
+  <div class="spacer"></div>
+  <button class="tag cmdk-hint" id="cmdk-open" type="button"><kbd>⌘</kbd><kbd>K</kbd> 빠른 이동</button>
+  <span class="opsclock mono" id="ops-clock">--:--:--</span>
+  <span class="tag src-mock" id="tag-source">SOURCE: MOCK</span>
+  <span class="user-chip" id="user-chip" style="display:none"><span class="av" id="user-av">A</span><span id="user-name"></span></span>
+  <button class="logout-btn" id="btn-logout" style="display:none">로그아웃</button>
+</header>
+
+<div class="app">
+  <!-- left nav rail -->
+  <nav class="rail">
+    <div class="rail-brand">
+      <span class="beacon" title="조기경보 가동중"></span>
+      <div>
+        <h1>SCCE</h1>
+        <div class="sub" id="meta-line">방산 공급망 자격증명 노출 조기경보</div>
+      </div>
+    </div>
+    <div class="nav-indicator" id="nav-indicator" aria-hidden="true"></div>
+    <button class="nav active" data-view="overview">
+      <span class="ic">▚</span><span class="lb">개요</span></button>
+    <button class="nav" data-view="siem">
+      <span class="ic">≣</span><span class="lb">SIEM</span><span class="nav-badge live-badge" id="nav-siem-badge">●</span></button>
+    <button class="nav" data-view="triage">
+      <span class="ic">◈</span><span class="lb">인시던트 대응</span><span class="nav-badge" id="nav-triage-badge"></span></button>
+    <button class="nav" data-view="investigate">
+      <span class="ic">⌖</span><span class="lb">조사</span></button>
+    <button class="nav" data-view="brief">
+      <span class="ic">▤</span><span class="lb">보고서·탐지룰</span></button>
+    <div class="rail-foot">
+      <div class="eyebrow">D4D · T2 #12</div>
+      <div class="rail-note">SCCE-OPS<br>합성/공개 데이터</div>
+    </div>
+  </nav>
+
+  <main class="wrap">
+
+    <!-- =============== OVERVIEW =============== -->
+    <section id="view-overview" class="view">
+      <section class="mission-strip bracket-frame" id="mission-strip">
+        <div class="ms-text">
+          <div class="eyebrow">DEMO THESIS · WHAT THIS SYSTEM PROVES</div>
+          <h2 id="mission-claim">태성회로 침해 8일 전, 동일 RedLine+C2 공급망 캠페인 조기 탐지</h2>
+          <p id="mission-sub">유출 자격증명과 스틸러 감염기기를 협력사 도메인 기준으로 상관해 “단순 노출”과 “지금 뚫리는 중”을 구분합니다.</p>
+          <div class="mission-pill" id="mission-scope">합성/가공 데이터 · 오프라인 재현</div>
+        </div>
+        <div class="ms-hero" id="ms-hero"></div>
+      </section>
+
+      <section class="kpis" id="kpis"></section>
+
+      <section class="demo-flow" id="demo-flow">
+        <div class="flow-card hot"><b>1</b><span>8일 조기경보</span><small>동일 RedLine+C2 확산을 먼저 포착</small></div>
+        <div class="flow-card"><b>2</b><span>활성 침해 판정</span><small>VPN·SSO·Admin·Cloud·Repo HIGH 크리덴셜</small></div>
+        <div class="flow-card"><b>3</b><span>캠페인 상관</span><small>개별 유출이 아닌 공급망 표적 작전</small></div>
+        <div class="flow-card"><b>4</b><span>초동 대응</span><small>SLA·담당·조치 통보문으로 연결</small></div>
+        <div class="flow-card"><b>5</b><span>보고서·탐지룰</span><small>브리프·IOC·Sigma·차단 리스트 산출</small></div>
+      </section>
+
+      <section class="panel replay-panel bracket-frame" id="replay-panel" style="margin-bottom:16px">
+        <div class="head">
+          <h2>공격 타임라인 · 조기경보 근거</h2>
+          <span class="count" id="replay-lead"></span>
+          <div class="spacer" style="flex:1"></div>
+          <span class="eyebrow">ATTACK TIMELINE · WHY THIS IS EARLY WARNING</span>
+        </div>
+        <div class="replay-body">
+          <p class="replay-intro" id="replay-intro"></p>
+          <div class="replay-controls">
+            <button class="rbtn" id="replay-play" aria-label="재생">▶</button>
+            <input type="range" id="replay-scrub" min="0" value="0" step="1">
+            <span class="replay-date mono" id="replay-date">—</span>
+          </div>
+          <svg id="replay-spark" viewBox="0 0 1000 120" preserveAspectRatio="none"></svg>
+          <div class="replay-foot">
+            <div class="replay-stats" id="replay-stats"></div>
+            <div class="replay-ew" id="replay-ew"></div>
+          </div>
+          <div class="replay-ticker" id="replay-ticker"></div>
+        </div>
+      </section>
+
+      <section class="panel forecast-panel bracket-frame" id="forecast-panel" style="margin-bottom:16px">
+        <div class="head">
+          <h2>다음 표적 확산 예측</h2>
+          <span class="count" id="forecast-spread"></span>
+          <div class="spacer" style="flex:1"></div>
+          <span class="eyebrow">PREDICTIVE · WHO GETS HIT NEXT</span>
+        </div>
+        <div class="body" id="forecast-body" style="padding:14px 16px"></div>
+      </section>
+
+      <section class="grid-main">
+        <div class="panel">
+          <div class="head">
+            <h2>협력사 위험 순위</h2>
+            <span class="count" id="rank-count"></span>
+            <div class="spacer" style="flex:1"></div>
+            <span class="eyebrow">RISK · CONFIDENCE · MITRE</span>
+          </div>
+          <div class="siem-toolbar rank-toolbar">
+            <div class="siem-filters" id="rank-status-filters"></div>
+            <input class="siem-search" id="rank-search" placeholder="협력사명 검색…">
+            <select class="rank-sort" id="rank-sort">
+              <option value="score_desc">점수 높은순</option>
+              <option value="score_asc">점수 낮은순</option>
+              <option value="name">이름순</option>
+            </select>
+          </div>
+          <div class="body" id="rank-body"></div>
+        </div>
+        <div class="panel detail">
+          <div class="head"><h2>업체 상세 · 근거</h2><span class="count" id="detail-hint">행을 선택하세요</span></div>
+          <div class="body" id="detail-body">
+            <div class="detail-empty">좌측에서 협력사를 선택하면<br>탐지 근거·타임라인·통보문이 표시됩니다.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid-lower">
+        <div class="panel">
+          <div class="head"><h2>조율된 공급망 캠페인</h2><span class="count" id="camp-count"></span></div>
+          <div class="body" id="camp-body"></div>
+        </div>
+        <div class="panel">
+          <div class="head"><h2>위협 상관 그래프</h2><span class="eyebrow">ACTOR · CAMPAIGN · C2 · VENDOR</span></div>
+          <svg id="graph" viewBox="0 0 640 340" preserveAspectRatio="xMidYMid meet"></svg>
+          <div class="legend">
+            <span><i style="background:var(--critical)"></i>행위자</span>
+            <span><i style="background:var(--amber)"></i>캠페인</span>
+            <span><i style="background:var(--medium)"></i>C2</span>
+            <span><i style="background:var(--low)"></i>협력사</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid-tables">
+        <div class="panel">
+          <div class="head"><h2>MITRE ATT&amp;CK 관측 기법</h2><span class="count" id="mitre-count"></span></div>
+          <table class="tbl" id="mitre-tbl"></table>
+        </div>
+        <div class="panel">
+          <div class="head"><h2>조기경보 상태</h2><span class="eyebrow">EARLY WARNING</span></div>
+          <div class="body" id="ew-summary" style="padding:16px"></div>
+        </div>
+      </section>
+
+      <div class="foot" id="foot"></div>
+    </section>
+
+    <!-- =============== SIEM =============== -->
+    <section id="view-siem" class="view hidden">
+      <div class="view-head">
+        <div class="siem-title-wrap">
+          <div class="eyebrow">SECURITY EVENT STREAM · COLLECT → DETECT</div>
+          <h2 class="view-title">SIEM · 보안 이벤트 스트림 <span class="live-dot" id="siem-live-dot">● LIVE</span></h2>
+        </div>
+        <div class="brief-actions">
+          <button class="btn2" id="siem-play">▶ 라이브 재생</button>
+        </div>
+      </div>
+      <div class="siem-stats" id="siem-stats"></div>
+      <div class="siem-toolbar">
+        <div class="siem-filters" id="siem-sev-filters"></div>
+        <div class="siem-filters" id="siem-src-filters"></div>
+        <input class="siem-search" id="siem-search" placeholder="검색 (업체·룰·메시지·C2…)">
+      </div>
+      <div class="panel">
+        <div class="head"><h2>이벤트 로그</h2><span class="count" id="siem-count"></span>
+          <div class="spacer" style="flex:1"></div><span class="eyebrow" id="siem-window"></span></div>
+        <div class="siem-log" id="siem-log"></div>
+      </div>
+    </section>
+
+    <!-- =============== TRIAGE =============== -->
+    <section id="view-triage" class="view hidden">
+      <div class="view-head">
+        <div><div class="eyebrow">INCIDENT RESPONSE</div><h2 class="view-title">인시던트 대응 큐</h2></div>
+        <div class="triage-stats" id="triage-stats"></div>
+      </div>
+      <div class="triage-list" id="triage-list"></div>
+    </section>
+
+    <!-- =============== INVESTIGATE =============== -->
+    <section id="view-investigate" class="view hidden">
+      <div class="view-head">
+        <div><div class="eyebrow">INVESTIGATION</div><h2 class="view-title">엔티티 조사 · 피벗</h2></div>
+      </div>
+      <div class="invest-grid">
+        <div class="panel">
+          <div class="head"><h2>엔티티</h2><span class="count" id="entity-count"></span></div>
+          <div class="body" id="entity-list"></div>
+        </div>
+        <div class="panel">
+          <div class="head"><h2>상세 · 연결 · 설명가능성</h2><span class="count" id="invest-hint">엔티티를 선택하세요</span></div>
+          <div class="body" id="invest-detail">
+            <div class="detail-empty">좌측에서 엔티티(캠페인·C2·행위자·협력사)를<br>선택하면 연결 관계와 판정 근거가 표시됩니다.</div>
+          </div>
+        </div>
+      </div>
+
+      <section class="grid-lower" style="margin-top:16px">
+        <div class="panel">
+          <div class="head"><h2>공급망 횡단 상관</h2><span class="count" id="xlink-count"></span>
+            <div class="spacer" style="flex:1"></div><span class="eyebrow">CREDENTIAL REUSE · SHARED HOST</span></div>
+          <div class="body" id="xlink-body" style="padding:12px"></div>
+        </div>
+        <div class="panel">
+          <div class="head"><h2>협력사 사칭(룩얼라이크) 도메인</h2><span class="count" id="lookalike-count"></span>
+            <div class="spacer" style="flex:1"></div><span class="eyebrow">TYPOSQUAT</span></div>
+          <div class="body" id="lookalike-body" style="padding:12px"></div>
+        </div>
+      </section>
+    </section>
+
+    <!-- =============== REPORT / IOC / RULES =============== -->
+    <section id="view-brief" class="view hidden">
+      <div class="view-head">
+        <div><div class="eyebrow">INTELLIGENCE PRODUCT · DETECTION PACKAGE</div><h2 class="view-title">보고서 · IOC · 탐지룰</h2></div>
+        <div class="brief-actions">
+          <button class="btn2" id="brief-copy">브리프 복사</button>
+          <button class="btn2" id="brief-print">인쇄 / PDF</button>
+          <button class="btn2" data-export="sigma">Sigma 룰</button>
+          <button class="btn2" data-export="blocklist">차단 리스트</button>
+          <button class="btn2" data-export="stix">STIX(JSON)</button>
+        </div>
+      </div>
+      <div class="report-grid">
+        <div class="panel"><div class="body" id="brief-body"></div></div>
+        <div class="panel">
+          <div class="head"><h2>내보내기 미리보기</h2><button class="btn2" id="export-copy" style="margin-left:auto">복사</button></div>
+          <pre class="export-pre" id="export-pre">상단에서 Sigma 룰 / 차단 리스트 / STIX(JSON)를 선택하세요.</pre>
+        </div>
+      </div>
+      <div class="panel" style="margin-top:16px">
+        <div class="head"><h2>침해지표</h2><span class="count" id="ioc-count2"></span></div>
+        <table class="tbl" id="ioc-tbl2"></table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<div class="cmdk-backdrop" id="cmdk-backdrop" style="display:none">
+  <div class="cmdk-box">
+    <input class="cmdk-input" id="cmdk-input" placeholder="검색: 협력사 · 캠페인 · C2 · 화면 이동…" autocomplete="off" spellcheck="false">
+    <div class="cmdk-results" id="cmdk-results"></div>
+    <div class="cmdk-foot"><span><kbd>↑</kbd><kbd>↓</kbd> 이동</span><span><kbd>↵</kbd> 선택</span><span><kbd>esc</kbd> 닫기</span></div>
+  </div>
+</div>
+
+<script src="report_data.js?v=16"></script>
+<script src="app.js?v=16"></script>
+</body>
+</html>

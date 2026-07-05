@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCCE · 접속 — 방산 공급망 조기경보</title>
+<link rel="stylesheet" href="styles.css?v=16">
+</head>
+<body class="login-body">
+
+<div class="login-card bracket-frame">
+  <div class="scan"></div>
+  <div class="login-inner">
+    <span class="login-classification">Demo · 인증 없는 데모 화면</span>
+
+    <div class="login-brand">
+      <span class="beacon"></span>
+      <h1>SCCE</h1>
+    </div>
+    <div class="login-sub">방산 공급망 자격증명 노출 조기경보 · 보안관제 콘솔</div>
+
+    <form id="login-form" autocomplete="off">
+      <div class="login-field">
+        <label for="u">운영자 ID</label>
+        <input id="u" type="text" value="analyst@scce.example" spellcheck="false">
+      </div>
+      <div class="login-field">
+        <label for="p">접속 키</label>
+        <input id="p" type="password" value="••••••••••••">
+      </div>
+      <button class="login-btn" type="submit">콘솔 접속</button>
+    </form>
+
+    <div class="login-status"><span class="dot"></span>데모 모드 · 실제 인증 없음 (아무 값으로나 접속)</div>
+
+    <div class="login-foot">
+      SCCE-OPS · D4D T2 #12 · 본 콘솔의 데이터는 합성/공개 정보이며 실제 기업·행위자와 무관합니다.<br>
+      입력한 ID는 이 브라우저 탭의 세션에만 저장되며, 서버로 전송되지 않습니다.
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var AUTH_KEY = "scce_auth";
+  // 이미 세션이 있으면 바로 대시보드로
+  try { if (sessionStorage.getItem(AUTH_KEY)) location.replace("index.html"); } catch (e) {}
+
+  function login() {
+    var user = (document.getElementById("u").value || "analyst@scce.example").trim();
+    // 데모 모드: 인증 없음 → 항상 접속 성공 (실서비스라면 서버 측 인증 필요)
+    try { sessionStorage.setItem(AUTH_KEY, user); } catch (e) {}
+    location.href = "index.html";
+  }
+  document.getElementById("login-form").addEventListener("submit", function (e) {
+    e.preventDefault(); login();
+  });
+})();
+</script>
+</body>
+</html>
