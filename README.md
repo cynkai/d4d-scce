@@ -8,9 +8,9 @@
 |---|---|
 | **트랙** | Track 2 · OSINT & Defense Intelligence |
 | **문제** | #12 방산 공급망 자격증명 노출 조기경보 (StealthMole 앵커) |
-| **핵심 지표** (합성 데이터셋 기준)| 조기경보 리드타임 **8일** · Campaign Recall **100%** · Active Precision **100%** |
+| **평가** (합성 데이터) | 무작위 세계 200개: 캠페인 재현율 **97%**, 정밀도 **74% / 28%** (배경 잡음 낮음/높음) · 데모 시나리오 리드타임 **8일** (무작위 캠페인 중앙값 2일) → [docs/EVALUATION.md](docs/EVALUATION.md) |
 | **실행 환경** | 오프라인 완주 가능 (외부 의존성 0, CDN 불요) — `./run.sh` 또는 `python3 pipeline.py` |
-| **검증** | `python3 scripts/verify_demo.py`, `python3 scripts/test_adapters.py` |
+| **검증** | `python -m pytest` (24개, CI 포함) · `python3 scripts/verify_demo.py` · `python3 scripts/robustness_eval.py` |
 
 ---
 
@@ -26,11 +26,11 @@
 |  |  |
 |---|---|
 | ![로그인](docs/screenshots/01_login.png) | ![개요](docs/screenshots/02_overview.png) |
-| 작전 콘솔 접속 (관리자 계정 활성 · 데모 모드) | 개요 — KPI · 조기경보 리드타임 · 위험 순위 |
+| 콘솔 접속 (인증 없는 데모 화면) | 개요 — KPI · 조기경보 리드타임 · 위험 순위 |
 | ![SIEM](docs/screenshots/03_siem.png) | ![인시던트 대응](docs/screenshots/04_incident.png) |
 | SIEM 이벤트 스트림 (collect → detect) | 인시던트 대응 큐 — SLA · 조치 전/후 잔여위험 |
 | ![인텔 브리프](docs/screenshots/05_brief.png) | |
-| 인텔 브리프 — 독립 정답셋 기준 성능 검증 포함 | |
+| 인텔 브리프 — 합성 정답셋 기준 성능 검증 포함 | |
 
 
 
@@ -102,7 +102,8 @@ d4d-scce/
   run.sh                     원커맨드 실행
   pipeline.py                오케스트레이션
   requirements.txt
-  scripts/generate_synthetic.py   합성 데이터 생성기(캠페인·C2·행위자 주입)
+  scripts/generate_synthetic.py   합성 데이터 생성기(캠페인·C2·행위자 주입, 정답셋은 ground_truth.json에 분리)
+  scripts/robustness_eval.py      무작위 합성 세계 200개로 캠페인 탐지 평가 → docs/EVALUATION.md
   src/
     adapters.py              mock(합성) / partner(StealthMole 스텁) 어댑터
     matcher.py               유출·스틸러 → 협력사 도메인 상관
@@ -114,10 +115,12 @@ d4d-scce/
     enrich.py                신뢰도 / 출처(citation) / 타임라인
     replay.py                ★ 공격 타임라인(Attack Timeline) — 일자별 as-of 스냅샷 + 조기경보 리드타임 증거
     recommender.py           즉시 조치 통보문 생성 (LLM 훅 = CMUX 연결부)
+    evaluation.py            정답셋 대조 평가 (캠페인: 구성 로그 Jaccard 매칭, 활성 침해: 나이브 대비)
   api/server.py              FastAPI: /api/report, /api/vendor, /api/advisory, /api/refresh
   web/                       SOC 대시보드 (login.html + index.html + styles.css + app.js)
   schema/README.md           데이터 스키마 계약서
-  data/                      synthetic/*.json, report.json
+  data/                      synthetic/*.json(원시 신호 + ground_truth.json), report.json
+  tests/                     pytest (CI: .github/workflows/tests.yml)
 ```
 
 ## 핵심 차별점 (심사 포인트)
@@ -125,8 +128,10 @@ d4d-scce/
 0. **설명 가능한 판정 + 대응 효과** — 각 협력사 상세에서 Evidence Ledger로 점수 산출 근거를 보여주고,
    인시던트 대응 큐에서 조치 전/후 잔여위험을 계산한다. 보고서 탭에는 Synthetic Ground Truth 평가까지 포함해
    “예쁜 화면”이 아니라 “왜 위험한지·조치하면 얼마나 줄어드는지·검증 결과가 어떤지”를 증명한다.
-1. **8일 조기경보 리드타임** — `replay.py`가 동일 RedLine+C2 캠페인의 as-of 확산을 재생해,
+1. **8일 조기경보 리드타임 (데모 시나리오)** — `replay.py`가 동일 RedLine+C2 캠페인의 as-of 확산을 재생해,
    태성회로(crown-jewel) 침해일 2026-07-03보다 **8일 전인 2026-06-25**에 캠페인 탐지 요건을 충족했음을 보여준다.
+   협력사 3곳이 11일에 걸쳐 감염되도록 심은 시나리오라 좋은 경우다. 무작위 캠페인 200개 세계에서는 중앙값 2일,
+   협력사 2곳짜리 캠페인은 0일이다([평가](docs/EVALUATION.md)).
    → “이미 터진 사고를 보여주는 대시보드”가 아니라 “침해 전에 대응 여유를 만든 조기경보”라는 핵심 가치.
 2. **조율된 공급망 캠페인 탐지 (`correlation.py`)** — 개별 업체 점수 나열이 아니라, 같은
    스틸러·같은 C2·같은 시간창으로 **다수 협력사를 동시 타격한 작전**을 하나의 캠페인으로 묶는다.
@@ -152,37 +157,60 @@ d4d-scce/
 
 최종 발표 동선은 **5개 화면**만 사용한다: `개요 → SIEM → 인시던트 대응 → 조사 → 보고서·탐지룰`.
 
-0. **접속 화면** — 작전 콘솔 로그인(관리자 계정 활성, 즉시 접속). "실제 배포된 보안관제 콘솔" 인상.
+0. **접속 화면** — 인증 없는 데모 로그인(아무 값으로나 즉시 접속). 실제 인증은 구현하지 않았다.
 1. **개요** — KPI에서 `조기경보 리드 8일`, `CRITICAL 4`, `매칭 유출 171/전체 248`을 먼저 보여준다.
 2. **공격 타임라인(Attack Timeline) 재생** — "과거 다시보기"가 아니라 조기경보가 실제로 앞서 발령됐다는 증거 재생이다.
    06-22 동방센서텍 감염 → **06-25 세종전술통신 감염 순간 조기경보 발령**
    → 07-03 crown-jewel 태성회로 침해. "**crown-jewel 침해 8일 전에 이미 탐지**"가 핵심.
 3. **태성회로 상세 + 캠페인 그래프** — VPN/SSO/클라우드/코드저장소 평문 유출, MITRE, 타임라인, 출처를 보여주고,
-   `CAMP-REDLINE-KR-0714` 그래프로 "개별 사고가 아니라 공급망 표적 작전"임을 설명한다.
+   `CAMP-REDLINE-260622-E149` 그래프로 "개별 사고가 아니라 공급망 표적 작전"임을 설명한다.
 4. **SIEM / 인시던트 대응 / 조사** — 같은 데이터가 이벤트 스트림, P1 대응 큐, 엔티티 피벗으로 이어지는 분석관 워크플로를 보여준다.
    인시던트 대응 큐에서는 `조치 전 위험 → 조치 후 잔여위험`을 함께 보여 대응 효과를 정량화한다.
 5. **보고서·탐지룰** — 인텔 브리프, IOC, Sigma 룰, 차단 리스트, STIX(JSON) 산출로 실무 적용성을 마무리한다.
-   브리프에는 Synthetic Ground Truth 기준 Campaign Recall / Active Precision / Lead Time 검증을 포함한다.
+   브리프에는 합성 정답셋 기준 Campaign Recall / Precision, Active Precision, Lead Time과 그 한계를 함께 적는다.
 
 ## 규정 (B-1) 준수
 
-- 회사명·도메인·행위자·C2 **전부 가공(fictional)**.
+- 회사명·도메인·행위자·C2 **전부 가공(fictional)**. 도메인·메일은 예약 도메인(RFC 2606), IP는 문서 전용 대역(RFC 5737).
 - 기존 CMUX(LLM 로그 분석)는 `recommender.llm_summarize()` 훅으로 연결 가능 — 발표 시
   "현재 데모는 오프라인 재현성을 위한 템플릿 기반, CMUX/LLM은 확장 훅"이라고 구분해 설명할 것.
 - StealthMole 등 파트너 피드는 현재 `PartnerAdapter` 확장 지점으로 남겨둔 상태다. 발표에서는
   "실제 연동 완료"가 아니라 "피드 접근 시 어댑터만 교체"라고 말한다.
 
+## 해커톤 이후 변경 사항 (2026-10)
+
+해커톤 버전을 다시 살펴보며, 공개해도 문제없는 데이터로 바꾸고 평가를 바로잡았다.
+
+- **합성 데이터의 실존 식별자 제거** — "유출 계정" 75개가 흔한 한국 이름 + 실제 메일 서비스(gmail·naver 등)라
+  실존 인물과 겹칠 수 있었고, C2 IP는 실제로 할당된 주소(그중 하나는 Tor 릴레이 대역)였다. 모든 도메인·메일을
+  예약 도메인(`.example`, `example.com/net/org`, RFC 2606)으로, IP를 문서 전용 대역(RFC 5737)으로 바꿨다.
+  로그인 화면도 군 도메인·"인가된 사용자 전용" 문구 대신 인증 없는 데모임을 밝힌다.
+- **순환 채점 제거** — 생성기가 정답 라벨을 원시 로그에 넣었고, 탐지기는 캠페인 이름을 그 라벨에서 가져왔으며,
+  평가는 이름 일치로 채점해 "Campaign Recall 100%"가 구조적으로 보장됐다. 캠페인 정밀도는 코드에 1.0으로
+  고정돼 있었다. 이제 정답은 `ground_truth.json`에만 있고, 탐지기는 관측값으로 이름을 짓고, 평가는 구성 로그
+  겹침(Jaccard ≥ 0.5)으로 채점한다. 데모 시나리오에서 캠페인 정밀도는 50%(탐지 2건 중 1건은 배경 잡음의
+  우연한 겹침)로 바뀌었다.
+- **무작위 세계 200개 평가와 탐지기 수정** — 평가를 늘리자 공용 C2에 무관한 감염이 섞이면 진짜 캠페인까지 통째로
+  놓치는 약점이 드러났다(재현율 53%/13%). 같은 (스틸러, C2) 묶음을 감염일 간격으로 나누도록 고쳐 재현율 97%가
+  됐다. 다만 잡음이 많으면 우연한 겹침 때문에 정밀도는 28%에 그친다. 이 수정은 평가를 본 뒤에 한 것이라 개선
+  폭은 낙관적일 수 있다. 자세한 수치와 한계는 [docs/EVALUATION.md](docs/EVALUATION.md).
+- **테스트와 CI** — 검증 스크립트를 pytest 24개로 옮기고, CI에서 데이터·리포트·평가 문서를 다시 만들어 커밋된
+  내용과 같은지 확인한다. 정답 라벨이 엔진으로 새지 않는지, 합성 식별자가 모두 예약 범위인지도 테스트한다.
+- **그 밖의 버그** — 심어둔 캠페인 로그 ID가 배경 로그 ID와 겹쳐 정답 라벨이 엉뚱한 로그에 붙던 문제를 고쳤다.
+
 ## 제출/발표 보조 자료
 
 - `docs/PITCH_3MIN.md` — 3분 발표 스크립트.
 - `scripts/verify_demo.py` — KPI/공격 타임라인/캠페인 서사 일관성 검증.
+- `docs/EVALUATION.md` — 무작위 합성 세계 200개 기준 캠페인 탐지 평가.
 
 검증:
 
 ```bash
-python3 scripts/generate_synthetic.py
-python3 pipeline.py
-python3 scripts/verify_demo.py
+pip install -r requirements-dev.txt
+python -m pytest                      # 단위·회귀 테스트
+python3 scripts/generate_synthetic.py && python3 pipeline.py && python3 scripts/verify_demo.py
+python3 scripts/robustness_eval.py    # docs/EVALUATION.md 재생성
 ```
 
 ## 현재 상태
