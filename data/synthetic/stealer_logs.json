@@ -1,6 +1,6 @@
 [
   {
-    "log_id": "S00020",
+    "log_id": "C00003",
     "stealer_family": "RedLine",
     "infection_date": "2026-06-22",
     "machine_id": "WIN-QA-05",
@@ -8,10 +8,7 @@
     "vendor_id": "V006",
     "is_corporate": true,
     "c2_host": "cdn-update-sync.example",
-    "campaign_id": "CAMP-REDLINE-KR-0714",
     "threat_actor": "Shadow Chisel",
-    "active_compromise": true,
-    "gt_active": true,
     "credentials": [
       {
         "url": "https://sso.dongbang-sensor.example/adfs/ls",
@@ -34,7 +31,7 @@
     ]
   },
   {
-    "log_id": "S00010",
+    "log_id": "C00002",
     "stealer_family": "RedLine",
     "infection_date": "2026-06-25",
     "machine_id": "WIN-ENG-22",
@@ -42,10 +39,7 @@
     "vendor_id": "V003",
     "is_corporate": true,
     "c2_host": "cdn-update-sync.example",
-    "campaign_id": "CAMP-REDLINE-KR-0714",
     "threat_actor": "Shadow Chisel",
-    "active_compromise": true,
-    "gt_active": true,
     "credentials": [
       {
         "url": "https://vpn.sejong-tactcom.example/remote/login",
@@ -68,7 +62,7 @@
     ]
   },
   {
-    "log_id": "S00000",
+    "log_id": "C00001",
     "stealer_family": "RedLine",
     "infection_date": "2026-07-03",
     "machine_id": "WIN-CAD-07",
@@ -76,10 +70,7 @@
     "vendor_id": "V007",
     "is_corporate": true,
     "c2_host": "cdn-update-sync.example",
-    "campaign_id": "CAMP-REDLINE-KR-0714",
     "threat_actor": "Shadow Chisel",
-    "active_compromise": true,
-    "gt_active": true,
     "credentials": [
       {
         "url": "https://vpn.taesung-pcb.example/remote/login",
@@ -127,9 +118,6 @@
     "vendor_id": null,
     "is_corporate": false,
     "c2_host": "198.51.100.44",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://mail.example.com/owa",
@@ -184,9 +172,6 @@
     "vendor_id": "V009",
     "is_corporate": true,
     "c2_host": "192.0.2.8",
-    "campaign_id": null,
-    "active_compromise": true,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://console.myungsung-fine.example/login",
@@ -235,9 +220,6 @@
     "vendor_id": null,
     "is_corporate": false,
     "c2_host": "198.51.100.44",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://portal.example.net/login",
@@ -286,9 +268,6 @@
     "vendor_id": null,
     "is_corporate": false,
     "c2_host": "203.0.113.11",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://portal.facebook.com/login",
@@ -343,9 +322,6 @@
     "vendor_id": null,
     "is_corporate": false,
     "c2_host": "192.0.2.8",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://mail.example.net/owa",
@@ -388,9 +364,6 @@
     "vendor_id": null,
     "is_corporate": false,
     "c2_host": "203.0.113.11",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://chat.saas.example/facebook.com",
@@ -421,9 +394,6 @@
     "vendor_id": null,
     "is_corporate": false,
     "c2_host": "198.51.100.44",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://portal.google.com/login",
@@ -478,9 +448,6 @@
     "vendor_id": null,
     "is_corporate": false,
     "c2_host": "198.51.100.44",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://chat.saas.example/example.org",
@@ -511,9 +478,6 @@
     "vendor_id": null,
     "is_corporate": false,
     "c2_host": "203.0.113.11",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://mail.google.com/owa",
@@ -562,9 +526,6 @@
     "vendor_id": null,
     "is_corporate": false,
     "c2_host": "203.0.113.11",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://mail.google.com/owa",
@@ -601,9 +562,6 @@
     "vendor_id": "V011",
     "is_corporate": true,
     "c2_host": "192.0.2.8",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://chat.saas.example/chungwoo-elec.example",
@@ -634,9 +592,6 @@
     "vendor_id": "V011",
     "is_corporate": true,
     "c2_host": "192.0.2.8",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://chat.saas.example/chungwoo-elec.example",
@@ -673,9 +628,6 @@
     "vendor_id": "V002",
     "is_corporate": true,
     "c2_host": "198.51.100.44",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://mail.daeyang-guidance.example/owa",
@@ -700,9 +652,6 @@
     "vendor_id": null,
     "is_corporate": false,
     "c2_host": "203.0.113.11",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://chat.saas.example/facebook.com",
@@ -745,9 +694,6 @@
     "vendor_id": "V002",
     "is_corporate": true,
     "c2_host": "198.51.100.44",
-    "campaign_id": null,
-    "active_compromise": true,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://mail.daeyang-guidance.example/owa",
@@ -802,9 +748,6 @@
     "vendor_id": "V003",
     "is_corporate": true,
     "c2_host": "203.0.113.11",
-    "campaign_id": null,
-    "active_compromise": true,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://portal.google.com/login",
@@ -841,9 +784,6 @@
     "vendor_id": null,
     "is_corporate": false,
     "c2_host": "198.51.100.44",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://chat.saas.example/example.org",
@@ -880,9 +820,6 @@
     "vendor_id": "V007",
     "is_corporate": true,
     "c2_host": "192.0.2.8",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://portal.taesung-pcb.example/login",
@@ -913,9 +850,6 @@
     "vendor_id": null,
     "is_corporate": false,
     "c2_host": "198.51.100.44",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://mail.facebook.com/owa",
@@ -946,9 +880,6 @@
     "vendor_id": null,
     "is_corporate": false,
     "c2_host": "203.0.113.11",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://chat.saas.example/example.org",
@@ -997,9 +928,6 @@
     "vendor_id": null,
     "is_corporate": false,
     "c2_host": "203.0.113.11",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://chat.saas.example/google.com",
@@ -1054,9 +982,6 @@
     "vendor_id": null,
     "is_corporate": false,
     "c2_host": "203.0.113.11",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://portal.facebook.com/login",
@@ -1081,9 +1006,6 @@
     "vendor_id": "V006",
     "is_corporate": true,
     "c2_host": "192.0.2.8",
-    "campaign_id": null,
-    "active_compromise": true,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://mail.dongbang-sensor.example/owa",
@@ -1132,9 +1054,6 @@
     "vendor_id": "V007",
     "is_corporate": true,
     "c2_host": "198.51.100.44",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://mail.taesung-pcb.example/owa",
@@ -1171,9 +1090,6 @@
     "vendor_id": "V003",
     "is_corporate": true,
     "c2_host": "192.0.2.8",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://portal.sejong-tactcom.example/login",
@@ -1210,9 +1126,6 @@
     "vendor_id": "V003",
     "is_corporate": true,
     "c2_host": "198.51.100.44",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://chat.saas.example/sejong-tactcom.example",
@@ -1237,9 +1150,6 @@
     "vendor_id": null,
     "is_corporate": false,
     "c2_host": "198.51.100.44",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://mail.facebook.com/owa",
@@ -1294,9 +1204,6 @@
     "vendor_id": null,
     "is_corporate": false,
     "c2_host": "192.0.2.8",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://chat.saas.example/google.com",
@@ -1351,9 +1258,6 @@
     "vendor_id": null,
     "is_corporate": false,
     "c2_host": "198.51.100.44",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://mail.google.com/owa",
@@ -1402,9 +1306,6 @@
     "vendor_id": null,
     "is_corporate": false,
     "c2_host": "192.0.2.8",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://mail.facebook.com/owa",
@@ -1441,9 +1342,6 @@
     "vendor_id": "V011",
     "is_corporate": true,
     "c2_host": "198.51.100.44",
-    "campaign_id": null,
-    "active_compromise": true,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://console.chungwoo-elec.example/login",
@@ -1498,9 +1396,6 @@
     "vendor_id": null,
     "is_corporate": false,
     "c2_host": "198.51.100.44",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://portal.facebook.com/login",
@@ -1531,9 +1426,6 @@
     "vendor_id": "V006",
     "is_corporate": true,
     "c2_host": "198.51.100.44",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://portal.facebook.com/login",
@@ -1582,9 +1474,6 @@
     "vendor_id": null,
     "is_corporate": false,
     "c2_host": "198.51.100.44",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://chat.saas.example/example.org",
@@ -1639,9 +1528,6 @@
     "vendor_id": "V006",
     "is_corporate": true,
     "c2_host": "192.0.2.8",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://portal.dongbang-sensor.example/login",
@@ -1696,9 +1582,6 @@
     "vendor_id": "V011",
     "is_corporate": true,
     "c2_host": "192.0.2.8",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://chat.saas.example/chungwoo-elec.example",
@@ -1723,9 +1606,6 @@
     "vendor_id": "V002",
     "is_corporate": true,
     "c2_host": "203.0.113.11",
-    "campaign_id": null,
-    "active_compromise": true,
-    "gt_active": true,
     "credentials": [
       {
         "url": "https://chat.saas.example/daeyang-guidance.example",
@@ -1756,9 +1636,6 @@
     "vendor_id": null,
     "is_corporate": false,
     "c2_host": "203.0.113.11",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://mail.example.net/owa",
@@ -1807,9 +1684,6 @@
     "vendor_id": "V008",
     "is_corporate": true,
     "c2_host": "198.51.100.44",
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://portal.google.com/login",
@@ -1858,9 +1732,6 @@
     "vendor_id": "V002",
     "is_corporate": true,
     "c2_host": "198.51.100.44",
-    "campaign_id": null,
-    "active_compromise": true,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://mail.daeyang-guidance.example/owa",
@@ -1903,9 +1774,6 @@
     "vendor_id": "V008",
     "is_corporate": true,
     "c2_host": null,
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://vpn.woojin-heat.example/remote/login",
@@ -1930,9 +1798,6 @@
     "vendor_id": "V003",
     "is_corporate": true,
     "c2_host": null,
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://vpn.sejong-tactcom.example/remote/login",
@@ -1957,9 +1822,6 @@
     "vendor_id": "V007",
     "is_corporate": true,
     "c2_host": null,
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://vpn.taesung-pcb.example/remote/login",
@@ -1984,9 +1846,6 @@
     "vendor_id": "V003",
     "is_corporate": true,
     "c2_host": null,
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://mail.sejong-tactcom.example/owa",
@@ -2017,9 +1876,6 @@
     "vendor_id": "V003",
     "is_corporate": true,
     "c2_host": null,
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://mail.sejong-tactcom.example/owa",
@@ -2050,9 +1906,6 @@
     "vendor_id": "V006",
     "is_corporate": true,
     "c2_host": null,
-    "campaign_id": null,
-    "active_compromise": false,
-    "gt_active": false,
     "credentials": [
       {
         "url": "https://mail.dongbang-sensor.example/owa",

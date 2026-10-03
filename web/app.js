@@ -74,7 +74,7 @@
       { label: "활성 침해", val: k.active_compromises, note: "VPN·SSO·코드저장소 등 HIGH 크리덴셜", cls: "alert" },
       { label: "캠페인 탐지", val: k.campaigns_detected, note: "동일 스틸러+C2 공급망 확산", cls: "warn" },
       { label: "매칭 유출", val: k.matched_exposed_credentials ?? k.exposed_credentials, note: `협력사 도메인 기준 / 전체 ${k.total_observed_credentials ?? "—"}`, cls: "warn" },
-      { label: "검증 정확도", val: k.active_precision_pct ?? 100, unit: "%", note: `합성 정답셋 기준 / 협력사 ${k.vendor_count}개`, cls: "" },
+      { label: "캠페인 정밀도", val: k.campaign_precision_pct ?? "—", unit: k.campaign_precision_pct != null ? "%" : "", note: `재현율 ${k.campaign_recall_pct ?? "—"}% · 합성 시나리오 1개 기준`, cls: "" },
     ];
     const box = $("#kpis"); box.innerHTML = "";
     tiles.forEach((t, i) => {
@@ -1197,9 +1197,10 @@
         최초 탐지 요건(2개 이상 협력사 동시 감염)을 충족하여, crown-jewel(<b>${esc(rp.crown_jewel||"-")}</b>)
         침해(${esc(rp.hero_peak_day||"-")}) 대비 <b>${lead!=null?lead+"일":"수일"}의 대응 여유</b>를 제공하였다.</p>
 
-        <h3>3. 성능 검증 (독립 정답셋 · 나이브 베이스라인 대조)</h3>
+        <h3>3. 성능 검증 (합성 정답셋 · 나이브 베이스라인 대조)</h3>
         <div class="eval-grid">
-          <div><span>Campaign Recall</span><b>${Math.round((cd.recall ?? 0) * 100)}%</b><small>${cd.true_positive ?? "-"}/${cd.ground_truth ?? "-"} campaigns</small></div>
+          <div><span>Campaign Recall</span><b>${cd.recall != null ? Math.round(cd.recall * 100) + "%" : "-"}</b><small>${cd.true_positive ?? "-"}/${cd.ground_truth ?? "-"} 정답 캠페인 탐지</small></div>
+          <div><span>Campaign Precision</span><b>${cd.precision != null ? Math.round(cd.precision * 100) + "%" : "-"}</b><small>${cd.true_positive ?? "-"}/${cd.detected ?? "-"} 탐지 중 정답 일치</small></div>
           <div><span>활성판정 Precision</span><b>${Math.round((ac.precision ?? 0) * 100)}%</b><small>우리 규칙 · FP ${ac.false_positive ?? 0} / F1 ${ac.f1 ?? "-"}</small></div>
           <div><span>Lead Time</span><b>${lt.primary_lead_days ?? "-"}일</b><small>${esc(lt.early_warning_day || "-")} → ${esc(lt.hero_peak_day || "-")}</small></div>
         </div>
@@ -1208,7 +1209,9 @@
           모두 오탐해 정밀도 <b>${Math.round(ac.naive_baseline.precision * 100)}%</b>(오탐 ${ac.naive_baseline.false_positive}건)에 그친다.
           우리 스코어링 규칙(최근 30일 + HIGH 크리덴셜)은 이 오탐을
           <b>${ac.false_positive_reduction_pct}% (${ac.false_positive_reduction}건)</b> 제거하여 정밀도 ${Math.round(ac.precision * 100)}%를 달성한다.
-          → 정답셋이 탐지기와 독립이므로 '셀프 채점'이 아니다.</p>` : ""}
+          단, 활성 침해 정답은 생성기가 같은 기준(최근 30일 + HIGH 크리덴셜)으로 정한 것이라
+          이 수치는 탐지 능력보다 규칙 구현을 확인하는 성격이다. 캠페인은 구성 로그 일치(Jaccard ≥ 0.5)로 채점하며,
+          무작위 시나리오 200개에서의 분포는 docs/EVALUATION.md 에 있다.</p>` : ""}
 
         <h3>4. 즉시 조치 대상 협력사</h3>
         <table><thead><tr><th>협력사</th><th>구분</th><th>공급 품목</th><th>위험점수</th><th>신뢰도</th></tr></thead>

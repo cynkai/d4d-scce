@@ -1093,7 +1093,7 @@ body{ animation: appIn .45s ease both; }
 .impact-mini i { height:2px; background:linear-gradient(90deg,var(--critical),var(--amber)); border-radius:99px; }
 .impact-mini em { font-style:normal; font-family:var(--font-mono); color:var(--amber); font-weight:850; text-align:right; }
 
-.eval-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:12px 0 18px; }
+.eval-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:10px; margin:12px 0 18px; }
 .eval-grid div { padding:14px; border-radius:16px; border:1px solid rgba(255,255,255,.10); background:rgba(255,255,255,.045); }
 .eval-grid span { display:block; font-family:var(--font-mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-faint); }
 .eval-grid b { display:block; margin-top:6px; font-size:28px; letter-spacing:-.04em; color:var(--accent); }

@@ -11,6 +11,7 @@
 또한 대시보드용 관계 그래프(nodes/edges)를 생성한다.
 """
 
+import hashlib
 from datetime import date
 
 TODAY = date(2026, 7, 4)
@@ -47,8 +48,10 @@ def detect_campaigns(stealers: list, vendors: list) -> list:
         if span > WINDOW_DAYS * 3:  # 너무 흩어져 있으면 캠페인 아님
             continue
         actor = next((l.get("threat_actor") for l in logs if l.get("threat_actor")), None)
-        campaign_id = next((l.get("campaign_id") for l in logs if l.get("campaign_id")),
-                           f"CAMP-{family}-{c2[:6]}")
+        # ID는 관측값으로만 만든다(정답 라벨을 읽지 않는다): 스틸러 계열 · 첫 감염일 · C2 해시.
+        first = min(dates)
+        campaign_id = (f"CAMP-{str(family).upper()}-{first[2:4]}{first[5:7]}{first[8:10]}-"
+                       f"{hashlib.sha1(str(c2).encode()).hexdigest()[:4].upper()}")
         # 신뢰도: 걸린 업체 수 + 시간 밀집 + 명시적 태그
         conf = min(0.5 + 0.12 * len(vids) + (0.15 if span <= WINDOW_DAYS else 0), 0.97)
         campaigns.append({
@@ -59,6 +62,7 @@ def detect_campaigns(stealers: list, vendors: list) -> list:
             "affected_vendors": [{"vendor_id": v, "name": vname.get(v, v)} for v in sorted(vids)],
             "affected_count": len(vids),
             "machines": [l["machine_id"] for l in logs],
+            "log_ids": [l.get("log_id") for l in logs],
             "first_seen": min(dates),
             "last_seen": max(dates),
             "span_days": span,

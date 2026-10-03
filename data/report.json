@@ -26,6 +26,7 @@
     "top_risk_score": 127.1,
     "early_warning_lead_days": 8,
     "campaign_recall_pct": 100,
+    "campaign_precision_pct": 50,
     "active_precision_pct": 100,
     "top_residual_risk": 55.1
   },
@@ -67,7 +68,7 @@
       },
       "active_incidents": [
         {
-          "log_id": "S00000",
+          "log_id": "C00001",
           "stealer_family": "RedLine",
           "infection_date": "2026-07-03",
           "machine_id": "WIN-CAD-07",
@@ -301,7 +302,7 @@
           "score_effect": "+88.6",
           "why": "2026-07-03 WIN-CAD-07에서 RedLine 감염 및 ERP/관리자 콘솔, 클라우드 콘솔, 코드저장소, SSO 통합인증, VPN 원격접속 노출",
           "evidence": [
-            "S00000",
+            "C00001",
             "WIN-CAD-07",
             "RedLine"
           ],
@@ -489,7 +490,7 @@
       },
       "active_incidents": [
         {
-          "log_id": "S00010",
+          "log_id": "C00002",
           "stealer_family": "RedLine",
           "infection_date": "2026-06-25",
           "machine_id": "WIN-ENG-22",
@@ -706,7 +707,7 @@
           "score_effect": "+48.6",
           "why": "2026-06-25 WIN-ENG-22에서 RedLine 감염 및 SSO 통합인증, VPN 원격접속 노출",
           "evidence": [
-            "S00010",
+            "C00002",
             "WIN-ENG-22",
             "RedLine"
           ],
@@ -874,7 +875,7 @@
       },
       "active_incidents": [
         {
-          "log_id": "S00020",
+          "log_id": "C00003",
           "stealer_family": "RedLine",
           "infection_date": "2026-06-22",
           "machine_id": "WIN-QA-05",
@@ -1071,7 +1072,7 @@
           "score_effect": "+36.3",
           "why": "2026-06-22 WIN-QA-05에서 RedLine 감염 및 SSO 통합인증 노출",
           "evidence": [
-            "S00020",
+            "C00003",
             "WIN-QA-05",
             "RedLine"
           ],
@@ -3725,7 +3726,7 @@
   ],
   "campaigns": [
     {
-      "campaign_id": "CAMP-REDLINE-KR-0714",
+      "campaign_id": "CAMP-REDLINE-260622-E149",
       "stealer_family": "RedLine",
       "c2_host": "cdn-update-sync.example",
       "threat_actor": "Shadow Chisel",
@@ -3749,6 +3750,11 @@
         "WIN-ENG-22",
         "WIN-CAD-07"
       ],
+      "log_ids": [
+        "C00003",
+        "C00002",
+        "C00001"
+      ],
       "first_seen": "2026-06-22",
       "last_seen": "2026-07-03",
       "span_days": 11,
@@ -3756,7 +3762,7 @@
       "note": "3개 협력사가 동일 C2(cdn-update-sync.example)·동일 스틸러(RedLine)로 11일 내 동시 감염 — 조율된 공급망 표적 정황."
     },
     {
-      "campaign_id": "CAMP-RedLine-192.0.",
+      "campaign_id": "CAMP-REDLINE-250803-D6B7",
       "stealer_family": "RedLine",
       "c2_host": "192.0.2.8",
       "threat_actor": null,
@@ -3780,6 +3786,11 @@
         "WIN-5080351",
         "WIN-8279795"
       ],
+      "log_ids": [
+        "S00002",
+        "S00035",
+        "S00036"
+      ],
       "first_seen": "2025-08-03",
       "last_seen": "2025-08-21",
       "span_days": 18,
@@ -3788,7 +3799,7 @@
     }
   ],
   "forecast": {
-    "primary_campaign": "CAMP-REDLINE-KR-0714",
+    "primary_campaign": "CAMP-REDLINE-260622-E149",
     "spread": {
       "affected_count": 3,
       "span_days": 11,
@@ -4601,9 +4612,9 @@
   "graph": {
     "nodes": [
       {
-        "id": "CAMP-REDLINE-KR-0714",
+        "id": "CAMP-REDLINE-260622-E149",
         "type": "campaign",
-        "label": "CAMP-REDLINE-KR-0714",
+        "label": "CAMP-REDLINE-260622-E149",
         "confidence": 0.97
       },
       {
@@ -4638,9 +4649,9 @@
         "status": "CRITICAL — 즉시 조치"
       },
       {
-        "id": "CAMP-RedLine-192.0.",
+        "id": "CAMP-REDLINE-250803-D6B7",
         "type": "campaign",
-        "label": "CAMP-RedLine-192.0.",
+        "label": "CAMP-REDLINE-250803-D6B7",
         "confidence": 0.86
       },
       {
@@ -4666,46 +4677,46 @@
     "edges": [
       {
         "source": "actor:Shadow Chisel",
-        "target": "CAMP-REDLINE-KR-0714",
+        "target": "CAMP-REDLINE-260622-E149",
         "rel": "operates"
       },
       {
-        "source": "CAMP-REDLINE-KR-0714",
+        "source": "CAMP-REDLINE-260622-E149",
         "target": "c2:cdn-update-sync.example",
         "rel": "uses"
       },
       {
-        "source": "CAMP-REDLINE-KR-0714",
+        "source": "CAMP-REDLINE-260622-E149",
         "target": "V003",
         "rel": "hits"
       },
       {
-        "source": "CAMP-REDLINE-KR-0714",
+        "source": "CAMP-REDLINE-260622-E149",
         "target": "V006",
         "rel": "hits"
       },
       {
-        "source": "CAMP-REDLINE-KR-0714",
+        "source": "CAMP-REDLINE-260622-E149",
         "target": "V007",
         "rel": "hits"
       },
       {
-        "source": "CAMP-RedLine-192.0.",
+        "source": "CAMP-REDLINE-250803-D6B7",
         "target": "c2:192.0.2.8",
         "rel": "uses"
       },
       {
-        "source": "CAMP-RedLine-192.0.",
+        "source": "CAMP-REDLINE-250803-D6B7",
         "target": "V006",
         "rel": "hits"
       },
       {
-        "source": "CAMP-RedLine-192.0.",
+        "source": "CAMP-REDLINE-250803-D6B7",
         "target": "V009",
         "rel": "hits"
       },
       {
-        "source": "CAMP-RedLine-192.0.",
+        "source": "CAMP-REDLINE-250803-D6B7",
         "target": "V011",
         "rel": "hits"
       }
@@ -5764,7 +5775,7 @@
         "vendor": null,
         "vendor_id": null,
         "rule": "EARLY-WARNING",
-        "message": "조기경보 발령 · CAMP-RedLine-192.0. 공급망 표적 정황",
+        "message": "조기경보 발령 · CAMP-REDLINE-250803-D6B7 공급망 표적 정황",
         "mitre": [],
         "id": "E00042"
       },
@@ -5775,7 +5786,7 @@
         "vendor": null,
         "vendor_id": null,
         "rule": "CAMPAIGN-CORRELATION",
-        "message": "조율 캠페인 탐지 · CAMP-RedLine-192.0. · 3개 협력사 · 동일 C2(192.0.2.8)/스틸러(RedLine)",
+        "message": "조율 캠페인 탐지 · CAMP-REDLINE-250803-D6B7 · 3개 협력사 · 동일 C2(192.0.2.8)/스틸러(RedLine)",
         "mitre": [
           "T1195.002"
         ],
@@ -6637,7 +6648,7 @@
         "vendor": null,
         "vendor_id": null,
         "rule": "EARLY-WARNING",
-        "message": "조기경보 발령 · CAMP-REDLINE-KR-0714 공급망 표적 정황",
+        "message": "조기경보 발령 · CAMP-REDLINE-260622-E149 공급망 표적 정황",
         "mitre": [],
         "id": "E00116"
       },
@@ -6659,7 +6670,7 @@
         "vendor": null,
         "vendor_id": null,
         "rule": "CAMPAIGN-CORRELATION",
-        "message": "조율 캠페인 탐지 · CAMP-REDLINE-KR-0714 · 3개 협력사 · 동일 C2(cdn-update-sync.example)/스틸러(RedLine)",
+        "message": "조율 캠페인 탐지 · CAMP-REDLINE-260622-E149 · 3개 협력사 · 동일 C2(cdn-update-sync.example)/스틸러(RedLine)",
         "mitre": [
           "T1195.002"
         ],
@@ -6708,13 +6719,24 @@
     }
   },
   "evaluation": {
-    "title": "Independent Ground-Truth Evaluation",
+    "title": "Ground-Truth Evaluation (single synthetic scenario)",
     "campaign_detection": {
       "ground_truth": 1,
       "detected": 2,
       "true_positive": 1,
-      "precision": 1.0,
-      "recall": 1.0
+      "false_positive": 1,
+      "precision": 0.5,
+      "recall": 1.0,
+      "matches": [
+        {
+          "detected": "CAMP-REDLINE-260622-E149",
+          "truth": "CAMP-REDLINE-KR-0714",
+          "jaccard": 1.0
+        }
+      ],
+      "unmatched_detected": [
+        "CAMP-REDLINE-250803-D6B7"
+      ]
     },
     "active_compromise_detection": {
       "ground_truth": 4,
@@ -6738,13 +6760,14 @@
     "lead_time": {
       "primary_lead_days": 8,
       "early_warning_day": "2026-06-25",
-      "hero_peak_day": "2026-07-03",
-      "mean_lead_days": 8
+      "hero_peak_day": "2026-07-03"
     },
     "notes": [
-      "모든 회사명·도메인·행위자·C2는 합성/가공 데이터",
-      "정답셋은 탐지기와 독립인 gt_active 라벨(4개 양성) 기준",
-      "함정 23건(오래된 감염·LOW 전용) 포함 — 나이브 대비 오탐 23건 감소"
+      "모든 회사명·도메인·행위자·C2는 합성/가공 데이터(예약 도메인·문서용 IP)",
+      "정답셋은 생성기가 따로 기록한 ground_truth.json — 분석 엔진은 읽지 않는다",
+      "캠페인: 탐지 2건 중 정답과 일치 1건 (정답 1건, 구성 로그 Jaccard ≥ 0.5)",
+      "함정 23건(오래된 감염·LOW 전용) 포함 — 나이브 대비 오탐 23건 감소",
+      "이 수치는 데모 시나리오 1개 기준이며, 정답이 설계된 합성 데이터라 실데이터보다 높게 나오기 쉽다"
     ]
   }
 }

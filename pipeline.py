@@ -25,9 +25,14 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
 from adapters import get_adapter                       # noqa: E402
 from matcher import (build_domain_index, match_leaks, match_stealers,  # noqa: E402
                      detect_lookalikes, link_identities)
-from scoring import score_vendor, classify, detect_active_compromise  # noqa: E402
+from scoring import score_vendor, classify  # noqa: E402
 from recommender import build_advisory                 # noqa: E402
-import mitre, ioc, correlation, enrich, replay, siem, forecast  # noqa: E402
+import mitre, ioc, correlation, enrich, replay, siem, forecast, evaluation  # noqa: E402
+
+
+def _pct(ev, section, key):
+    value = (ev or {}).get(section, {}).get(key)
+    return None if value is None else round(value * 100)
 
 
 def _ko_cat(cat):
@@ -141,61 +146,36 @@ def _build_response_impact(row):
     }
 
 
-def _confusion(pairs):
-    """(예측, 정답) 쌍 리스트 → 혼동행렬 + precision/recall/f1."""
-    tp = fp = fn = tn = 0
-    for pred, truth in pairs:
-        if pred and truth: tp += 1
-        elif pred and not truth: fp += 1
-        elif not pred and truth: fn += 1
-        else: tn += 1
-    prec = tp / (tp + fp) if (tp + fp) else 1.0
-    rec = tp / (tp + fn) if (tp + fn) else 1.0
-    f1 = (2 * prec * rec / (prec + rec)) if (prec + rec) else 0.0
-    return {"tp": tp, "fp": fp, "fn": fn, "tn": tn,
-            "precision": round(prec, 3), "recall": round(rec, 3), "f1": round(f1, 3)}
+TRUTH_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "synthetic", "ground_truth.json")
 
 
-def _build_evaluation(ranked, campaigns, replay_data, stealers):
+def _load_truth(source):
+    """합성 데이터의 정답셋. 분석 단계가 아니라 평가 단계에서만 읽는다."""
+    if source != "mock" or not os.path.exists(TRUTH_PATH):
+        return None
+    with open(TRUTH_PATH, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def _build_evaluation(campaigns, replay_data, stealers, truth):
     """
-    독립 정답셋(generate_synthetic 의 gt_active 라벨) 기준 검증.
-    핵심: 활성 침해 판정을 '우리 규칙(최근30일+HIGH)' vs '나이브(회사 감염이면 활성)'로
-    각각 정답과 대조해, 우리 스코어링이 오탐을 얼마나 줄이는지 정량화한다.
-    (기존의 순환 채점 = detected를 정답으로 쓰던 방식 폐기.)
+    정답셋(ground_truth.json) 기준 검증. 탐지기는 정답 라벨을 보지 않는다.
+    - 캠페인: 구성 로그 Jaccard ≥ 0.5 로 탐지↔정답 짝짓기 → precision/recall.
+    - 활성 침해: '우리 규칙(최근30일+HIGH)' vs '나이브(회사 감염이면 활성)'를 각각 정답과 대조.
+    단일 시나리오 결과일 뿐이다. 여러 무작위 시나리오에서의 분포는
+    scripts/robustness_eval.py → docs/EVALUATION.md 에 있다.
     """
-    # 캠페인 탐지
-    truth_campaigns = {c for c in (s.get("campaign_id") for s in stealers) if c}
-    detected_campaigns = {c["campaign_id"] for c in campaigns}
-    tp_campaigns = len(truth_campaigns & detected_campaigns)
-
-    # 활성 침해: 로그 단위로 정답/예측 대조
-    ours_pairs, naive_pairs = [], []
-    decoy_total = 0
-    for log in stealers:
-        gt = bool(log.get("gt_active", False))
-        if log.get("is_corporate") and not gt:
-            decoy_total += 1  # 나이브가 낚일 수 있는 '함정'(회사 감염이나 실제로는 비활성)
-        our_pred = detect_active_compromise(log)["is_active"]
-        naive_pred = bool(log.get("is_corporate"))  # 나이브: 회사 도메인 감염이면 무조건 활성
-        ours_pairs.append((our_pred, gt))
-        naive_pairs.append((naive_pred, gt))
-
-    ours = _confusion(ours_pairs)
-    naive = _confusion(naive_pairs)
+    if truth is None:
+        return None
+    camp = evaluation.match_campaigns(campaigns, truth["campaigns"])
+    ours, naive, decoy_total = evaluation.evaluate_active(stealers, truth["active_log_ids"])
     fp_reduction = naive["fp"] - ours["fp"]
     fp_reduction_pct = round(fp_reduction / naive["fp"] * 100) if naive["fp"] else 0
 
     return {
-        "title": "Independent Ground-Truth Evaluation",
-        "campaign_detection": {
-            "ground_truth": len(truth_campaigns),
-            "detected": len(detected_campaigns),
-            "true_positive": tp_campaigns,
-            "precision": 1.0 if detected_campaigns else 0,
-            "recall": round(tp_campaigns / len(truth_campaigns), 2) if truth_campaigns else 1.0,
-        },
+        "title": "Ground-Truth Evaluation (single synthetic scenario)",
+        "campaign_detection": camp,
         "active_compromise_detection": {
-            # 하위호환 키(우리 탐지기 기준)
             "ground_truth": ours["tp"] + ours["fn"],
             "detected": ours["tp"] + ours["fp"],
             "true_positive": ours["tp"],
@@ -219,12 +199,14 @@ def _build_evaluation(ranked, campaigns, replay_data, stealers):
             "primary_lead_days": replay_data.get("lead_days"),
             "early_warning_day": replay_data.get("early_warning_day"),
             "hero_peak_day": replay_data.get("hero_peak_day"),
-            "mean_lead_days": replay_data.get("lead_days"),
         },
         "notes": [
-            "모든 회사명·도메인·행위자·C2는 합성/가공 데이터",
-            f"정답셋은 탐지기와 독립인 gt_active 라벨({ours['tp'] + ours['fn']}개 양성) 기준",
+            "모든 회사명·도메인·행위자·C2는 합성/가공 데이터(예약 도메인·문서용 IP)",
+            "정답셋은 생성기가 따로 기록한 ground_truth.json — 분석 엔진은 읽지 않는다",
+            f"캠페인: 탐지 {camp['detected']}건 중 정답과 일치 {camp['true_positive']}건 "
+            f"(정답 {camp['ground_truth']}건, 구성 로그 Jaccard ≥ {evaluation.MATCH_JACCARD})",
             f"함정 {decoy_total}건(오래된 감염·LOW 전용) 포함 — 나이브 대비 오탐 {fp_reduction}건 감소",
+            "이 수치는 데모 시나리오 1개 기준이며, 정답이 설계된 합성 데이터라 실데이터보다 높게 나오기 쉽다",
         ],
     }
 
@@ -304,7 +286,7 @@ def run(source="mock", **kw):
         row["evidence_ledger"] = _build_evidence_ledger(row)
         row["attack_path"] = _build_attack_path(row)
         row["response_impact"] = _build_response_impact(row)
-    evaluation = _build_evaluation(ranked, campaigns, replay_data, stealers)
+    eval_report = _build_evaluation(campaigns, replay_data, stealers, _load_truth(source))
     portfolio = _build_rank_analytics(ranked)
     spread_forecast = forecast.predict_next_targets(
         vendors, ranked, campaigns, leaks_by_v, stealers_by_v,
@@ -340,8 +322,9 @@ def run(source="mock", **kw):
             "campaigns_detected": len(campaigns),
             "top_risk_score": ranked[0]["risk_score"] if ranked else 0,
             "early_warning_lead_days": lead,
-            "campaign_recall_pct": round(evaluation["campaign_detection"]["recall"] * 100),
-            "active_precision_pct": round(evaluation["active_compromise_detection"]["precision"] * 100),
+            "campaign_recall_pct": _pct(eval_report, "campaign_detection", "recall"),
+            "campaign_precision_pct": _pct(eval_report, "campaign_detection", "precision"),
+            "active_precision_pct": _pct(eval_report, "active_compromise_detection", "precision"),
             "top_residual_risk": ranked[0]["response_impact"]["residual_risk"] if ranked else None,
         },
         "ranked_vendors": ranked,
@@ -356,7 +339,7 @@ def run(source="mock", **kw):
         "mitre_summary": mitre_summary,
         "replay": replay_data,
         "siem": siem_data,
-        "evaluation": evaluation,
+        "evaluation": eval_report,
     }
 
     # 산출물 쓰기

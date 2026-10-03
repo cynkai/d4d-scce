@@ -172,8 +172,9 @@ def _machine(rng, family, vid, domain, infection, c2, campaign, high_prob):
         "machine_id": f"WIN-{rng.randint(10**6, 10**7-1)}",
         "country": rng.choices(["KR", "KR", "KR", "CN", "RU", "VN"], weights=[5, 5, 5, 1, 1, 1])[0],
         "vendor_id": vid, "is_corporate": bool(vid),
-        "c2_host": c2, "campaign_id": campaign,
-        "active_compromise": bool(vid and has_high), "gt_active": gt, "credentials": creds,
+        "c2_host": c2, "credentials": creds,
+        # 정답 라벨은 '_' 접두 키로만 들고 다니다가 split_truth()에서 원시 데이터와 분리한다.
+        "_campaign": campaign, "_gt_active": gt,
     }
 
 
@@ -198,8 +199,8 @@ def build_decoys(rng, vendors):
             "vendor_id": vid, "is_corporate": True,
             # c2_host=None: 캠페인/리플레이/IOC 로직에서 제외됨(평가 전용 함정).
             "c2_host": None,
-            "campaign_id": None, "active_compromise": False, "gt_active": False,
             "credentials": creds,
+            "_campaign": None, "_gt_active": False,
         }
 
     # (a) 오래된 감염(활성 창 밖) + HIGH 크리덴셜 — 이미 지난 위협. 나이브는 오탐.
@@ -259,12 +260,12 @@ def inject_campaign_and_hero(rng, vendors, leaked, stealer):
         creds = [{"url": URL_TEMPLATES[c].format(domain=hd), "category": c,
                   "username": make_email(rng, hd), "password_type": "plaintext"} for c in cats]
         rec = {
-            "log_id": f"S000{len(inserted)}0", "stealer_family": "RedLine",
+            "log_id": f"C{len(inserted) + 1:05d}", "stealer_family": "RedLine",
             "infection_date": (TODAY - timedelta(days=days_ago)).isoformat(),
             "machine_id": mid, "country": "KR", "vendor_id": v["vendor_id"],
-            "is_corporate": True, "c2_host": c2, "campaign_id": campaign_id,
-            "threat_actor": actor, "active_compromise": True, "gt_active": True,
-            "credentials": creds,
+            "is_corporate": True, "c2_host": c2,
+            "threat_actor": actor, "credentials": creds,
+            "_campaign": campaign_id, "_gt_active": True,
         }
         stealer.insert(0, rec); inserted.append(rec)
 
@@ -280,34 +281,63 @@ def inject_campaign_and_hero(rng, vendors, leaked, stealer):
     return campaign_id
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--seed", type=int, default=42)
-    args = ap.parse_args()
-    rng = random.Random(args.seed)
-    os.makedirs(OUT_DIR, exist_ok=True)
+NO_SIGNAL_VENDOR = "성일방산소재"
 
+
+def build_world(seed=42):
+    """데모 시나리오 한 벌: (vendors, leaked, stealer). 스틸러 로그는 아직 '_' 라벨을 가진다."""
+    rng = random.Random(seed)
     vendors = build_vendors()
     leaked = build_leaked_credentials(rng, vendors)
     stealer = build_stealer_logs(rng, vendors)
     stealer.extend(build_decoys(rng, vendors))   # 평가용 함정(정답=비활성)
-    campaign = inject_campaign_and_hero(rng, vendors, leaked, stealer)
+    inject_campaign_and_hero(rng, vendors, leaked, stealer)
 
     # [관측편향 데모용] "성일방산소재"로 귀속된 레코드를 전부 제거 —
     # 관측 채널(다크웹·스틸러)에 아무 흔적도 없는 상태를 강제로 재현한다.
     # (이 회사가 실제로 안전한지는 SCCE가 알 수 없다 — 그게 핵심이다.)
-    NO_SIGNAL_VENDOR = "성일방산소재"
     ns_id = next(v["vendor_id"] for v in vendors if v["name"] == NO_SIGNAL_VENDOR)
     leaked = [r for r in leaked if r.get("vendor_id") != ns_id]
     stealer = [s for s in stealer if s.get("vendor_id") != ns_id]
+    return vendors, leaked, stealer
+
+
+def split_truth(stealer):
+    """스틸러 로그에서 정답 라벨을 떼어낸다 → (원시 로그, 정답셋).
+
+    분석 엔진은 원시 로그만 받는다. 정답셋은 평가(pipeline 의 검증 블록,
+    scripts/robustness_eval.py)에서만 읽는다.
+    """
+    raw = [{k: v for k, v in log.items() if not k.startswith("_")} for log in stealer]
+    campaigns = {}
+    for log in stealer:
+        if log.get("_campaign"):
+            campaigns.setdefault(log["_campaign"], []).append(log["log_id"])
+    truth = {
+        "campaigns": [{"campaign_id": cid, "log_ids": ids} for cid, ids in campaigns.items()],
+        "active_log_ids": [log["log_id"] for log in stealer if log.get("_gt_active")],
+    }
+    return raw, truth
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--seed", type=int, default=42)
+    args = ap.parse_args()
+    os.makedirs(OUT_DIR, exist_ok=True)
+
+    vendors, leaked, stealer = build_world(args.seed)
+    stealer, truth = split_truth(stealer)
 
     for fname, data in {"vendors.json": vendors,
                         "leaked_credentials.json": leaked,
-                        "stealer_logs.json": stealer}.items():
+                        "stealer_logs.json": stealer,
+                        "ground_truth.json": truth}.items():
         with open(os.path.join(OUT_DIR, fname), "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
-        print(f"  wrote {fname:26s} ({len(data)} records)")
-    print(f"\n캠페인 주입: {campaign}  (히어로=태성회로)")
+        size = len(data) if isinstance(data, list) else len(data["campaigns"])
+        print(f"  wrote {fname:26s} ({size} records)")
+    print(f"\n캠페인 주입: {[c['campaign_id'] for c in truth['campaigns']]}  (히어로=태성회로)")
     print(f"기준일(TODAY)={TODAY.isoformat()}, seed={args.seed}")
 
 

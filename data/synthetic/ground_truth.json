@@ -1,0 +1,18 @@
+{
+  "campaigns": [
+    {
+      "campaign_id": "CAMP-REDLINE-KR-0714",
+      "log_ids": [
+        "C00003",
+        "C00002",
+        "C00001"
+      ]
+    }
+  ],
+  "active_log_ids": [
+    "C00003",
+    "C00002",
+    "C00001",
+    "S00037"
+  ]
+}
