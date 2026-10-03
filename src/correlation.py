@@ -23,10 +23,25 @@ def _age(iso):
     return (TODAY - date(y, m, d)).days
 
 
-def detect_campaigns(stealers: list, vendors: list) -> list:
+def _time_clusters(logs: list) -> list:
+    """감염일 순으로 정렬해, 이웃 간격이 WINDOW_DAYS 를 넘는 곳에서 자른다."""
+    ordered = sorted(logs, key=lambda l: l["infection_date"])
+    clusters, current = [], []
+    for log in ordered:
+        if current and _age(current[-1]["infection_date"]) - _age(log["infection_date"]) > WINDOW_DAYS:
+            clusters.append(current)
+            current = []
+        current.append(log)
+    if current:
+        clusters.append(current)
+    return clusters
+
+
+def detect_campaigns(stealers: list, vendors: list, split_by_time: bool = True) -> list:
     """
-    (stealer_family, c2_host) 별로 로그를 묶고,
-    2개 이상 서로 다른 협력사가 시간창 안에서 걸리면 캠페인으로 인정.
+    (stealer_family, c2_host) 별로 로그를 묶고, 그 안을 시간 간격으로 다시 나눈 뒤,
+    2개 이상 서로 다른 협력사가 같은 시간 묶음에 걸리면 캠페인으로 인정.
+    split_by_time=False 는 시간 분할 전의 동작(평가 비교용, scripts/robustness_eval.py).
     """
     vname = {v["vendor_id"]: v["name"] for v in vendors}
     groups = {}
@@ -39,37 +54,41 @@ def detect_campaigns(stealers: list, vendors: list) -> list:
         groups.setdefault(key, []).append(log)
 
     campaigns = []
-    for (family, c2), logs in groups.items():
-        vids = {l["vendor_id"] for l in logs}
-        if len(vids) < 2:
-            continue
-        dates = [l["infection_date"] for l in logs]
-        span = max(_age(min(dates)), 0) - max(_age(max(dates)), 0)
-        if span > WINDOW_DAYS * 3:  # 너무 흩어져 있으면 캠페인 아님
-            continue
-        actor = next((l.get("threat_actor") for l in logs if l.get("threat_actor")), None)
-        # ID는 관측값으로만 만든다(정답 라벨을 읽지 않는다): 스틸러 계열 · 첫 감염일 · C2 해시.
-        first = min(dates)
-        campaign_id = (f"CAMP-{str(family).upper()}-{first[2:4]}{first[5:7]}{first[8:10]}-"
-                       f"{hashlib.sha1(str(c2).encode()).hexdigest()[:4].upper()}")
-        # 신뢰도: 걸린 업체 수 + 시간 밀집 + 명시적 태그
-        conf = min(0.5 + 0.12 * len(vids) + (0.15 if span <= WINDOW_DAYS else 0), 0.97)
-        campaigns.append({
-            "campaign_id": campaign_id,
-            "stealer_family": family,
-            "c2_host": c2,
-            "threat_actor": actor,
-            "affected_vendors": [{"vendor_id": v, "name": vname.get(v, v)} for v in sorted(vids)],
-            "affected_count": len(vids),
-            "machines": [l["machine_id"] for l in logs],
-            "log_ids": [l.get("log_id") for l in logs],
-            "first_seen": min(dates),
-            "last_seen": max(dates),
-            "span_days": span,
-            "confidence": round(conf, 2),
-            "note": (f"{len(vids)}개 협력사가 동일 C2({c2})·동일 스틸러({family})로 "
-                     f"{span}일 내 동시 감염 — 조율된 공급망 표적 정황."),
-        })
+    for (family, c2), group in groups.items():
+        # 같은 (스틸러, C2)라도 공용 C2에는 무관한 감염이 몇 달에 걸쳐 섞인다.
+        # 감염일 간격이 WINDOW_DAYS 를 넘으면 다른 묶음으로 나눠, 시간상 붙어 있는
+        # 감염끼리만 캠페인 후보로 본다.
+        for logs in (_time_clusters(group) if split_by_time else [group]):
+            vids = {l["vendor_id"] for l in logs}
+            if len(vids) < 2:
+                continue
+            dates = [l["infection_date"] for l in logs]
+            span = max(_age(min(dates)), 0) - max(_age(max(dates)), 0)
+            if span > WINDOW_DAYS * 3:  # 너무 흩어져 있으면 캠페인 아님
+                continue
+            actor = next((l.get("threat_actor") for l in logs if l.get("threat_actor")), None)
+            # ID는 관측값으로만 만든다(정답 라벨을 읽지 않는다): 스틸러 계열 · 첫 감염일 · C2 해시.
+            first = min(dates)
+            campaign_id = (f"CAMP-{str(family).upper()}-{first[2:4]}{first[5:7]}{first[8:10]}-"
+                           f"{hashlib.sha1(str(c2).encode()).hexdigest()[:4].upper()}")
+            # 신뢰도: 걸린 업체 수 + 시간 밀집 + 명시적 태그
+            conf = min(0.5 + 0.12 * len(vids) + (0.15 if span <= WINDOW_DAYS else 0), 0.97)
+            campaigns.append({
+                "campaign_id": campaign_id,
+                "stealer_family": family,
+                "c2_host": c2,
+                "threat_actor": actor,
+                "affected_vendors": [{"vendor_id": v, "name": vname.get(v, v)} for v in sorted(vids)],
+                "affected_count": len(vids),
+                "machines": [l["machine_id"] for l in logs],
+                "log_ids": [l.get("log_id") for l in logs],
+                "first_seen": min(dates),
+                "last_seen": max(dates),
+                "span_days": span,
+                "confidence": round(conf, 2),
+                "note": (f"{len(vids)}개 협력사가 동일 C2({c2})·동일 스틸러({family})로 "
+                         f"{span}일 내 동시 감염 — 조율된 공급망 표적 정황."),
+            })
     return sorted(campaigns, key=lambda c: (-c["affected_count"], -c["confidence"]))
 
 
