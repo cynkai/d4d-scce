@@ -8,8 +8,8 @@
 여기서 바로 잡아낸다.
 
 실행:
-  python3 scripts/test_adapters.py            # Mock만 검사(항상 실행 가능, 네트워크 불요)
-  python3 scripts/test_adapters.py --partner  # PartnerAdapter 연결까지 포함(네트워크 필요)
+  python3 scripts/check_adapters.py            # Mock만 검사(항상 실행 가능, 네트워크 불요)
+  python3 scripts/check_adapters.py --partner  # PartnerAdapter 연결까지 포함(네트워크 필요)
 """
 
 import argparse

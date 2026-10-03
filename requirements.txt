@@ -1,7 +1,8 @@
-fastapi>=0.110
-uvicorn[standard]>=0.29
+# 대시보드 서버 (FastAPI). 파이프라인과 오프라인 대시보드는 표준 라이브러리만 쓴다.
+fastapi==0.142.2
+uvicorn[standard]==0.54.0
 
 # 파트너(StealthMole) 연동 옵션 — MockAdapter만 쓰면 필요 없음
-python-dotenv>=1.0
-PyJWT>=2.8
-requests>=2.31
+python-dotenv==1.2.4
+PyJWT==2.15.1
+requests==2.34.2

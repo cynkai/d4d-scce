@@ -36,7 +36,7 @@ def redact(obj, depth=0):
     if obj is None:
         return None
     if isinstance(obj, bool):
-        return f"<bool>"
+        return "<bool>"
     if isinstance(obj, (int, float)):
         return f"<{type(obj).__name__}>"
     s = str(obj)

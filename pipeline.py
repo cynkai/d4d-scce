@@ -247,7 +247,7 @@ def _build_rank_analytics(ranked):
     return {"median_score": round(median, 1), "total_portfolio_risk": round(total, 1)}
 
 
-def run(source="mock", **kw):
+def run(source="mock", write=True, **kw):
     adapter = get_adapter(source, **kw)
     vendors = adapter.load_vendors()
     leaks = adapter.load_leaks()
@@ -343,19 +343,20 @@ def run(source="mock", **kw):
     }
 
     # 산출물 쓰기
-    data_dir = os.path.join(os.path.dirname(__file__), "data")
-    os.makedirs(data_dir, exist_ok=True)
-    with open(os.path.join(data_dir, "report.json"), "w", encoding="utf-8") as f:
-        json.dump(report, f, ensure_ascii=False, indent=2)
+    if write:
+        data_dir = os.path.join(os.path.dirname(__file__), "data")
+        os.makedirs(data_dir, exist_ok=True)
+        with open(os.path.join(data_dir, "report.json"), "w", encoding="utf-8") as f:
+            json.dump(report, f, ensure_ascii=False, indent=2)
 
-    web_dir = os.path.join(os.path.dirname(__file__), "web")
-    os.makedirs(web_dir, exist_ok=True)
-    with open(os.path.join(web_dir, "report_data.js"), "w", encoding="utf-8") as f:
-        f.write("window.__REPORT__ = ")
-        json.dump(report, f, ensure_ascii=False)
-        f.write(";")
+        web_dir = os.path.join(os.path.dirname(__file__), "web")
+        os.makedirs(web_dir, exist_ok=True)
+        with open(os.path.join(web_dir, "report_data.js"), "w", encoding="utf-8") as f:
+            f.write("window.__REPORT__ = ")
+            json.dump(report, f, ensure_ascii=False)
+            f.write(";")
 
-    _print_summary(report, ranked, campaigns)
+        _print_summary(report, ranked, campaigns)
     return report
 
 

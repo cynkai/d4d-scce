@@ -6,7 +6,6 @@ IOC 추출 — raw 신호에서 침해지표(Indicators of Compromise)를 정규
 """
 
 import re
-from urllib.parse import urlparse
 
 IP_RE = re.compile(r"^\d{1,3}(\.\d{1,3}){3}$")
 

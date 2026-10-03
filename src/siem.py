@@ -24,7 +24,6 @@ def _ts(rng, iso):
 def build_siem(vendors, leaks, stealers, campaigns, seed=42):
     rng = random.Random(seed)
     vname = {v["vendor_id"]: v["name"] for v in vendors}
-    camp_machines = {m for c in campaigns for m in c.get("machines", [])}
     camp_c2 = {c["c2_host"]: c for c in campaigns if c.get("c2_host")}
     events = []
 
