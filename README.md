@@ -43,7 +43,7 @@
 > ✅ Compromise Likelihood Score — "이 회사는 지금 뚫렸거나 뚫리는 중일 가능성이 높다"
 
 한 문장으로: **"협력사의 보안 수준을 평가하는 시스템이 아니라, 여러 보안 증거를 종합해 지금 가장 먼저 대응해야 할
-협력사를 찾아주는 AI 기반 공급망 침해 조기경보 시스템."** SIEM·Evidence Ledger·Campaign Correlation·
+협력사를 찾아주는 증거 기반 공급망 침해 조기경보 시스템."** SIEM·Evidence Ledger·Campaign Correlation·
 공격 타임라인·대응 권고는 전부 이 하나의 목적을 뒷받침하는 요소다.
 
 ### 알려진 한계 — 관측편향(Observability Bias) "합성 데이터는 정답이 설계되어 있어 상한이 나오기 쉽다, 실데이터에서는 다를 수 있다."
