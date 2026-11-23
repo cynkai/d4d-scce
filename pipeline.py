@@ -53,13 +53,25 @@ def _write_report_files(report, data_dir, web_dir):
             "window.__REPORT__ = " + json.dumps(report, ensure_ascii=False) + ";", encoding="utf-8"
         )
         with _report_write_lock:
+            previous_snapshot = Path(web_stage) / "previous.js"
+            try:
+                shutil.copy2(snapshot_path, previous_snapshot)
+            except FileNotFoundError:
+                pass
             for staged, destination in ((staged_report, report_path), (staged_snapshot, snapshot_path)):
                 try:
                     shutil.copymode(destination, staged)
                 except FileNotFoundError:
                     pass
             staged_snapshot.replace(snapshot_path)
-            staged_report.replace(report_path)
+            try:
+                staged_report.replace(report_path)
+            except OSError:
+                if previous_snapshot.exists():
+                    previous_snapshot.replace(snapshot_path)
+                else:
+                    snapshot_path.unlink()
+                raise
 
 
 def _pct(ev, section, key):

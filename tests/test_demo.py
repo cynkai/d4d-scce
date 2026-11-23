@@ -60,6 +60,29 @@ def test_failed_snapshot_staging_preserves_previous_report(monkeypatch, tmp_path
     assert sorted(path.name for path in web_dir.iterdir()) == ["report_data.js"]
 
 
+def test_failed_report_replace_restores_previous_snapshot(monkeypatch, tmp_path):
+    data_dir = tmp_path / "data"
+    web_dir = tmp_path / "web"
+    old_report = {"source": "이전"}
+    pipeline._write_report_files(old_report, data_dir, web_dir)
+    report_path = data_dir / "report.json"
+    snapshot_path = web_dir / "report_data.js"
+    old_snapshot = snapshot_path.read_bytes()
+    replace = type(report_path).replace
+
+    def fail_report_replace(path, target):
+        if target == report_path:
+            raise OSError("report replace failed")
+        return replace(path, target)
+
+    monkeypatch.setattr(type(report_path), "replace", fail_report_replace)
+    with pytest.raises(OSError, match="report replace failed"):
+        pipeline._write_report_files({"source": "신규"}, data_dir, web_dir)
+
+    assert json.loads(report_path.read_text(encoding="utf-8")) == old_report
+    assert snapshot_path.read_bytes() == old_snapshot
+
+
 @pytest.fixture(scope="module")
 def report():
     return pipeline.run("mock", write=False)
