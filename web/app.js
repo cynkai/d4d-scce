@@ -41,13 +41,35 @@
 
   let REPORT = null;
 
+  function isReport(report) {
+    const meta = report?.meta;
+    return typeof meta?.source === "string" && meta.source.trim() !== "" &&
+      typeof meta.generated_today === "string" && /^\d{4}-\d{2}-\d{2}$/.test(meta.generated_today) &&
+      report.kpis && typeof report.kpis === "object" && !Array.isArray(report.kpis) &&
+      Array.isArray(report.ranked_vendors) && report.ranked_vendors.every(vendor =>
+        typeof vendor?.status === "string" && typeof vendor.vendor_id === "string" &&
+        typeof vendor.name === "string" && Number.isFinite(vendor.risk_score) &&
+        Number.isFinite(vendor.confidence?.score) && vendor.breakdown && vendor.counts);
+  }
+
   async function loadReport() {
-    // API 우선(서버 실행 시), 실패하면 오프라인 폴백(report_data.js).
-    try {
-      const r = await fetch("/api/report", { cache: "no-store" });
-      if (r.ok) return await r.json();
-    } catch (e) { /* file:// 또는 서버 없음 → 폴백 */ }
-    return window.__REPORT__ || null;
+    if (location.protocol === "http:" || location.protocol === "https:") {
+      const request = new AbortController();
+      const deadline = setTimeout(() => request.abort(), 3000);
+      try {
+        const response = await fetch("/api/report", { cache: "no-store", signal: request.signal });
+        if (response.ok) {
+          const report = await response.json();
+          if (isReport(report)) return { report, delivery: "API" };
+        }
+      } catch {
+        // 서버가 없거나 응답을 파싱할 수 없으면 함께 배포한 스냅샷을 사용한다.
+      } finally {
+        clearTimeout(deadline);
+      }
+    }
+    const report = window.__REPORT__;
+    return isReport(report) ? { report, delivery: "OFFLINE" } : null;
   }
 
   // ---- KPI -----------------------------------------------------------------
@@ -1433,16 +1455,20 @@ ${fams.map(f => "  - attack.stealer." + f.toLowerCase()).join("\n")}`;
     if (!user) { location.replace("login.html"); return; }
     mountSession(user);
 
-    REPORT = await loadReport();
-    if (!REPORT) {
-      $("#detail-body").innerHTML = `<div class="detail-empty">report 데이터를 찾을 수 없습니다.<br>
-        <code>python pipeline.py</code> 를 먼저 실행하세요.</div>`;
+    const loaded = await loadReport();
+    const sourceTag = $("#tag-source");
+    if (!loaded) {
+      sourceTag.textContent = "보고서 없음";
+      $("#report-unavailable").hidden = false;
       return;
     }
-    const R = REPORT;
+    const R = REPORT = loaded.report;
     $("#meta-line").textContent = "방산 공급망 자격증명 노출 조기경보";
     $("#meta-line").title = `${R.meta.title} · ${R.meta.problem} · 기준일 ${R.meta.generated_today}`;
-    $("#tag-source").textContent = "SOURCE: " + String(R.meta.source).toUpperCase();
+    const delivery = loaded.delivery === "API" ? "서버에서 받은 보고서" : "함께 제공된 오프라인 스냅샷";
+    sourceTag.textContent = `SOURCE: ${R.meta.source.toUpperCase()} · ${loaded.delivery}`;
+    sourceTag.title = `${delivery} · 자료 기준일 ${R.meta.generated_today}`;
+    $("#view-overview").hidden = false;
 
     renderKpis(R.kpis);
     renderMission(R);
