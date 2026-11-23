@@ -36,6 +36,53 @@ def test_offline_dashboard_snapshot_matches_api_report():
     assert api_report["meta"]["source"] == "mock"
 
 
+def test_failed_snapshot_staging_preserves_previous_report(monkeypatch, tmp_path):
+    data_dir = tmp_path / "data"
+    web_dir = tmp_path / "web"
+    old_report = {"source": "이전"}
+    pipeline._write_report_files(old_report, data_dir, web_dir)
+    snapshot_path = web_dir / "report_data.js"
+    old_snapshot = snapshot_path.read_text(encoding="utf-8")
+    write_text = type(snapshot_path).write_text
+
+    def fail_snapshot(path, *args, **kwargs):
+        if path.name == snapshot_path.name:
+            raise OSError("snapshot write failed")
+        return write_text(path, *args, **kwargs)
+
+    monkeypatch.setattr(type(snapshot_path), "write_text", fail_snapshot)
+    with pytest.raises(OSError, match="snapshot write failed"):
+        pipeline._write_report_files({"source": "신규"}, data_dir, web_dir)
+
+    assert json.loads((data_dir / "report.json").read_text(encoding="utf-8")) == old_report
+    assert snapshot_path.read_text(encoding="utf-8") == old_snapshot
+    assert sorted(path.name for path in data_dir.iterdir()) == ["report.json"]
+    assert sorted(path.name for path in web_dir.iterdir()) == ["report_data.js"]
+
+
+def test_failed_report_replace_restores_previous_snapshot(monkeypatch, tmp_path):
+    data_dir = tmp_path / "data"
+    web_dir = tmp_path / "web"
+    old_report = {"source": "이전"}
+    pipeline._write_report_files(old_report, data_dir, web_dir)
+    report_path = data_dir / "report.json"
+    snapshot_path = web_dir / "report_data.js"
+    old_snapshot = snapshot_path.read_bytes()
+    replace = type(report_path).replace
+
+    def fail_report_replace(path, target):
+        if target == report_path:
+            raise OSError("report replace failed")
+        return replace(path, target)
+
+    monkeypatch.setattr(type(report_path), "replace", fail_report_replace)
+    with pytest.raises(OSError, match="report replace failed"):
+        pipeline._write_report_files({"source": "신규"}, data_dir, web_dir)
+
+    assert json.loads(report_path.read_text(encoding="utf-8")) == old_report
+    assert snapshot_path.read_bytes() == old_snapshot
+
+
 @pytest.fixture(scope="module")
 def report():
     return pipeline.run("mock", write=False)

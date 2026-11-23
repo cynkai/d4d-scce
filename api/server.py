@@ -16,6 +16,7 @@ FastAPI 백엔드 — report API + 정적 대시보드 서빙.
 """
 
 import json
+import logging
 import os
 import sys
 
@@ -30,13 +31,18 @@ WEB = os.path.join(ROOT, "web")
 sys.path.insert(0, ROOT)
 
 app = FastAPI(title="SCCE — 방산 공급망 자격증명 노출 조기경보")
+logger = logging.getLogger(__name__)
 
 
 def _load():
-    if not os.path.exists(DATA):
-        raise HTTPException(503, "report.json 없음 — python pipeline.py 먼저 실행")
-    with open(DATA, encoding="utf-8") as f:
-        return json.load(f)
+    try:
+        with open(DATA, encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError as error:
+        raise HTTPException(503, "report.json 없음 — python pipeline.py 먼저 실행") from error
+    except (OSError, UnicodeError, json.JSONDecodeError) as error:
+        logger.warning("보고서를 읽을 수 없음", exc_info=True)
+        raise HTTPException(503, "report.json 읽기 실패 — python pipeline.py로 다시 생성") from error
 
 
 @app.get("/api/report")
