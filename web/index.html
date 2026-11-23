@@ -13,7 +13,7 @@
   <div class="spacer"></div>
   <button class="tag cmdk-hint" id="cmdk-open" type="button"><kbd>⌘</kbd><kbd>K</kbd> 빠른 이동</button>
   <span class="opsclock mono" id="ops-clock">--:--:--</span>
-  <span class="tag src-mock" id="tag-source">SOURCE: MOCK</span>
+  <span class="tag src-mock" id="tag-source" role="status">보고서 확인 중</span>
   <span class="user-chip" id="user-chip" style="display:none"><span class="av" id="user-av">A</span><span id="user-name"></span></span>
   <button class="logout-btn" id="btn-logout" style="display:none">로그아웃</button>
 </header>
@@ -46,9 +46,11 @@
   </nav>
 
   <main class="wrap">
+    <p id="report-unavailable" role="alert" hidden>보고서를 열 수 없습니다.
+      <code>python3 pipeline.py</code>를 실행해 보고서를 만든 뒤 다시 열어 주세요.</p>
 
     <!-- =============== OVERVIEW =============== -->
-    <section id="view-overview" class="view">
+    <section id="view-overview" class="view" hidden>
       <section class="mission-strip bracket-frame" id="mission-strip">
         <div class="ms-text">
           <div class="eyebrow">DEMO THESIS · WHAT THIS SYSTEM PROVES</div>
@@ -262,6 +264,6 @@
 </div>
 
 <script src="report_data.js?v=16"></script>
-<script src="app.js?v=16"></script>
+<script src="app.js?v=17"></script>
 </body>
 </html>

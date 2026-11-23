@@ -25,6 +25,17 @@ def test_committed_synthetic_data_matches_the_generator():
     assert truth == load("ground_truth.json")
 
 
+def test_offline_dashboard_snapshot_matches_api_report():
+    with open(os.path.join(ROOT, "data", "report.json"), encoding="utf-8") as f:
+        api_report = json.load(f)
+    with open(os.path.join(ROOT, "web", "report_data.js"), encoding="utf-8") as f:
+        snapshot = f.read().strip()
+    prefix = "window.__REPORT__ = "
+    assert snapshot.startswith(prefix) and snapshot.endswith(";")
+    assert json.loads(snapshot[len(prefix):-1]) == api_report
+    assert api_report["meta"]["source"] == "mock"
+
+
 @pytest.fixture(scope="module")
 def report():
     return pipeline.run("mock", write=False)
