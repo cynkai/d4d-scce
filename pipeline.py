@@ -18,7 +18,11 @@
 import argparse
 import json
 import os
+from pathlib import Path
+import shutil
 import sys
+from tempfile import TemporaryDirectory
+from threading import Lock
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
 
@@ -28,6 +32,34 @@ from matcher import (build_domain_index, match_leaks, match_stealers,  # noqa: E
 from scoring import score_vendor, classify  # noqa: E402
 from recommender import build_advisory                 # noqa: E402
 import mitre, ioc, correlation, enrich, replay, siem, forecast, evaluation  # noqa: E402
+
+
+_report_write_lock = Lock()
+
+
+def _write_report_files(report, data_dir, web_dir):
+    data_dir.mkdir(parents=True, exist_ok=True)
+    web_dir.mkdir(parents=True, exist_ok=True)
+    with (
+        TemporaryDirectory(dir=data_dir, prefix=".report-") as data_stage,
+        TemporaryDirectory(dir=web_dir, prefix=".report-") as web_stage,
+    ):
+        report_path = data_dir / "report.json"
+        snapshot_path = web_dir / "report_data.js"
+        staged_report = Path(data_stage) / report_path.name
+        staged_snapshot = Path(web_stage) / snapshot_path.name
+        staged_report.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+        staged_snapshot.write_text(
+            "window.__REPORT__ = " + json.dumps(report, ensure_ascii=False) + ";", encoding="utf-8"
+        )
+        with _report_write_lock:
+            for staged, destination in ((staged_report, report_path), (staged_snapshot, snapshot_path)):
+                try:
+                    shutil.copymode(destination, staged)
+                except FileNotFoundError:
+                    pass
+            staged_snapshot.replace(snapshot_path)
+            staged_report.replace(report_path)
 
 
 def _pct(ev, section, key):
@@ -344,18 +376,8 @@ def run(source="mock", write=True, **kw):
 
     # 산출물 쓰기
     if write:
-        data_dir = os.path.join(os.path.dirname(__file__), "data")
-        os.makedirs(data_dir, exist_ok=True)
-        with open(os.path.join(data_dir, "report.json"), "w", encoding="utf-8") as f:
-            json.dump(report, f, ensure_ascii=False, indent=2)
-
-        web_dir = os.path.join(os.path.dirname(__file__), "web")
-        os.makedirs(web_dir, exist_ok=True)
-        with open(os.path.join(web_dir, "report_data.js"), "w", encoding="utf-8") as f:
-            f.write("window.__REPORT__ = ")
-            json.dump(report, f, ensure_ascii=False)
-            f.write(";")
-
+        root = Path(__file__).parent
+        _write_report_files(report, root / "data", root / "web")
         _print_summary(report, ranked, campaigns)
     return report
 
